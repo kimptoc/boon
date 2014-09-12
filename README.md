@@ -15,3 +15,8 @@ TODO
 basic test case, create DataRepo, add objects, query them back
 
 perf tests - better bare java at least :)
+
+NOTES
+---
+
+https://help.github.com/articles/syncing-a-fork
