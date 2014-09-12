@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/kimptoc/boon-data-repo-jdk16.svg?branch=master)](https://travis-ci.org/kimptoc/boon-data-repo-jdk16)
+[![Build Status](https://travis-ci.org/kimptoc/boon.svg?branch=master)](https://travis-ci.org/kimptoc/boon)
 
 INTRO
 ---
