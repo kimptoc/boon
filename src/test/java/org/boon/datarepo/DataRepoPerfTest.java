@@ -65,7 +65,7 @@ public class DataRepoPerfTest
             results = dbRepo.query(eq("colour","red"));
         }
         elapsed = System.currentTimeMillis() - start;
-        assertTrue(elapsed < 70, elapsed+" vs 70");
+        assertTrue(elapsed < 110, elapsed+" vs 110");
         assertTrue(results.size() > 10000);
         puts("DataRepo lookup", elapsed, "ms, found:", results.size());
 
