@@ -89,7 +89,7 @@ public class DataRepoPerfTest
             results2 = dbRepo.query(and(eq("job", "artist"), eq("colour", "red"))); // TODO SLOW -dont use
         }
         elapsed = System.currentTimeMillis() - start;
-        assertTrue(elapsed < 1150, elapsed+" vs 1150");
+        assertTrue(elapsed < 1450, elapsed+" vs 1450");
         assertTrue(results2.size() > 1000, results2.size()+" vs 1000");
         puts("DataRepo AND lookup", elapsed, "ms, found:", results2.size());
 
