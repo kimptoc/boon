@@ -203,10 +203,10 @@ public class NumberValue extends Number implements Value {
         return toString();
     }
 
-    @Override
-    public String stringValueEncoded () {
-           return toString ();
-    }
+//    @Override
+//    public String stringValueEncoded () {
+//           return toString ();
+//    }
 
 
     @Override

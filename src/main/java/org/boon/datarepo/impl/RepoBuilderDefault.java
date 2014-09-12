@@ -120,19 +120,19 @@ public class RepoBuilderDefault implements RepoBuilder {
     /**
      * This holds the set of search indexes that the Repo will manage
      */
-    Set<String> searchIndexes = new HashSet<>();
+    Set<String> searchIndexes = new HashSet<String>();
     /**
      * This holds the set of lookupIndexes that the Repo will manage.
      */
-    Set<String> lookupIndexes = new HashSet<>();
+    Set<String> lookupIndexes = new HashSet<String>();
     /**
      * This holds the uniqueSearchIndexes that this repo will manage.
      */
-    Set<String> uniqueSearchIndexes = new HashSet<>();
+    Set<String> uniqueSearchIndexes = new HashSet<String>();
     /**
      * This holds the uniqueLookupIndexes that this repo will manager.
      */
-    Set<String> uniqueLookupIndexes = new HashSet<>();
+    Set<String> uniqueLookupIndexes = new HashSet<String>();
 
     /**
      * If we are dealing with a complex key, like a derived key or some sort of
@@ -233,7 +233,7 @@ public class RepoBuilderDefault implements RepoBuilder {
     /**
      * Holds a collection of comparators that will be used per property for the Repo.
      */
-    private Map<String, Comparator> collators = new HashMap<>();
+    private Map<String, Comparator> collators = new HashMap<String, Comparator>();
 
 
     /**
@@ -242,7 +242,7 @@ public class RepoBuilderDefault implements RepoBuilder {
      * Key transformers are used to for example make a case insensitive search.
      * It determines how the key is indexed.
      */
-    private Map<String, Function> keyTransformers = new HashMap<>();
+    private Map<String, Function> keyTransformers = new HashMap<String, Function>();
 
 
     /**
@@ -251,7 +251,7 @@ public class RepoBuilderDefault implements RepoBuilder {
      * Employee.address.zip would be a nested index.
      */
     @Deprecated
-    private Map<String, String[]> nestedIndexes = new HashMap<>();
+    private Map<String, String[]> nestedIndexes = new HashMap<String, String[]>();
 
 
     /**
@@ -263,7 +263,7 @@ public class RepoBuilderDefault implements RepoBuilder {
      * For non-unique indexes, this sets up how many values you would like
      * the index to hold initially. (It expands automatically).
      */
-    private Map<String, Integer> indexBucketSize = new HashMap<>();
+    private Map<String, Integer> indexBucketSize = new HashMap<String, Integer>();
 
 
     /**

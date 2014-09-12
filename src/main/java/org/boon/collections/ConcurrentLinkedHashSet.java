@@ -37,8 +37,8 @@ import java.util.concurrent.CopyOnWriteArrayList;
 
 public class ConcurrentLinkedHashSet<T> implements Set<T> {
 
-    List<T> list = new CopyOnWriteArrayList<>();
-    Set<T> set = new ConcurrentHashSet<>();
+    List<T> list = new CopyOnWriteArrayList<T>();
+    Set<T> set = new ConcurrentHashSet<T>();
 
     @Override
     public int size() {

@@ -105,7 +105,7 @@ public class BeanUtils {
 
            fields = getPropertyFieldAccessMap( object.getClass() );
            if ( object instanceof Map ) {
-               fields = new HashMap<>(fields);
+               fields = new HashMap<String, FieldAccess>(fields);
                fields = getFieldsFromMap( fields, ( Map<String, Object> ) object );
            }
            return fields;
@@ -465,7 +465,7 @@ public class BeanUtils {
         return getPropertyValue( object, properties );
     }
 
-    static Map<String, String[]> splitsPathsCache = new ConcurrentHashMap<>();
+    static Map<String, String[]> splitsPathsCache = new ConcurrentHashMap<String, String[]>();
 
     private static String[] propertyPathAsStringArray(String path) {
         String[] split = splitsPathsCache.get(path);
@@ -474,7 +474,7 @@ public class BeanUtils {
         }
 
 
-        split =  StringScanner.splitByCharsNoneEmpty(path, '.', '[', ']', '/');
+        split =  StringScanner.splitByCharsNoneEmpty(path, (char)'.', '[', ']', '/');
         splitsPathsCache.put(path, split);
         return split;
     }

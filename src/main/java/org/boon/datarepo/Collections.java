@@ -219,7 +219,7 @@ public class Collections {
         SearchableCollectionComposer query = SPIFactory.getSearchableCollectionFactory().get();
 
 
-        Map<String, FieldAccess> fields = new LinkedHashMap<>();
+        Map<String, FieldAccess> fields = new LinkedHashMap<String, FieldAccess>();
 
         for ( Class<?> cls : classes ) {
 

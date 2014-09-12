@@ -35,7 +35,7 @@ import java.io.File;
 import java.lang.reflect.Modifier;
 import java.math.BigDecimal;
 import java.math.BigInteger;
-import java.nio.file.Path;
+//import java.nio.file.Path;
 import java.util.*;
 
 public class Typ {
@@ -79,7 +79,7 @@ public class Typ {
     public static final Class<Date> date = Date.class;
     public static final Class<Calendar> calendar = Calendar.class;
     public static final Class<File> file = File.class;
-    public static final Class<Path> path = Path.class;
+//    public static final Class<Path> path = Path.class;
 
 
     /* Arry. */

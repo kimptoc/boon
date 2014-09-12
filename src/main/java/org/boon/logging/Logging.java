@@ -42,7 +42,7 @@ public class Logging {
 
 
     private final static Context _context;
-    private static WeakReference<Context> weakContext = new WeakReference<>( null );
+    private static WeakReference<Context> weakContext = new WeakReference<Context>( null );
 
 
     private static class Context {
@@ -50,11 +50,11 @@ public class Logging {
 
         private static volatile LoggerFactory factory;
 
-        private static final ConcurrentMap<String, LoggerDelegate> loggers = new ConcurrentHashMap<>();
+        private static final ConcurrentMap<String, LoggerDelegate> loggers = new ConcurrentHashMap<String, LoggerDelegate>();
 
 
         private static final ConcurrentMap<String, ConfigurableLogger> configurableLoggers
-                            = new ConcurrentHashMap<>();
+                            = new ConcurrentHashMap<String, ConfigurableLogger>();
 
 
     }
@@ -65,7 +65,7 @@ public class Logging {
         if ( noStatics || Sys.inContainer() ) {
 
             _context = null;
-            weakContext = new WeakReference<>( new Context() );
+            weakContext = new WeakReference<Context>( new Context() );
 
         } else {
             _context = new Context();
@@ -83,7 +83,7 @@ public class Logging {
             Context context = weakContext.get();
             if ( context == null ) {
                 context = new Context();
-                weakContext = new WeakReference<>( context );
+                weakContext = new WeakReference<Context>( context );
             }
             return context;
         }

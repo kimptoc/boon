@@ -42,7 +42,7 @@ class MultiValue<T> {
 
     public static <T> MultiValue<T> add( MultiValue<T> org, T newItem, int bucketSize ) {
         if ( org == null ) {
-            return new MultiValue<>( newItem, bucketSize );
+            return new MultiValue<T>( newItem, bucketSize );
         } else {
 
             org.add( newItem );

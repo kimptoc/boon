@@ -34,7 +34,7 @@ import java.util.*;
 
 public class ValueList extends AbstractList<Object> implements List<Object> {
 
-    List<Object> list = new ArrayList<>( 5 );
+    List<Object> list = new ArrayList<Object>( 5 );
 
     private final boolean lazyChop;
     boolean converted = false;

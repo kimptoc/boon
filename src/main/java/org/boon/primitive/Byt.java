@@ -34,7 +34,7 @@ import org.boon.Universal;
 import org.boon.core.reflection.Invoker;
 
 import java.io.UnsupportedEncodingException;
-import java.nio.charset.StandardCharsets;
+//import java.nio.charset.StandardCharsets;
 
 import static org.boon.Exceptions.die;
 
@@ -126,7 +126,7 @@ public class Byt {
      */
     @Universal
     public static byte[] bytes( String str ) {
-         return str.getBytes( StandardCharsets.UTF_8 );
+         return str.getBytes( );
     }
 
 
@@ -816,7 +816,7 @@ public class Byt {
     }
 
     public static String utfString( byte[] jsonBytes ) {
-        return new String (jsonBytes, StandardCharsets.UTF_8);
+        return new String (jsonBytes);
     }
 
 
@@ -825,7 +825,7 @@ public class Byt {
 
         int sum = 0;
         for ( byte v : array ) {
-            sum = (int) Invoker.invokeReducer(object, sum, v);
+            sum = (Integer) Invoker.invokeReducer(object, sum, v);
         }
         return sum;
     }

@@ -718,11 +718,11 @@ public class Chr {
     }
 
 
-    public static char[][] split( final char[] inputArray,
-                                  final char split ) {
-        return CharScanner.split( inputArray, split );
-
-    }
+//    public static char[][] split( final char[] inputArray,
+//                                  final char split ) {
+//        return CharScanner.split( inputArray, split );
+//
+//    }
 
 
     public static boolean contains( char[] chars, char c ) {

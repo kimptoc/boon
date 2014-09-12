@@ -99,7 +99,7 @@ public class Arry {
         return ( V[] ) newArray;
     }
 
-    @SafeVarargs
+//    @SafeVarargs
     public static <V> V[] array( final V... array ) {
         return array;
 

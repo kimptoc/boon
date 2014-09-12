@@ -133,7 +133,7 @@ public class Mapper {
          * @return a new list
          */
     public  <T> List<T> convertListOfMapsToObjects(List<Map> list, Class<T> componentType) {
-        List<Object> newList = new ArrayList<>( list.size() );
+        List<Object> newList = new ArrayList<Object>( list.size() );
         for ( Object obj : list ) {
 
             if ( obj instanceof Value ) {
@@ -293,7 +293,7 @@ public class Mapper {
         int size = argList.size();
 
         /* List to hold items that we coerce into parameter types. */
-        List<Object> convertedArguments = new ArrayList<>( argList );
+        List<Object> convertedArguments = new ArrayList<Object>( argList );
 
         /* Meta data holder of the class. */
         ClassMeta<T> classMeta = ClassMeta.classMeta( clazz );
@@ -690,6 +690,8 @@ public class Mapper {
                     break;
 
 
+                case ARRAY:
+                   item = Conversions.toList(item);
                 case SET:
                 case COLLECTION:
                 case LIST:
@@ -1511,7 +1513,7 @@ public class Mapper {
             return null;
         }
 
-        Map<String, Object> map = new LinkedHashMap<>();
+        Map<String, Object> map = new LinkedHashMap<String, Object>();
 
 
 
@@ -1549,7 +1551,7 @@ public class Mapper {
                 map.put( key, entry.value() );
             } else if ( Boon.isArray( value ) ) {
                 int length = Arry.len(value);
-                List<Map<String, Object>> list = new ArrayList<>( length );
+                List<Map<String, Object>> list = new ArrayList<Map<String, Object>>( length );
                 for ( int index = 0; index < length; index++ ) {
                     Object item = BeanUtils.idx( value, index );
                     list.add( toMap( item ) );
@@ -1561,7 +1563,7 @@ public class Mapper {
                 if ( Typ.isBasicType( componentType ) ) {
                     map.put( key, value );
                 } else {
-                    List<Map<String, Object>> list = new ArrayList<>(
+                    List<Map<String, Object>> list = new ArrayList<Map<String, Object>>(
                             collection.size() );
                     for ( Object item : collection ) {
                         if ( item != null ) {
@@ -1602,7 +1604,7 @@ public class Mapper {
             if ( from.isReadOnly() ) {
                 return null;
             }
-            Maps.Entry<String, Object> entry = new Maps.EntryImpl<>( from.name(),
+            Maps.Entry<String, Object> entry = new Maps.EntryImpl<String, Object>( from.name(),
                     from.getValue( object ) );
             return entry;
         }
@@ -1616,7 +1618,7 @@ public class Mapper {
      * @return the return value.
      */
     public  List<Map<String, Object>> toListOfMaps( Collection<?> collection ) {
-        List<Map<String, Object>> list = new ArrayList<>();
+        List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
         for ( Object o : collection ) {
             list.add( toMap( o ) );
         }

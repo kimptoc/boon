@@ -34,14 +34,13 @@ import org.boon.cache.CacheType;
 import org.boon.cache.SimpleCache;
 import org.boon.core.Dates;
 import org.boon.core.reflection.FastStringUtils;
-import org.boon.json.JsonException;
 
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.Writer;
 import java.math.BigDecimal;
 import java.math.BigInteger;
-import java.nio.charset.StandardCharsets;
+//import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import java.util.Currency;
 import java.util.Date;
@@ -77,7 +76,7 @@ public class CharBuf extends PrintWriter implements CharSequence {
 
         super(writer());
 
-        String str = new String(bytes, StandardCharsets.UTF_8);
+        String str = new String(bytes);
         this.buffer = FastStringUtils.toCharArray(str);
         this.location = buffer.length;
         this.capacity = buffer.length;
@@ -210,7 +209,7 @@ public class CharBuf extends PrintWriter implements CharSequence {
 
 
         if (icache == null) {
-            icache = new SimpleCache<> ( 1000, CacheType.LRU );
+            icache = new SimpleCache( 1000, CacheType.LRU );
         }
         char [] chars = icache.get ( key );
 
@@ -291,7 +290,7 @@ public class CharBuf extends PrintWriter implements CharSequence {
     public final  CharBuf addDouble( Double key ) {
 
         if (dcache == null) {
-            dcache = new SimpleCache<> ( 100, CacheType.LRU );
+            dcache = new SimpleCache<Double, char[]>( 100, CacheType.LRU );
         }
         char [] chars = dcache.get ( key );
 
@@ -323,7 +322,7 @@ public class CharBuf extends PrintWriter implements CharSequence {
     public final  CharBuf addFloat( Float key ) {
 
         if (fcache == null) {
-            fcache = new SimpleCache<> ( 100, CacheType.LRU );
+            fcache = new SimpleCache<Float, char[]>( 100, CacheType.LRU );
         }
         char [] chars = fcache.get ( key );
 
@@ -473,9 +472,9 @@ public class CharBuf extends PrintWriter implements CharSequence {
 
 
 
-    private static  boolean isJSONControlOrUnicode( int c ) {
+    private static  boolean isJSONEscapeOrAsciiControl(int c) {
 
-        return (c < 30 || c == 34 || c == 92 ) ? true : false;
+        return (c < 32 || c == 34 || c == 92 ) ? true : false;
 
     }
 
@@ -486,7 +485,7 @@ public class CharBuf extends PrintWriter implements CharSequence {
         char c;
         while ( true ) {
             c = charArray[ index ];
-            if ( isJSONControlOrUnicode( c )) {
+            if ( isJSONEscapeOrAsciiControl(c)) {
                 jsonControlCount++;
 
             }
@@ -546,7 +545,7 @@ public class CharBuf extends PrintWriter implements CharSequence {
                 char c = charArray[ index ];
 
 
-                if ( isJSONControlOrUnicode( c )) {
+                if ( isJSONEscapeOrAsciiControl(c)) {
 
                     switch ( c ) {
                         case '\"':
@@ -820,7 +819,7 @@ public class CharBuf extends PrintWriter implements CharSequence {
 
     public void addAsUTF( byte[] value ) {
 
-        String str = new String(value, StandardCharsets.UTF_8);
+        String str = new String(value);
         final char[] chars = FastStringUtils.toCharArray(str);
         this.add(chars);
 
@@ -846,7 +845,7 @@ public class CharBuf extends PrintWriter implements CharSequence {
     private Cache <BigDecimal, char[]> bigDCache;
     public CharBuf addBigDecimal( BigDecimal key ) {
         if (bigDCache == null) {
-            bigDCache = new SimpleCache<> ( 100, CacheType.LRU );
+            bigDCache = new SimpleCache<BigDecimal, char[]>( 100, CacheType.LRU );
         }
         char [] chars = bigDCache.get ( key );
 
@@ -867,7 +866,7 @@ public class CharBuf extends PrintWriter implements CharSequence {
 
     public CharBuf addBigInteger( BigInteger key ) {
         if (bigICache == null) {
-            bigICache = new SimpleCache<> ( 100, CacheType.LRU );
+            bigICache = new SimpleCache<BigInteger, char[]>( 100, CacheType.LRU );
         }
         char [] chars = bigICache.get ( key );
 
@@ -897,7 +896,7 @@ public class CharBuf extends PrintWriter implements CharSequence {
     public final  CharBuf addLong( Long key ) {
 
         if (lcache == null) {
-            lcache = new SimpleCache<> ( 100, CacheType.LRU );
+            lcache = new SimpleCache<Long, char[]>( 100, CacheType.LRU );
         }
         char [] chars = lcache.get ( key );
 
@@ -915,7 +914,7 @@ public class CharBuf extends PrintWriter implements CharSequence {
     private Cache <Currency, char[]> currencyCache;
     public CharBuf addCurrency( Currency key ) {
         if (currencyCache == null) {
-            currencyCache = new SimpleCache<> ( 100, CacheType.LRU );
+            currencyCache = new SimpleCache<Currency, char[]>( 100, CacheType.LRU );
         }
         char [] chars = currencyCache.get ( key );
 
@@ -1096,7 +1095,7 @@ public class CharBuf extends PrintWriter implements CharSequence {
     public final CharBuf decodeJsonString ( byte[] bytes, int start, int to ) {
 
 
-        String str = new String(bytes, start, to - start, StandardCharsets.UTF_8);
+        String str = new String(bytes, start, to - start);
         final char[] chars = FastStringUtils.toCharArray(str);
         this.decodeJsonString(chars);
         return this;
@@ -1195,9 +1194,9 @@ public class CharBuf extends PrintWriter implements CharSequence {
         return multiply(' ', i);
     }
 
-    public void jsonDate(long millis) {
-        Dates.jsonDateChars(new Date(millis), this);
-    }
+//    public void jsonDate(long millis) {
+//        Dates.jsonDateChars(new Date(millis), this);
+//    }
 
 
 

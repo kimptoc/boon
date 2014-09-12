@@ -46,7 +46,7 @@ public class Expression {
     private ObjectContext context = null;
 
 
-    private List<ExpressionBinding> expressions = new ArrayList<>(  );
+    private List<ExpressionBinding> expressions = new ArrayList<ExpressionBinding>(  );
 
     public Grouping grouping() {
         return grouping;

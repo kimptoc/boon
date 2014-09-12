@@ -41,7 +41,7 @@ import org.boon.criteria.internal.*;
 
 import java.util.*;
 
-import static org.boon.Boon.fromJson;
+//import static org.boon.Boon.fromJson;
 import static org.boon.Boon.iterator;
 import static org.boon.Exceptions.die;
 import static org.boon.Lists.atIndex;
@@ -86,7 +86,7 @@ public class ObjectFilter {
             return Collections.EMPTY_LIST;
         }
 
-        List<T> results = new ArrayList<>();
+        List<T> results = new ArrayList<T>();
         for ( T item : items ) {
             if (ObjectFilter.and( expressions.toArray( new Criteria[expressions.size()] ) ).test( item )) {
                 results.add( item );
@@ -102,7 +102,7 @@ public class ObjectFilter {
 
         Group and = ObjectFilter.and(exp);
 
-        List<T> results = new ArrayList<>();
+        List<T> results = new ArrayList<T>();
         for ( T item : items ) {
             if ( and.test( item ) ) {
                 results.add( item );
@@ -1547,16 +1547,16 @@ public class ObjectFilter {
 
     }
 
-    /**
-     * Converts a JSON string into a Criteria.
-     * @param json
-     * @return
-     */
-    public static Criteria criteriaFromJson(String json) {
-
-        return (Criteria) Invoker.invokeFromObject(ObjectFilter.class,
-                "createCriteriaFromClass", fromJson(json));
-
-    }
+//    /**
+//     * Converts a JSON string into a Criteria.
+//     * @param json
+//     * @return
+//     */
+//    public static Criteria criteriaFromJson(String json) {
+//
+//        return (Criteria) Invoker.invokeFromObject(ObjectFilter.class,
+//                "createCriteriaFromClass", fromJson(json));
+//
+//    }
 
 }

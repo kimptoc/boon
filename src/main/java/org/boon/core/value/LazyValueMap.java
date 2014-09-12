@@ -220,9 +220,9 @@ public class LazyValueMap extends AbstractMap<String, Object> implements ValueMa
 
         /** added to avoid hash collision attack. */
         if (Sys.is1_7OrLater() && althashingThreshold) {
-            map = new HashMap<>( items.length );
+            map = new HashMap<String, Object>( items.length );
         } else {
-            map = new TreeMap<>();
+            map = new TreeMap<String, Object>();
         }
 
 

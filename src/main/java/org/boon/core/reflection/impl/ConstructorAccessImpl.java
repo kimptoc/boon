@@ -63,7 +63,7 @@ public class ConstructorAccessImpl <T> implements ConstructorAccess {
         this.constructor.setAccessible(true);
         this.annotationData = Annotations.getAnnotationDataForMethod(method);
 
-        annotationMap = new ConcurrentHashMap<>(  );
+        annotationMap = new ConcurrentHashMap<String, AnnotationData>(  );
         for (AnnotationData data : annotationData) {
             annotationMap.put( data.getName(), data );
             annotationMap.put( data.getSimpleClassName(), data );

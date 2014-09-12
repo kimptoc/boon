@@ -39,7 +39,7 @@ import org.boon.core.reflection.fields.FieldsAccessor;
 import org.boon.core.value.ValueContainer;
 import org.boon.primitive.CharBuf;
 
-import java.lang.invoke.ConstantCallSite;
+//import java.lang.invoke.ConstantCallSite;
 import java.lang.reflect.Method;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
@@ -547,18 +547,18 @@ public class Invoker {
         }
     }
 
-    public static ConstantCallSite invokeReducerLongIntReturnLongMethodHandle(Object object ) {
-
-            ClassMeta meta = ClassMeta.classMeta(object.getClass());
-            return meta.invokeReducerLongIntReturnLongMethodHandle(object);
-    }
-
-
-    public  static <T> ConstantCallSite invokeReducerLongIntReturnLongMethodHandle(T object, String methodName ) {
-
-        ClassMeta meta = ClassMeta.classMeta(object.getClass());
-        return meta.invokeReducerLongIntReturnLongMethodHandle(object, methodName);
-    }
+//    public static ConstantCallSite invokeReducerLongIntReturnLongMethodHandle(Object object ) {
+//
+//            ClassMeta meta = ClassMeta.classMeta(object.getClass());
+//            return meta.invokeReducerLongIntReturnLongMethodHandle(object);
+//    }
+//
+//
+//    public  static <T> ConstantCallSite invokeReducerLongIntReturnLongMethodHandle(T object, String methodName ) {
+//
+//        ClassMeta meta = ClassMeta.classMeta(object.getClass());
+//        return meta.invokeReducerLongIntReturnLongMethodHandle(object, methodName);
+//    }
 
     public static Method invokeReducerLongIntReturnLongMethod(Object object ) {
 

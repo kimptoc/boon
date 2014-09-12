@@ -43,7 +43,7 @@ import org.boon.datarepo.spi.ResultSetInternal;
 import java.lang.reflect.Array;
 import java.util.*;
 
-import static org.boon.Boon.toJson;
+//import static org.boon.Boon.toJson;
 import static org.boon.Lists.list;
 import static org.boon.core.reflection.MapObjectConversion.toMap;
 
@@ -60,13 +60,13 @@ public class ResultSetImpl<T> implements ResultSetInternal<T> {
 
     public ResultSetImpl( Map<String, FieldAccess> fields ) {
         this.fields = fields;
-        this.allResults = new ArrayList<>();
+        this.allResults = new ArrayList<List<T>>();
     }
 
 
     public ResultSetImpl( List<T> results, Map<String, FieldAccess> fields ) {
         this.fields = fields;
-        this.allResults = new ArrayList<>();
+        this.allResults = new ArrayList<List<T>>();
         this.addResults( results );
     }
 
@@ -76,7 +76,7 @@ public class ResultSetImpl<T> implements ResultSetInternal<T> {
         } else {
             this.fields = Collections.EMPTY_MAP;
         }
-        this.allResults = new ArrayList<>();
+        this.allResults = new ArrayList<List<T>>();
         this.addResults( results );
     }
 
@@ -85,7 +85,7 @@ public class ResultSetImpl<T> implements ResultSetInternal<T> {
             results = allResults.get( 0 );
         } else if ( results == null ) {
 
-            results = new ArrayList<>( totalSize );
+            results = new ArrayList<T>( totalSize );
 
             for ( List<T> list : allResults ) {
                 for ( T item : list ) {
@@ -353,7 +353,7 @@ public class ResultSetImpl<T> implements ResultSetInternal<T> {
         prepareResults();
 
 
-        List<Map<String, Object>> items = new ArrayList<>( results.size() );
+        List<Map<String, Object>> items = new ArrayList<Map<String, Object>>( results.size() );
         for ( T item : results ) {
             items.add( toMap( item ) );
         }
@@ -395,7 +395,9 @@ public class ResultSetImpl<T> implements ResultSetInternal<T> {
 
     @Override
     public String firstJSON() {
-        return toJson( firstItem () );
+//        return toJson( firstItem () );
+
+        return null;
     }
 
     @Override
@@ -563,7 +565,7 @@ public class ResultSetImpl<T> implements ResultSetInternal<T> {
     public List<Map<String, Object>> paginateMaps( int start, int size ) {
         prepareResults();
 
-        List<Map<String, Object>> mapResults = new ArrayList<>();
+        List<Map<String, Object>> mapResults = new ArrayList<Map<String, Object>>();
         List<T> list = this.paginate( start, size );
 
         for ( T item : list ) {

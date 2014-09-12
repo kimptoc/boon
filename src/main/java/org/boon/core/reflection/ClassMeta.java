@@ -36,7 +36,7 @@ import org.boon.core.reflection.fields.FieldAccess;
 import org.boon.core.reflection.impl.ConstructorAccessImpl;
 import org.boon.core.reflection.impl.MethodAccessImpl;
 
-import java.lang.invoke.ConstantCallSite;
+//import java.lang.invoke.ConstantCallSite;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;
 import java.lang.reflect.Type;
@@ -119,12 +119,12 @@ public class ClassMeta <T> implements Annotated{
 
 
     public Set<String> instanceMethods() {
-        return new LinkedHashSet<>(instanceMethods);
+        return new LinkedHashSet<String>(instanceMethods);
     }
 
 
     public Set<String> classMethods() {
-        return  new LinkedHashSet<>(classMethods);
+        return  new LinkedHashSet<String>(classMethods);
     }
 
     public ClassMeta( Class<T> cls ) {
@@ -154,7 +154,7 @@ public class ClassMeta <T> implements Annotated{
 
         for (Constructor constructor : constructors ) {
             if (constructor.getParameterTypes().length == 0 ) {
-                noArg = new ConstructorAccessImpl<>(constructor);
+                noArg = new ConstructorAccessImpl(constructor);
             }
             set.add(new ConstructorAccessImpl(constructor));
         }
@@ -168,10 +168,10 @@ public class ClassMeta <T> implements Annotated{
 
 
 
-        methodMap = new ConcurrentHashMap<>(  );
-        methodsMulti = new MultiMap<>(  );
-        instanceMethods = new LinkedHashSet<>();
-        classMethods = new LinkedHashSet<>();
+        methodMap = new ConcurrentHashMap<String, MethodAccess>(  );
+        methodsMulti = new MultiMap<String, MethodAccess>(  );
+        instanceMethods = new LinkedHashSet<String>();
+        classMethods = new LinkedHashSet<String>();
 
 
 
@@ -345,7 +345,7 @@ public class ClassMeta <T> implements Annotated{
 
 
     public List<ConstructorAccess> oneArgumentConstructors() {
-        List <ConstructorAccess> constructors = new ArrayList<>();
+        List <ConstructorAccess> constructors = new ArrayList<ConstructorAccess>();
         for (ConstructorAccess constructorAccess : constructorAccessSet) {
             if (constructorAccess.parameterTypes().length==1) {
 
@@ -461,7 +461,7 @@ public class ClassMeta <T> implements Annotated{
             methodAccess = methodMap.get("test");
         }
 
-        return (boolean) methodAccess.invoke(instance, arg);
+        return (Boolean) methodAccess.invoke(instance, arg);
     }
 
     public Object invokeReducer(Object instance, Object sum, Object value) {
@@ -502,23 +502,23 @@ public class ClassMeta <T> implements Annotated{
         return this.cls.getSimpleName();
     }
 
-    public ConstantCallSite invokeReducerLongIntReturnLongMethodHandle(Object object) {
-        MethodAccess methodAccess;
-        if (methods.size()==1) {
-            methodAccess = methods.get(0);
-        } else  {
-            methodAccess = methodMap.get("reduce");
-        }
-        ConstantCallSite methodHandle = methodAccess.invokeReducerLongIntReturnLongMethodHandle(object);
-        return methodHandle;
-    }
-
-    public ConstantCallSite invokeReducerLongIntReturnLongMethodHandle(Object object, String methodName) {
-        MethodAccess methodAccess;
-        methodAccess = methodMap.get(methodName);
-        ConstantCallSite methodHandle = methodAccess.invokeReducerLongIntReturnLongMethodHandle(object);
-        return methodHandle;
-    }
+//    public ConstantCallSite invokeReducerLongIntReturnLongMethodHandle(Object object) {
+//        MethodAccess methodAccess;
+//        if (methods.size()==1) {
+//            methodAccess = methods.get(0);
+//        } else  {
+//            methodAccess = methodMap.get("reduce");
+//        }
+//        ConstantCallSite methodHandle = methodAccess.invokeReducerLongIntReturnLongMethodHandle(object);
+//        return methodHandle;
+//    }
+//
+//    public ConstantCallSite invokeReducerLongIntReturnLongMethodHandle(Object object, String methodName) {
+//        MethodAccess methodAccess;
+//        methodAccess = methodMap.get(methodName);
+//        ConstantCallSite methodHandle = methodAccess.invokeReducerLongIntReturnLongMethodHandle(object);
+//        return methodHandle;
+//    }
 
 
 

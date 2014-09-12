@@ -40,7 +40,7 @@ import java.util.concurrent.ConcurrentHashMap;
 public class FieldFieldsAccessor implements FieldsAccessor {
 
 
-    private final Map<Class<?>, Map<String, FieldAccess>> fieldMap = new ConcurrentHashMap<> ();
+    private final Map<Class<?>, Map<String, FieldAccess>> fieldMap = new ConcurrentHashMap<Class<?>, Map<String, FieldAccess>>();
 
     private final boolean useAlias;
     private final boolean caseInsensitive;
@@ -76,14 +76,14 @@ public class FieldFieldsAccessor implements FieldsAccessor {
         Map<String, FieldAccess> fieldAccessMap = Reflection.getAllAccessorFields ( aClass, true );
         if (caseInsensitive) {
             Map<String, FieldAccess> mapOld = fieldAccessMap;
-            fieldAccessMap = new LinkedHashMap<>();
+            fieldAccessMap = new LinkedHashMap<String, FieldAccess>();
             for (Map.Entry<String, FieldAccess> entry : mapOld.entrySet()) {
                 fieldAccessMap.put(entry.getKey().toLowerCase(), entry.getValue());
             }
         }
 
         if ( useAlias ) {
-            Map<String, FieldAccess> fieldAccessMap2 = new LinkedHashMap<> ( fieldAccessMap.size () );
+            Map<String, FieldAccess> fieldAccessMap2 = new LinkedHashMap<String, FieldAccess>( fieldAccessMap.size () );
 
             for (FieldAccess fa : fieldAccessMap.values ()) {
                 String alias = fa.alias();

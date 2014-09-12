@@ -136,7 +136,7 @@ public class UniqueSearchIndex<KEY, ITEM> extends UniqueLookupIndex<KEY, ITEM> i
             SortedMap<String, MultiValue<ITEM>> sortedSubMap = sortMap.subMap( start, after.toString() );
 
             if ( sortedSubMap.size() > 0 ) {
-                results = new ArrayList<>();
+                results = new ArrayList<ITEM>();
                 for ( MultiValue<ITEM> values : sortedSubMap.values() ) {
                     values.addTo( results );
                 }
@@ -165,7 +165,7 @@ public class UniqueSearchIndex<KEY, ITEM> extends UniqueLookupIndex<KEY, ITEM> i
 
         SortedMap<KEY, ITEM> keyMultiValueSortedMap = this.navigableMap.subMap( start, end );
 
-        return new ArrayList<>( keyMultiValueSortedMap.values() );
+        return new ArrayList<ITEM>( keyMultiValueSortedMap.values() );
 
     }
 
@@ -175,28 +175,28 @@ public class UniqueSearchIndex<KEY, ITEM> extends UniqueLookupIndex<KEY, ITEM> i
         key = getKey( key );
 
         SortedMap<KEY, ITEM> keyMultiValueSortedMap = this.navigableMap.tailMap( key, false );
-        return new ArrayList<>( keyMultiValueSortedMap.values() );
+        return new ArrayList<ITEM>( keyMultiValueSortedMap.values() );
     }
 
     @Override
     public List<ITEM> findLessThan( KEY key ) {
         key = getKey( key );
         SortedMap<KEY, ITEM> keyMultiValueSortedMap = this.navigableMap.headMap( key, false );
-        return new ArrayList<>( keyMultiValueSortedMap.values() );
+        return new ArrayList<ITEM>( keyMultiValueSortedMap.values() );
     }
 
     @Override
     public List<ITEM> findGreaterThanEqual( KEY key ) {
         key = getKey( key );
         SortedMap<KEY, ITEM> keyMultiValueSortedMap = this.navigableMap.tailMap( key );
-        return new ArrayList<>( keyMultiValueSortedMap.values() );
+        return new ArrayList<ITEM>( keyMultiValueSortedMap.values() );
     }
 
     @Override
     public List<ITEM> findLessThanEqual( KEY key ) {
         key = getKey( key );
         SortedMap<KEY, ITEM> keyMultiValueSortedMap = this.navigableMap.headMap( key );
-        return new ArrayList<>( keyMultiValueSortedMap.values() );
+        return new ArrayList<ITEM>( keyMultiValueSortedMap.values() );
     }
 
     @Override

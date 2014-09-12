@@ -43,7 +43,7 @@ import static org.boon.datarepo.modification.ModificationType.*;
 
 public class ObjectEditorEventDecorator<KEY, ITEM> extends ObjectEditorDecoratorBase<KEY, ITEM> {
 
-    List<ModificationListener<KEY, ITEM>> listeners = new CopyOnWriteArrayList<>();
+    List<ModificationListener<KEY, ITEM>> listeners = new CopyOnWriteArrayList<ModificationListener<KEY, ITEM>>();
 
     public void add( ModificationListener l ) {
         listeners.add( l );

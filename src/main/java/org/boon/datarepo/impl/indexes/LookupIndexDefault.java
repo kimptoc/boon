@@ -215,7 +215,7 @@ public class LookupIndexDefault<KEY, ITEM> implements LookupIndex<KEY, ITEM> {
             log.fine( "all called" );
         }
 
-        List results = new ArrayList<>( map.size() );
+        List results = new ArrayList( map.size() );
         for ( MultiValue values : map.values() ) {
             values.addTo( results );
         }

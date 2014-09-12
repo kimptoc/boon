@@ -100,133 +100,83 @@ public enum Type {
 
     public static Type getType ( String typeName ) {
 
-            switch ( typeName ) {
-                case "int":
-                    return Type.INT;
-                case "short":
-                    return Type.SHORT;
-                case "byte":
-                    return Type.BYTE;
-                case "float":
-                    return Type.FLOAT;
-                case "double":
-                    return Type.DOUBLE;
-                case "boolean":
-                    return Type.BOOLEAN;
-                case "char":
-                    return Type.CHAR;
-                case "long":
-                    return Type.LONG;
-
-                case "java.lang.String":
-                    return Type.STRING;
-                case "java.lang.Boolean":
-                    return Type.BOOLEAN_WRAPPER;
-                case "java.lang.Byte":
-                    return Type.BYTE_WRAPPER;
-                case "java.lang.Short":
-                    return Type.SHORT_WRAPPER;
-                case "java.lang.Integer":
-                    return Type.INTEGER_WRAPPER;
-                case "java.lang.Double":
-                    return Type.DOUBLE_WRAPPER;
-                case "java.lang.Float":
-                    return Type.FLOAT_WRAPPER;
-                case "java.lang.Character":
-                    return Type.CHAR_WRAPPER;
-
-                case "java.lang.Class":
-                    return Type.CLASS;
-
-
-
-                case "java.lang.Void":
-                    return Type.VOID;
-
-
-
-
-
-                case "java.lang.Long":
-                    return Type.LONG_WRAPPER;
-
-
-                case "java.util.Set":
-                case "java.util.HashSet":
-                case "java.util.TreeSet":
-                    return Type.SET;
-
-                case "java.util.List":
-                case "java.util.ArrayList":
-                case "java.util.LinkedList":
-                case "org.boon.core.value.ValueList":
-                    return Type.LIST;
-
-                case "java.util.Map":
-                case "org.boon.collections.LazyMap":
-                case "java.util.HashMap":
-                case "java.util.LinkedHashMap":
-                case "java.util.TreeMap":
-                case "org.boon.core.value.LazyValueMap":
-                    return Type.MAP;
-
-                case "java.lang.CharSequence":
-                //case "org.boon.core.value.CharSequenceValue":
-                    return Type.CHAR_SEQUENCE;
-
-                case "java.math.BigDecimal":
-                    return Type.BIG_DECIMAL;
-                case "java.math.BigInteger":
-                    return Type.BIG_INT;
-
-                case "java.util.Date":
-                case "java.sql.Date":
-                case "java.sql.Time":
-                case "java.sql.Timestamp":
-                    return Type.DATE;
-
-
-
-                case "java.util.Calendar":
-                    return Type.CALENDAR;
-
-                case "org.boon.core.value.ValueMapImpl":
-                    return Type.VALUE_MAP;
-
-                case "org.boon.core.value.NumberValue":
-                case "org.boon.core.value.CharSequenceValue":
-                    return Type.VALUE;
-
-                case "java.lang.Object":
-                    return Type.OBJECT;
-
-                case "java.io.File":
-                    return Type.FILE;
-
-                case "java.net.URI":
-                    return Type.URI;
-
-                case "java.net.URL":
-                    return Type.URL;
-
-                case "java.nio.file.Path":
-                    return Type.PATH;
-
-                case "java.util.UUID":
-                    return Type.UUID;
-
-
-                case "java.util.Locale":
-                    return Type.LOCALE;
-
-
-                case "java.util.TimeZone":
-                    return Type.TIME_ZONE;
-
-                case "java.util.Currency":
-                    return Type.CURRENCY;
-
-            }
+        if (typeName.equals("int")) {
+            return Type.INT;
+        } else if (typeName.equals("short")) {
+            return Type.SHORT;
+        } else if (typeName.equals("byte")) {
+            return Type.BYTE;
+        } else if (typeName.equals("float")) {
+            return Type.FLOAT;
+        } else if (typeName.equals("double")) {
+            return Type.DOUBLE;
+        } else if (typeName.equals("boolean")) {
+            return Type.BOOLEAN;
+        } else if (typeName.equals("char")) {
+            return Type.CHAR;
+        } else if (typeName.equals("long")) {
+            return Type.LONG;
+        } else if (typeName.equals("java.lang.String")) {
+            return Type.STRING;
+        } else if (typeName.equals("java.lang.Boolean")) {
+            return Type.BOOLEAN_WRAPPER;
+        } else if (typeName.equals("java.lang.Byte")) {
+            return Type.BYTE_WRAPPER;
+        } else if (typeName.equals("java.lang.Short")) {
+            return Type.SHORT_WRAPPER;
+        } else if (typeName.equals("java.lang.Integer")) {
+            return Type.INTEGER_WRAPPER;
+        } else if (typeName.equals("java.lang.Double")) {
+            return Type.DOUBLE_WRAPPER;
+        } else if (typeName.equals("java.lang.Float")) {
+            return Type.FLOAT_WRAPPER;
+        } else if (typeName.equals("java.lang.Character")) {
+            return Type.CHAR_WRAPPER;
+        } else if (typeName.equals("java.lang.Class")) {
+            return Type.CLASS;
+        } else if (typeName.equals("java.lang.Void")) {
+            return Type.VOID;
+        } else if (typeName.equals("java.lang.Long")) {
+            return Type.LONG_WRAPPER;
+        } else if (typeName.equals("java.util.Set") || typeName.equals("java.util.HashSet") || typeName.equals("java.util.TreeSet")) {
+            return Type.SET;
+        } else if (typeName.equals("java.util.List") || typeName.equals("java.util.ArrayList") || typeName.equals("java.util.LinkedList") || typeName.equals("org.boon.core.value.ValueList")) {
+            return Type.LIST;
+        } else if (typeName.equals("java.util.Map") || typeName.equals("org.boon.collections.LazyMap") || typeName.equals("java.util.HashMap") || typeName.equals("java.util.LinkedHashMap") || typeName.equals("java.util.TreeMap") || typeName.equals("org.boon.core.value.LazyValueMap")) {
+            return Type.MAP;
+        } else if (typeName.equals("java.lang.CharSequence")) {//case "org.boon.core.value.CharSequenceValue":
+            return Type.CHAR_SEQUENCE;
+        } else if (typeName.equals("java.math.BigDecimal")) {
+            return Type.BIG_DECIMAL;
+        } else if (typeName.equals("java.math.BigInteger")) {
+            return Type.BIG_INT;
+        } else if (typeName.equals("java.util.Date") || typeName.equals("java.sql.Date") || typeName.equals("java.sql.Time") || typeName.equals("java.sql.Timestamp")) {
+            return Type.DATE;
+        } else if (typeName.equals("java.util.Calendar")) {
+            return Type.CALENDAR;
+        } else if (typeName.equals("org.boon.core.value.ValueMapImpl")) {
+            return Type.VALUE_MAP;
+        } else if (typeName.equals("org.boon.core.value.NumberValue") || typeName.equals("org.boon.core.value.CharSequenceValue")) {
+            return Type.VALUE;
+        } else if (typeName.equals("java.lang.Object")) {
+            return Type.OBJECT;
+        } else if (typeName.equals("java.io.File")) {
+            return Type.FILE;
+        } else if (typeName.equals("java.net.URI")) {
+            return Type.URI;
+        } else if (typeName.equals("java.net.URL")) {
+            return Type.URL;
+        } else if (typeName.equals("java.nio.file.Path")) {
+            return Type.PATH;
+        } else if (typeName.equals("java.util.UUID")) {
+            return Type.UUID;
+        } else if (typeName.equals("java.util.Locale")) {
+            return Type.LOCALE;
+        } else if (typeName.equals("java.util.TimeZone")) {
+            return Type.TIME_ZONE;
+        } else if (typeName.equals("java.util.Currency")) {
+            return Type.CURRENCY;
+        }
             return Type.INSTANCE;
 
     }
@@ -264,7 +214,7 @@ public enum Type {
 
     public  static List<Object> gatherTypes ( List<?> list ) {
 
-        List<Object> types = new ArrayList<>();
+        List<Object> types = new ArrayList<Object>();
 
         for (Object o : list) {
             if (o instanceof List) {
@@ -282,7 +232,7 @@ public enum Type {
 
     public  static List<Object> gatherActualTypes ( List<?> list ) {
 
-        List<Object> types = new ArrayList<>();
+        List<Object> types = new ArrayList<Object>();
 
         for (Object o : list) {
             if (o instanceof List) {

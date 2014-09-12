@@ -40,8 +40,8 @@ import org.boon.datarepo.ResultSet;
 public class FilterWithSimpleCache extends FilterDecoratorBase {
 
     /* The fifo cache is meant for a routine that is maybe using a few queries in a loop. */
-    private Cache<Criteria, ResultSet> fifoCache = new SimpleConcurrentCache<>( 50, false, CacheType.FIFO );
-    private Cache<Criteria, ResultSet> lruCache = new SimpleConcurrentCache<>( 1_000, false, CacheType.LRU );
+    private Cache<Criteria, ResultSet> fifoCache = new SimpleConcurrentCache<Criteria, ResultSet>( 50, false, CacheType.FIFO );
+    private Cache<Criteria, ResultSet> lruCache = new SimpleConcurrentCache<Criteria, ResultSet>( 1000, false, CacheType.LRU );
 
 
     @Override
@@ -72,8 +72,8 @@ public class FilterWithSimpleCache extends FilterDecoratorBase {
     public void invalidate() {
 
           /* The fifo cache is meant for a routine that is maybe using a few queries in a loop. */
-        fifoCache = new SimpleConcurrentCache<>( 50, false, CacheType.FIFO );
-        lruCache = new SimpleConcurrentCache<>( 1_000, false, CacheType.LRU );
+        fifoCache = new SimpleConcurrentCache<Criteria, ResultSet>( 50, false, CacheType.FIFO );
+        lruCache = new SimpleConcurrentCache<Criteria, ResultSet>( 1000, false, CacheType.LRU );
         super.invalidate();
     }
 

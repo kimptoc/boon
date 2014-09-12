@@ -49,7 +49,7 @@ public class Sets {
         if (collection==null) {
             return Collections.EMPTY_SET;
         }
-        return new LinkedHashSet<>( collection );
+        return new LinkedHashSet<V>( collection );
     }
 
 
@@ -71,11 +71,11 @@ public class Sets {
 
 
     public static <V> Set<V> set( Class<V> clazz ) {
-        return new LinkedHashSet<>();
+        return new LinkedHashSet<V>();
     }
 
     public static <V> Set<V> set( Iterable<V> iterable ) {
-        Set<V> set = new LinkedHashSet<>();
+        Set<V> set = new LinkedHashSet<V>();
         for ( V o : iterable ) {
             set.add( o );
         }
@@ -83,7 +83,7 @@ public class Sets {
     }
 
     public static <V> Set<V> set( Enumeration<V> enumeration ) {
-        Set<V> set = new LinkedHashSet<>();
+        Set<V> set = new LinkedHashSet<V>();
         while ( enumeration.hasMoreElements() ) {
             set.add( enumeration.nextElement() );
         }
@@ -92,7 +92,7 @@ public class Sets {
 
 
     public static <V> Set<V> set( Iterator<V> iterator ) {
-        Set<V> set = new LinkedHashSet<>();
+        Set<V> set = new LinkedHashSet<V>();
         while ( iterator.hasNext() ) {
             set.add( iterator.next() );
         }
@@ -100,11 +100,11 @@ public class Sets {
     }
 
 
-    @SafeVarargs
+//    @SafeVarargs
     public static <V> Set<V> set( final V... array ) {
 
 
-        Set<V> set = new LinkedHashSet<>();
+        Set<V> set = new LinkedHashSet<V>();
 
         for ( V v : array ) {
             set.add( v );
@@ -112,9 +112,25 @@ public class Sets {
         return set;
     }
 
+//    @SafeVarargs
+    public static <V> Set<V> set( int size, final V... array  ) {
+
+        int index=0;
+        Set<V> set = new LinkedHashSet<V>();
+
+        for ( V v : array ) {
+            set.add( v );
+            index++;
+            if (index == size) {
+                break;
+            }
+        }
+        return set;
+    }
+
 
     public static <V> NavigableSet<V> sortedSet( Iterator<V> iterator ) {
-        NavigableSet<V> set = new TreeSet<>();
+        NavigableSet<V> set = new TreeSet<V>();
         while ( iterator.hasNext() ) {
             set.add( iterator.next() );
         }
@@ -122,11 +138,11 @@ public class Sets {
     }
 
     public static <V> NavigableSet<V> sortedSet( Class<V> clazz ) {
-        return new TreeSet<>();
+        return new TreeSet<V>();
     }
 
     public static <V> NavigableSet<V> sortedSet( Iterable<V> iterable ) {
-        NavigableSet<V> set = new TreeSet<>();
+        NavigableSet<V> set = new TreeSet<V>();
         for ( V o : iterable ) {
             set.add( o );
         }
@@ -134,16 +150,16 @@ public class Sets {
     }
 
     public static <V> NavigableSet<V> sortedSet( Enumeration<V> enumeration ) {
-        NavigableSet<V> set = new TreeSet<>();
+        NavigableSet<V> set = new TreeSet<V>();
         while ( enumeration.hasMoreElements() ) {
             set.add( enumeration.nextElement() );
         }
         return set;
     }
 
-    @SafeVarargs
+//    @SafeVarargs
     public static <V> NavigableSet<V> sortedSet( final V... array ) {
-        NavigableSet<V> set = new TreeSet<>();
+        NavigableSet<V> set = new TreeSet<V>();
 
         for ( V v : array ) {
             set.add( v );
@@ -152,12 +168,12 @@ public class Sets {
     }
 
     public static <V> NavigableSet<V> sortedSet( Collection<V> collection ) {
-        return new TreeSet<>( collection );
+        return new TreeSet<V>( collection );
     }
 
 
     public static <V> NavigableSet<V> safeSortedSet( Iterator<V> iterator ) {
-        NavigableSet<V> set = new ConcurrentSkipListSet<>();
+        NavigableSet<V> set = new ConcurrentSkipListSet<V>();
         while ( iterator.hasNext() ) {
             set.add( iterator.next() );
         }
@@ -165,11 +181,11 @@ public class Sets {
     }
 
     public static <V> NavigableSet<V> safeSortedSet( Class<V> clazz ) {
-        return new ConcurrentSkipListSet<>();
+        return new ConcurrentSkipListSet<V>();
     }
 
     public static <V> NavigableSet<V> safeSortedSet( Iterable<V> iterable ) {
-        NavigableSet<V> set = new ConcurrentSkipListSet<>();
+        NavigableSet<V> set = new ConcurrentSkipListSet<V>();
         for ( V o : iterable ) {
             set.add( o );
         }
@@ -177,17 +193,17 @@ public class Sets {
     }
 
     public static <V> NavigableSet<V> safeSortedSet( Enumeration<V> enumeration ) {
-        NavigableSet<V> set = new ConcurrentSkipListSet<>();
+        NavigableSet<V> set = new ConcurrentSkipListSet<V>();
         while ( enumeration.hasMoreElements() ) {
             set.add( enumeration.nextElement() );
         }
         return set;
     }
 
-    @SafeVarargs
+//    @SafeVarargs
     public static <V> NavigableSet<V> safeSortedSet( final V... array ) {
 
-        NavigableSet<V> set = new ConcurrentSkipListSet<>();
+        NavigableSet<V> set = new ConcurrentSkipListSet<V>();
 
         for ( V v : array ) {
             set.add( v );
@@ -198,15 +214,15 @@ public class Sets {
 
 
     public static <V> NavigableSet<V> safeSortedSet( Collection<V> collection ) {
-        return new ConcurrentSkipListSet<>( collection );
+        return new ConcurrentSkipListSet<V>( collection );
     }
 
     public static <V> Set<V> safeSet( Class<V> clazz ) {
-        return new CopyOnWriteArraySet<>();
+        return new CopyOnWriteArraySet<V>();
     }
 
     public static <V> Set<V> safeSet( Iterable<V> iterable ) {
-        Set<V> set = new CopyOnWriteArraySet<>();
+        Set<V> set = new CopyOnWriteArraySet<V>();
         for ( V o : iterable ) {
             set.add( o );
         }
@@ -214,7 +230,7 @@ public class Sets {
     }
 
     public static <V> Set<V> safeSet( Enumeration<V> enumeration ) {
-        Set<V> set = new CopyOnWriteArraySet<>();
+        Set<V> set = new CopyOnWriteArraySet<V>();
         while ( enumeration.hasMoreElements() ) {
             set.add( enumeration.nextElement() );
         }
@@ -223,7 +239,7 @@ public class Sets {
 
 
     public static <V> Set<V> safeSet( Iterator<V> iterator ) {
-        Set<V> set = new CopyOnWriteArraySet<>();
+        Set<V> set = new CopyOnWriteArraySet<V>();
         while ( iterator.hasNext() ) {
             set.add( iterator.next() );
         }
@@ -231,17 +247,17 @@ public class Sets {
     }
 
 
-    @SafeVarargs
+//    @SafeVarargs
     public static <V> Set<V> safeSet( final V... array ) {
 
         List<V> list = Lists.list( array );
-        Set<V> set = new CopyOnWriteArraySet<>( list );
+        Set<V> set = new CopyOnWriteArraySet<V>( list );
 
         return set;
     }
 
     public static <V> Set<V> safeSet( Collection<V> collection ) {
-        return new CopyOnWriteArraySet<>( collection );
+        return new CopyOnWriteArraySet<V>( collection );
     }
 
 
@@ -305,22 +321,22 @@ public class Sets {
 
     @Universal
     public static <V> Set<V> copy( HashSet<V> collection ) {
-        return new LinkedHashSet<>( collection );
+        return new LinkedHashSet<V>( collection );
     }
 
     @Universal
     public static <V> NavigableSet<V> copy( TreeSet<V> collection ) {
-        return new TreeSet<>( collection );
+        return new TreeSet<V>( collection );
     }
 
     @Universal
     public static <V> Set<V> copy( CopyOnWriteArraySet<V> collection ) {
-        return new CopyOnWriteArraySet<>( collection );
+        return new CopyOnWriteArraySet<V>( collection );
     }
 
     @Universal
     public static <V> NavigableSet<V> copy( ConcurrentSkipListSet<V> collection ) {
-        return new ConcurrentSkipListSet<>( collection );
+        return new ConcurrentSkipListSet<V>( collection );
     }
 
 
@@ -355,7 +371,7 @@ public class Sets {
 
 
     public static <V> Set<V> deepCopy( Collection<V> collection ) {
-        Set<V> newSet = new LinkedHashSet<>(collection.size());
+        Set<V> newSet = new LinkedHashSet<V>(collection.size());
 
         for (V v : collection) {
             newSet.add(BeanUtils.copy(v));
@@ -373,7 +389,7 @@ public class Sets {
 
 
     public static <V,T> List<T> deepCopy( Collection<V> src, Class<T> dest  ) {
-        List<T> list = new ArrayList<>(src.size());
+        List<T> list = new ArrayList<T>(src.size());
 
         for (V v : src) {
             list.add( BeanUtils.createFromSrc( v, dest ));
@@ -403,7 +419,7 @@ public class Sets {
 
 
     public static <T> Set<T> setFromProperty( Class<T> propertyType, String propertyPath, Collection<?> list ) {
-        Set<T> newSet = new LinkedHashSet<>( list.size() );
+        Set<T> newSet = new LinkedHashSet<T>( list.size() );
 
         for ( Object item : list ) {
             T newItem = ( T ) BeanUtils.idx( item, propertyPath );
@@ -416,7 +432,7 @@ public class Sets {
 
 
     public static <T> Set<T> setFromProperty( Class<T> propertyType, String propertyPath, Iterable<?> list ) {
-        Set<T> newSet = new LinkedHashSet<>(  );
+        Set<T> newSet = new LinkedHashSet<T>(  );
 
         for ( Object item : list ) {
             T newItem = ( T ) BeanUtils.idx( item, propertyPath );

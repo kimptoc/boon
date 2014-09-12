@@ -93,7 +93,7 @@ public class TimeKeeperBasic implements TimeKeeper {
         if ( locked ) {
             try {
                 //I don't want more than one thread calling nanoTime
-                time = System.nanoTime() / 1_000_000;
+                time = System.nanoTime() / 1000000;
                 this.time.set( time );
                 return time;
 

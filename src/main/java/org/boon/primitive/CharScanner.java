@@ -124,25 +124,25 @@ public class CharScanner {
     }
 
 
-    public static boolean hasDecimalChar( char[] chars, boolean negative ) {
-
-        int index =0;
-
-        if (negative) index++;
-
-        for (; index < chars.length; index++) {
-            switch ( chars[index] ) {
-                case MINUS:
-                case PLUS:
-                case LETTER_E:
-                case LETTER_BIG_E:
-                case DECIMAL_POINT:
-                    return true;
-            }
-        }
-        return false;
-
-    }
+//    public static boolean hasDecimalChar( char[] chars, boolean negative ) {
+//
+//        int index =0;
+//
+//        if (negative) index++;
+//
+//        for (; index < chars.length; index++) {
+//            switch ( chars[index] ) {
+//                case MINUS:
+//                case PLUS:
+//                case LETTER_E:
+//                case LETTER_BIG_E:
+//                case DECIMAL_POINT:
+//                    return true;
+//            }
+//        }
+//        return false;
+//
+//    }
 
     public static boolean isDigits( final char[] inputArray ) {
         for ( int index = 0; index < inputArray.length; index++ ) {
@@ -154,97 +154,97 @@ public class CharScanner {
         return true;
     }
 
-    public static char[][] splitExact( final char[] inputArray,
-                                       final char split, final int resultsArrayLength ) {
-        /** Holds the results. */
-        char[][] results = new char[ resultsArrayLength ][];
-
-        int resultIndex = 0;
-        int startCurrentLineIndex = 0;
-        int currentLineLength = 1;
-
-
-        char c = '\u0000';
-        int index = 0;
-
-        for (; index < inputArray.length; index++, currentLineLength++ ) {
-            c = inputArray[ index ];
-            if ( c == split ) {
-
-                results[ resultIndex ] = Chr.copy(
-                        inputArray, startCurrentLineIndex, currentLineLength - 1 );
-                startCurrentLineIndex = index + 1; //skip the char
-
-                currentLineLength = 0;
-                resultIndex++;
-            }
-        }
-
-        if ( c != split ) {
-
-            results[ resultIndex ] = Chr.copy(
-                    inputArray, startCurrentLineIndex, currentLineLength - 1 );
-            resultIndex++;
-        }
-
-        int actualLength = resultIndex;
-        if ( actualLength < resultsArrayLength ) {
-            final int newSize = resultsArrayLength - actualLength;
-            results = __shrink( results, newSize );
-        }
-        return results;
-    }
-
-    public static char[][] splitExact( final char[] inputArray,
-                                       final int resultsArrayLength, char... delims ) {
-        /** Holds the results. */
-        char[][] results = new char[ resultsArrayLength ][];
-
-        int resultIndex = 0;
-        int startCurrentLineIndex = 0;
-        int currentLineLength = 1;
-
-
-        char c = '\u0000';
-        int index = 0;
-        int j;
-        char split;
-
-
-        for (; index < inputArray.length; index++, currentLineLength++ ) {
-            c = inputArray[ index ];
-
-            inner:
-            for ( j = 0; j < delims.length; j++ ) {
-                split = delims[ j ];
-                if ( c == split ) {
-
-                    results[ resultIndex ] = Chr.copy(
-                            inputArray, startCurrentLineIndex, currentLineLength - 1 );
-                    startCurrentLineIndex = index + 1; //skip the char
-
-                    currentLineLength = 0;
-                    resultIndex++;
-                    break inner;
-                }
-            }
-        }
-
-        if ( !Chr.in( c, delims ) ) {
-
-            results[ resultIndex ] = Chr.copy(
-                    inputArray, startCurrentLineIndex, currentLineLength - 1 );
-            resultIndex++;
-        }
-
-
-        int actualLength = resultIndex;
-        if ( actualLength < resultsArrayLength ) {
-            final int newSize = resultsArrayLength - actualLength;
-            results = __shrink( results, newSize );
-        }
-        return results;
-    }
+//    public static char[][] splitExact( final char[] inputArray,
+//                                       final char split, final int resultsArrayLength ) {
+//        /** Holds the results. */
+//        char[][] results = new char[ resultsArrayLength ][];
+//
+//        int resultIndex = 0;
+//        int startCurrentLineIndex = 0;
+//        int currentLineLength = 1;
+//
+//
+//        char c = '\u0000';
+//        int index = 0;
+//
+//        for (; index < inputArray.length; index++, currentLineLength++ ) {
+//            c = inputArray[ index ];
+//            if ( c == split ) {
+//
+//                results[ resultIndex ] = Chr.copy(
+//                        inputArray, startCurrentLineIndex, currentLineLength - 1 );
+//                startCurrentLineIndex = index + 1; //skip the char
+//
+//                currentLineLength = 0;
+//                resultIndex++;
+//            }
+//        }
+//
+//        if ( c != split ) {
+//
+//            results[ resultIndex ] = Chr.copy(
+//                    inputArray, startCurrentLineIndex, currentLineLength - 1 );
+//            resultIndex++;
+//        }
+//
+//        int actualLength = resultIndex;
+//        if ( actualLength < resultsArrayLength ) {
+//            final int newSize = resultsArrayLength - actualLength;
+//            results = __shrink( results, newSize );
+//        }
+//        return results;
+//    }
+//
+//    public static char[][] splitExact( final char[] inputArray,
+//                                       final int resultsArrayLength, char... delims ) {
+//        /** Holds the results. */
+//        char[][] results = new char[ resultsArrayLength ][];
+//
+//        int resultIndex = 0;
+//        int startCurrentLineIndex = 0;
+//        int currentLineLength = 1;
+//
+//
+//        char c = '\u0000';
+//        int index = 0;
+//        int j;
+//        char split;
+//
+//
+//        for (; index < inputArray.length; index++, currentLineLength++ ) {
+//            c = inputArray[ index ];
+//
+//            inner:
+//            for ( j = 0; j < delims.length; j++ ) {
+//                split = delims[ j ];
+//                if ( c == split ) {
+//
+//                    results[ resultIndex ] = Chr.copy(
+//                            inputArray, startCurrentLineIndex, currentLineLength - 1 );
+//                    startCurrentLineIndex = index + 1; //skip the char
+//
+//                    currentLineLength = 0;
+//                    resultIndex++;
+//                    break inner;
+//                }
+//            }
+//        }
+//
+//        if ( !Chr.in( c, delims ) ) {
+//
+//            results[ resultIndex ] = Chr.copy(
+//                    inputArray, startCurrentLineIndex, currentLineLength - 1 );
+//            resultIndex++;
+//        }
+//
+//
+//        int actualLength = resultIndex;
+//        if ( actualLength < resultsArrayLength ) {
+//            final int newSize = resultsArrayLength - actualLength;
+//            results = __shrink( results, newSize );
+//        }
+//        return results;
+//    }
 
 
 
@@ -456,54 +456,54 @@ public class CharScanner {
         return results;
     }
 
-    public static char[][] splitFrom( final char[] inputArray, int fromIndex,
-                                  final char split ) {
-        /** Holds the results. */
-        char[][] results = new char[ 16 ][];
-
-        int resultIndex = 0;
-        int startCurrentLineIndex = 0;
-        int currentLineLength = 1;
-
-
-        char c = '\u0000';
-        int index = fromIndex;
-
-        for (; index < inputArray.length; index++, currentLineLength++ ) {
-            c = inputArray[ index ];
-            if ( c == split ) {
-
-                if ( resultIndex == results.length ) {
-
-                    results = _grow( results );
-                }
-
-
-                results[ resultIndex ] = Chr.copy(
-                        inputArray, startCurrentLineIndex, currentLineLength - 1 );
-                startCurrentLineIndex = index + 1; //skip the char
-
-                currentLineLength = 0;
-                resultIndex++;
-            }
-        }
-
-        if ( c != split ) {
-
-            results[ resultIndex ] = Chr.copy(
-                    inputArray, startCurrentLineIndex, currentLineLength - 1 );
-            resultIndex++;
-        }
-
-        int actualLength = resultIndex;
-        if ( actualLength < results.length ) {
-            final int newSize = results.length - actualLength;
-            results = __shrink( results, newSize );
-        }
-        return results;
-    }
-
-
+//    public static char[][] splitFrom( final char[] inputArray, int fromIndex,
+//                                  final char split ) {
+//        /** Holds the results. */
+//        char[][] results = new char[ 16 ][];
+//
+//        int resultIndex = 0;
+//        int startCurrentLineIndex = 0;
+//        int currentLineLength = 1;
+//
+//
+//        char c = '\u0000';
+//        int index = fromIndex;
+//
+//        for (; index < inputArray.length; index++, currentLineLength++ ) {
+//            c = inputArray[ index ];
+//            if ( c == split ) {
+//
+//                if ( resultIndex == results.length ) {
+//
+//                    results = _grow( results );
+//                }
+//
+//
+//                results[ resultIndex ] = Chr.copy(
+//                        inputArray, startCurrentLineIndex, currentLineLength - 1 );
+//                startCurrentLineIndex = index + 1; //skip the char
+//
+//                currentLineLength = 0;
+//                resultIndex++;
+//            }
+//        }
+//
+//        if ( c != split ) {
+//
+//            results[ resultIndex ] = Chr.copy(
+//                    inputArray, startCurrentLineIndex, currentLineLength - 1 );
+//            resultIndex++;
+//        }
+//
+//        int actualLength = resultIndex;
+//        if ( actualLength < results.length ) {
+//            final int newSize = results.length - actualLength;
+//            results = __shrink( results, newSize );
+//        }
+//        return results;
+//    }
+//
+//
     public static char[][] splitByChars( final char[] inputArray,
                                          final char... delims ) {
         /** Holds the results. */
@@ -1010,6 +1010,10 @@ public class CharScanner {
         return (float) parseDouble( buffer, from , to );
     }
 
+    public static float parseFloat( char[] buffer ) {
+        return (float) parseDouble( buffer, 0 , buffer.length );
+    }
+
 
     public static double parseDouble( char[] buffer ) {
         return parseDouble( buffer, 0, buffer.length );
@@ -1021,10 +1025,13 @@ public class CharScanner {
         int digitsPastPoint = 0;
 
         int index = from;
+        boolean negative=false;
+
 
 
         if (buffer[index] == '-') {
             index++;
+            negative=true;
         }
 
         boolean foundDot = false;
@@ -1087,29 +1094,33 @@ public class CharScanner {
 
 
 
-        return value;
+        if (value==0.0 && negative) {
+            return -0.0;
+        } else {
+            return value;
+        }
     }
 
     private static double powersOf10[] = {
                               1.0,
                              10.0,
                             100.0,
-                          1_000.0,
-                         10_000.0,
-                        100_000.0,
-                      1_000_000.0,
-                     10_000_000.0,
-                    100_000_000.0,
-                  1_000_000_000.0,
-                 10_000_000_000.0,
-                100_000_000_000.0,
-              1_000_000_000_000.0,
-             10_000_000_000_000.0,
-            100_000_000_000_000.0,
-          1_000_000_000_000_000.0,
-         10_000_000_000_000_000.0,
-        100_000_000_000_000_000.0,
-      1_000_000_000_000_000_000.0,
+                          1000.0,
+                         10000.0,
+                        100000.0,
+                      1000000.0,
+                     10000000.0,
+                    100000000.0,
+                  1000000000.0,
+                 10000000000.0,
+                100000000000.0,
+              1000000000000.0,
+             10000000000000.0,
+            100000000000000.0,
+          1000000000000000.0,
+         10000000000000000.0,
+        100000000000000000.0,
+      1000000000000000000.0,
 
     };
 

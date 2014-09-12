@@ -43,7 +43,7 @@ public class InMemoryThreadLocalLogger implements LoggerDelegate{
 
     private LogLevel level = DEBUG;
 
-    private static ThreadLocal<CharBuf> bufTL = new ThreadLocal<>();
+    private static ThreadLocal<CharBuf> bufTL = new ThreadLocal<CharBuf>();
 
 
     public InMemoryThreadLocalLogger(LogLevel level) {

@@ -31,13 +31,13 @@ package org.boon.primitive;
 import org.boon.Exceptions;
 import org.boon.StringScanner;
 import org.boon.Universal;
-import org.boon.collections.IntList;
+//import org.boon.collections.IntList;
 import org.boon.core.reflection.BeanUtils;
 import org.boon.core.reflection.Invoker;
 import org.boon.core.reflection.fields.FieldAccess;
 
-import java.lang.invoke.ConstantCallSite;
-import java.lang.invoke.MethodHandle;
+//import java.lang.invoke.ConstantCallSite;
+//import java.lang.invoke.MethodHandle;
 import java.lang.reflect.Method;
 import java.util.Arrays;
 import java.util.Collection;
@@ -677,32 +677,32 @@ public class Int {
      * @param <T> the type of object
      * @return the final reduction
      */
-    public  static <T> long reduceBy( final int[] array, T object ) {
-        if (object.getClass().isAnonymousClass()) {
-            return reduceByR(array, object );
-        }
-
-
-        try {
-            ConstantCallSite callSite = Invoker.invokeReducerLongIntReturnLongMethodHandle(object);
-            MethodHandle methodHandle = callSite.dynamicInvoker();
-            try {
-
-                long sum = 0;
-                for ( int v : array ) {
-                    sum = (long) methodHandle.invokeExact( sum, v );
-
-                }
-                return sum;
-            } catch (Throwable throwable) {
-                return handle(Long.class, throwable, "Unable to perform reduceBy");
-            }
-        } catch (Exception ex) {
-            return reduceByR(array, object);
-        }
-
-    }
-
+//    public  static <T> long reduceBy( final int[] array, T object ) {
+//        if (object.getClass().isAnonymousClass()) {
+//            return reduceByR(array, object );
+//        }
+//
+//
+//        try {
+//            ConstantCallSite callSite = Invoker.invokeReducerLongIntReturnLongMethodHandle(object);
+//            MethodHandle methodHandle = callSite.dynamicInvoker();
+//            try {
+//
+//                long sum = 0;
+//                for ( int v : array ) {
+//                    sum = (long) methodHandle.invokeExact( sum, v );
+//
+//                }
+//                return sum;
+//            } catch (Throwable throwable) {
+//                return handle(Long.class, throwable, "Unable to perform reduceBy");
+//            }
+//        } catch (Exception ex) {
+//            return reduceByR(array, object);
+//        }
+//
+//    }
+//
 
 
 
@@ -714,33 +714,33 @@ public class Int {
      * @param <T> the type of object
      * @return the final reduction
      */
-    public static <T> long reduceBy( final int[] array, T object, String methodName ) {
-
-        if (object.getClass().isAnonymousClass()) {
-            return reduceByR(array, object, methodName);
-        }
-
-        try {
-            ConstantCallSite callSite = Invoker.invokeReducerLongIntReturnLongMethodHandle(object, methodName);
-            MethodHandle methodHandle = callSite.dynamicInvoker();
-            try {
-
-                long sum = 0;
-                for ( int v : array ) {
-                        sum = (long) methodHandle.invokeExact( sum, v );
-
-                }
-                return sum;
-            } catch (Throwable throwable) {
-                return handle(Long.class, throwable, "Unable to perform reduceBy");
-            }
-        } catch (Exception ex) {
-            return reduceByR(array, object, methodName);
-        }
-
-
-    }
-
+//    public static <T> long reduceBy( final int[] array, T object, String methodName ) {
+//
+//        if (object.getClass().isAnonymousClass()) {
+//            return reduceByR(array, object, methodName);
+//        }
+//
+//        try {
+//            ConstantCallSite callSite = Invoker.invokeReducerLongIntReturnLongMethodHandle(object, methodName);
+//            MethodHandle methodHandle = callSite.dynamicInvoker();
+//            try {
+//
+//                long sum = 0;
+//                for ( int v : array ) {
+//                        sum = (long) methodHandle.invokeExact( sum, v );
+//
+//                }
+//                return sum;
+//            } catch (Throwable throwable) {
+//                return handle(Long.class, throwable, "Unable to perform reduceBy");
+//            }
+//        } catch (Exception ex) {
+//            return reduceByR(array, object, methodName);
+//        }
+//
+//
+//    }
+//
 
     /**
      * Fallback to reflection if the call-site will not work or did not work
@@ -757,7 +757,7 @@ public class Int {
 
             long sum = 0;
             for ( int v : array ) {
-                sum = (long) method.invoke(object, sum, v);
+                sum = (Long) method.invoke(object, sum, v);
 
             }
             return sum;
@@ -785,7 +785,7 @@ public class Int {
 
             long sum = 0;
             for ( int v : array ) {
-                sum = (long) method.invoke(object, sum, v);
+                sum = (Long) method.invoke(object, sum, v);
 
             }
             return sum;
@@ -815,7 +815,7 @@ public class Int {
             long sum = 0;
             for (int index=0; index< length; index++) {
                 int v = array[index];
-                sum = (long) method.invoke(object, sum, v);
+                sum = (Long) method.invoke(object, sum, v);
 
             }
             return sum;
@@ -843,7 +843,7 @@ public class Int {
             long sum = 0;
             for (int index=0; index< length; index++) {
                 int v = array[index];
-                sum = (long) method.invoke(object, sum, v);
+                sum = (Long) method.invoke(object, sum, v);
 
             }
             return sum;
@@ -861,36 +861,36 @@ public class Int {
      * @param object function
      * @return reduction
      */
-    public static long reduceBy( final int[] array,  int length,
-                                 Object object ) {
-
-
-        if (object.getClass().isAnonymousClass()) {
-            return reduceByR(array, length, object );
-        }
-
-        try {
-            ConstantCallSite callSite = Invoker.invokeReducerLongIntReturnLongMethodHandle(object );
-            MethodHandle methodHandle = callSite.dynamicInvoker();
-            try {
-
-                long sum = 0;
-                for (int index=0; index < length; index++) {
-                    int v = array[index];
-                    sum = (long) methodHandle.invokeExact( sum, v );
-
-                }
-                return sum;
-            } catch (Throwable throwable) {
-                return handle(Long.class, throwable, "Unable to perform reduceBy");
-            }
-        } catch (Exception ex) {
-            return reduceByR(array, length, object );
-        }
-
-
-    }
-
+//    public static long reduceBy( final int[] array,  int length,
+//                                 Object object ) {
+//
+//
+//        if (object.getClass().isAnonymousClass()) {
+//            return reduceByR(array, length, object );
+//        }
+//
+//        try {
+//            ConstantCallSite callSite = Invoker.invokeReducerLongIntReturnLongMethodHandle(object );
+//            MethodHandle methodHandle = callSite.dynamicInvoker();
+//            try {
+//
+//                long sum = 0;
+//                for (int index=0; index < length; index++) {
+//                    int v = array[index];
+//                    sum = (long) methodHandle.invokeExact( sum, v );
+//
+//                }
+//                return sum;
+//            } catch (Throwable throwable) {
+//                return handle(Long.class, throwable, "Unable to perform reduceBy");
+//            }
+//        } catch (Exception ex) {
+//            return reduceByR(array, length, object );
+//        }
+//
+//
+//    }
+//
 
 
     /**
@@ -901,36 +901,36 @@ public class Int {
      * @param function functionName
      * @return reduction
      */
-    public static long reduceBy( final int[] array,  int length,
-                                 Object function, String functionName ) {
-
-
-        if (function.getClass().isAnonymousClass()) {
-            return reduceByR(array, length, function, functionName );
-        }
-
-        try {
-            ConstantCallSite callSite = Invoker.invokeReducerLongIntReturnLongMethodHandle(function, functionName );
-            MethodHandle methodHandle = callSite.dynamicInvoker();
-            try {
-
-                long sum = 0;
-                for (int index=0; index < length; index++) {
-                    int v = array[index];
-                    sum = (long) methodHandle.invokeExact( sum, v );
-
-                }
-                return sum;
-            } catch (Throwable throwable) {
-                return handle(Long.class, throwable, "Unable to perform reduceBy");
-            }
-        } catch (Exception ex) {
-            return reduceByR(array, length, function, functionName );
-        }
-
-
-    }
-
+//    public static long reduceBy( final int[] array,  int length,
+//                                 Object function, String functionName ) {
+//
+//
+//        if (function.getClass().isAnonymousClass()) {
+//            return reduceByR(array, length, function, functionName );
+//        }
+//
+//        try {
+//            ConstantCallSite callSite = Invoker.invokeReducerLongIntReturnLongMethodHandle(function, functionName );
+//            MethodHandle methodHandle = callSite.dynamicInvoker();
+//            try {
+//
+//                long sum = 0;
+//                for (int index=0; index < length; index++) {
+//                    int v = array[index];
+//                    sum = (long) methodHandle.invokeExact( sum, v );
+//
+//                }
+//                return sum;
+//            } catch (Throwable throwable) {
+//                return handle(Long.class, throwable, "Unable to perform reduceBy");
+//            }
+//        } catch (Exception ex) {
+//            return reduceByR(array, length, function, functionName );
+//        }
+//
+//
+//    }
+//
 
     /**
      * Reduce By
@@ -939,34 +939,34 @@ public class Int {
      * @param object function
      * @return reduction
      */
-    public static long reduceBy( final int[] array, int start, int length,
-                                 Object object ) {
-
-
-        if (object.getClass().isAnonymousClass()) {
-            return reduceByR(array, object );
-        }
-
-        try {
-            ConstantCallSite callSite = Invoker.invokeReducerLongIntReturnLongMethodHandle(object );
-            MethodHandle methodHandle = callSite.dynamicInvoker();
-            try {
-
-                long sum = 0;
-                for (int index=start; index < length; index++) {
-                    int v = array[index];
-                    sum = (long) methodHandle.invokeExact( sum, v );
-
-                }
-                return sum;
-            } catch (Throwable throwable) {
-                return handle(Long.class, throwable, "Unable to perform reduceBy");
-            }
-        } catch (Exception ex) {
-            return reduceByR(array, object );
-        }
-
-    }
+//    public static long reduceBy( final int[] array, int start, int length,
+//                                 Object object ) {
+//
+//
+//        if (object.getClass().isAnonymousClass()) {
+//            return reduceByR(array, object );
+//        }
+//
+//        try {
+//            ConstantCallSite callSite = Invoker.invokeReducerLongIntReturnLongMethodHandle(object );
+//            MethodHandle methodHandle = callSite.dynamicInvoker();
+//            try {
+//
+//                long sum = 0;
+//                for (int index=start; index < length; index++) {
+//                    int v = array[index];
+//                    sum = (long) methodHandle.invokeExact( sum, v );
+//
+//                }
+//                return sum;
+//            } catch (Throwable throwable) {
+//                return handle(Long.class, throwable, "Unable to perform reduceBy");
+//            }
+//        } catch (Exception ex) {
+//            return reduceByR(array, object );
+//        }
+//
+//    }
 
     /**
      * Checks to see if two values are the same
@@ -1513,9 +1513,9 @@ public class Int {
      *
      * @return standard deviation
      */
-    public static int median(Collection<?> inputList, String propertyPath) {
-        return IntList.toIntList(inputList, propertyPath).median();
-    }
+//    public static int median(Collection<?> inputList, String propertyPath) {
+//        return IntList.toIntList(inputList, propertyPath).median();
+//    }
 
 
     /**
@@ -1524,8 +1524,8 @@ public class Int {
      * @return rounded up to the power of 2.
      */
     public static int roundUpToPowerOf2( int number ) {
-        int rounded = number >= 1_000
-                ? 1_000
+        int rounded = number >= 1000
+                ? 1000
                 : ( rounded = Integer.highestOneBit( number ) ) != 0
                 ? ( Integer.bitCount( number ) > 1 ) ? rounded << 1 : rounded
                 : 1;

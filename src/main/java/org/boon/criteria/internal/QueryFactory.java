@@ -57,7 +57,7 @@ public class QueryFactory {
             return Collections.EMPTY_LIST;
         }
 
-        List<T> results = new ArrayList<>();
+        List<T> results = new ArrayList<T>();
         for ( T item : items ) {
             if ( exp.test( item ) ) {
                 results.add( item );

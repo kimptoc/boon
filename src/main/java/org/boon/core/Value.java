@@ -63,7 +63,7 @@ public interface Value {
 
     String stringValue(CharBuf charBuf);
 
-    String stringValueEncoded();
+//    String stringValueEncoded();
 
     Currency currencyValue();
 

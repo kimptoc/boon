@@ -94,7 +94,7 @@ public class Reflection {
 
 
     private final static Context _context;
-    private static WeakReference<Context> weakContext = new WeakReference<>( null );
+    private static WeakReference<Context> weakContext = new WeakReference<Context>( null );
 
 
     static {
@@ -103,7 +103,7 @@ public class Reflection {
         if ( noStatics || Sys.inContainer() ) {
 
             _context = null;
-            weakContext = new WeakReference<>( new Context() );
+            weakContext = new WeakReference<Context>( new Context() );
 
         } else {
             ;
@@ -143,7 +143,7 @@ public class Reflection {
             Context context = weakContext.get();
             if ( context == null ) {
                 context = new Context();
-                weakContext = new WeakReference<>( context );
+                weakContext = new WeakReference<Context>( context );
             }
             return context;
         }
@@ -152,22 +152,22 @@ public class Reflection {
     static class Context {
 
 
-        Map<Class<?>, List<Field>> __fields = new ConcurrentHashMap<>( 200 );
+        Map<Class<?>, List<Field>> __fields = new ConcurrentHashMap<Class<?>, List<Field>>( 200 );
 
         Unsafe control;
-        Map<String, String> _sortableFields = new ConcurrentHashMap<>();
+        Map<String, String> _sortableFields = new ConcurrentHashMap<String, String>();
 
-        Map<Class<?>, ClassMeta<?>> _classMetaMap = new ConcurrentHashMap<>( 200 );
+        Map<Class<?>, ClassMeta<?>> _classMetaMap = new ConcurrentHashMap<Class<?>, ClassMeta<?>>( 200 );
 
-        Map<Class<?>, Map<String, FieldAccess>> _allAccessorReflectionFieldsCache = new ConcurrentHashMap<>( 200 );
-        Map<Class<?>, Map<String, FieldAccess>> _allAccessorPropertyFieldsCache = new ConcurrentHashMap<>( 200 );
-        Map<Class<?>, Map<String, FieldAccess>> _allAccessorUnsafeFieldsCache = new ConcurrentHashMap<>( 200 );
+        Map<Class<?>, Map<String, FieldAccess>> _allAccessorReflectionFieldsCache = new ConcurrentHashMap<Class<?>, Map<String, FieldAccess>>( 200 );
+        Map<Class<?>, Map<String, FieldAccess>> _allAccessorPropertyFieldsCache = new ConcurrentHashMap<Class<?>, Map<String, FieldAccess>>( 200 );
+        Map<Class<?>, Map<String, FieldAccess>> _allAccessorUnsafeFieldsCache = new ConcurrentHashMap<Class<?>, Map<String, FieldAccess>>( 200 );
 
-        Map<Class<?>, Map<String, FieldAccess>> _combinedFieldsFieldsFirst = new ConcurrentHashMap<>( 200 );
-        Map<Class<?>, Map<String, FieldAccess>> _combinedFieldsFieldsFirstForSerializer = new ConcurrentHashMap<>( 200 );
+        Map<Class<?>, Map<String, FieldAccess>> _combinedFieldsFieldsFirst = new ConcurrentHashMap<Class<?>, Map<String, FieldAccess>>( 200 );
+        Map<Class<?>, Map<String, FieldAccess>> _combinedFieldsFieldsFirstForSerializer = new ConcurrentHashMap<Class<?>, Map<String, FieldAccess>>( 200 );
 
-        Map<Class<?>, Map<String, FieldAccess>> _combinedFieldsPropertyFirst = new ConcurrentHashMap<>( 200 );
-        Map<Class<?>, Map<String, FieldAccess>> _combinedFieldsPropertyFirstForSerializer = new ConcurrentHashMap<>( 200 );
+        Map<Class<?>, Map<String, FieldAccess>> _combinedFieldsPropertyFirst = new ConcurrentHashMap<Class<?>, Map<String, FieldAccess>>( 200 );
+        Map<Class<?>, Map<String, FieldAccess>> _combinedFieldsPropertyFirstForSerializer = new ConcurrentHashMap<Class<?>, Map<String, FieldAccess>>( 200 );
 
     }
 
@@ -401,7 +401,7 @@ public class Reflection {
 
     private static Map<String, FieldAccess> removeNonSerializable(Map<String, FieldAccess> fieldAccessMap) {
 
-        LinkedHashMap<String, FieldAccess> map = new LinkedHashMap<>(fieldAccessMap);
+        LinkedHashMap<String, FieldAccess> map = new LinkedHashMap<String, FieldAccess>(fieldAccessMap);
         final List<String> set = new ArrayList(fieldAccessMap.keySet());
         for (String key : set) {
             final FieldAccess fieldAccess = fieldAccessMap.get(key);
@@ -569,7 +569,7 @@ public class Reflection {
         Map<String, FieldAccess> map = getAccessorFieldsFromCache(theClass, useUnsafe);
         if ( map == null ) {
             List<FieldAccess> list = Lists.mapBy( getAllFields( theClass ), new FieldConverter( useUnsafe ) );
-            map = new LinkedHashMap<>( list.size() );
+            map = new LinkedHashMap<String, FieldAccess>( list.size() );
             for ( FieldAccess fieldAccess : list ) {
                 map.put( fieldAccess.name(), fieldAccess );
             }
@@ -603,7 +603,7 @@ public class Reflection {
         if ( fields == null ) {
             Map<String, Pair<Method>> methods = getPropertySetterGetterMethods( theClass );
 
-            fields = new LinkedHashMap<>();
+            fields = new LinkedHashMap<String, FieldAccess>();
 
             for ( Map.Entry<String, Pair<Method>> entry :
                     methods.entrySet() ) {
@@ -630,8 +630,8 @@ public class Reflection {
         try {
             Method[] methods = theClass.getMethods();
 
-            Map<String, Pair<Method>> methodMap = new LinkedHashMap<>( methods.length );
-            List<Method> getterMethodList = new ArrayList<>( methods.length );
+            Map<String, Pair<Method>> methodMap = new LinkedHashMap<String, Pair<Method>>( methods.length );
+            List<Method> getterMethodList = new ArrayList<Method>( methods.length );
 
             for ( int index = 0; index < methods.length; index++ ) {
                 Method method = methods[ index ];
@@ -694,7 +694,7 @@ public class Reflection {
 
         Pair<Method> pair = methodMap.get( propertyName );
         if ( pair == null ) {
-            pair = new Pair<>();
+            pair = new Pair<Method>();
             methodMap.put( propertyName, pair );
         }
         pair.setSecond( method );

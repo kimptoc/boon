@@ -151,7 +151,7 @@ public class SearchIndexDefault<KEY, ITEM> extends LookupIndexDefault<KEY, ITEM>
             SortedMap<String, MultiValue> sortedSubMap = sortMap.subMap( start, after.toString() );
 
             if ( sortedSubMap.size() > 0 ) {
-                results = new ArrayList<>();
+                results = new ArrayList<ITEM>();
                 for ( MultiValue values : sortedSubMap.values() ) {
                     values.addTo( results );
                 }
@@ -167,7 +167,7 @@ public class SearchIndexDefault<KEY, ITEM> extends LookupIndexDefault<KEY, ITEM>
     public List<ITEM> findEndsWith( KEY keyFrag ) {
         keyFrag = getKey( keyFrag );
 
-        List<ITEM> results = new ArrayList<>();
+        List<ITEM> results = new ArrayList<ITEM>();
 
         if ( keyFrag instanceof String ) {
 
@@ -188,7 +188,7 @@ public class SearchIndexDefault<KEY, ITEM> extends LookupIndexDefault<KEY, ITEM>
     public List<ITEM> findContains( KEY keyFrag ) {
         keyFrag = getKey( keyFrag );
 
-        List<ITEM> results = new ArrayList<>();
+        List<ITEM> results = new ArrayList<ITEM>();
 
         if ( keyFrag instanceof String ) {
 
@@ -232,7 +232,7 @@ public class SearchIndexDefault<KEY, ITEM> extends LookupIndexDefault<KEY, ITEM>
     private List<ITEM> getResults( SortedMap<KEY, MultiValue> keyMultiValueSortedMap ) {
         List<ITEM> results = null;
         if ( keyMultiValueSortedMap.size() > 0 ) {
-            results = new ArrayList<>();
+            results = new ArrayList<ITEM>();
             for ( MultiValue<ITEM> values : keyMultiValueSortedMap.values() ) {
                 values.addTo( results );
             }

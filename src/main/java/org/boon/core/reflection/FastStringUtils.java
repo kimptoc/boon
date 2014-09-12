@@ -32,7 +32,7 @@ import sun.misc.Unsafe;
 
 import java.lang.reflect.Field;
 import java.nio.charset.Charset;
-import java.nio.charset.StandardCharsets;
+//import java.nio.charset.StandardCharsets;
 
 /**
  * Created by rick on 12/15/13.
@@ -186,7 +186,8 @@ public class FastStringUtils {
     }
 
     public static char[] toCharArrayFromBytes(final byte[] bytes, Charset charset) {
-        return toCharArray(new String(bytes, charset != null ? charset : StandardCharsets.UTF_8));
+        if (charset != null) return toCharArray(new String(bytes, charset));
+        else return toCharArray(new String(bytes));
     }
 
     public static String noCopyStringFromChars(final char[] chars) {

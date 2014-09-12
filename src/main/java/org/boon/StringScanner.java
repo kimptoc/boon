@@ -91,11 +91,20 @@ public class StringScanner {
         return new String(Chr.add ( comps ));
     }
 
-    public static String[] splitByCharsNoneEmpty( final String string, int start, int end, final char... delimiters ) {
-        Exceptions.requireNonNull( string );
+//    public static String[] splitByCharsNoneEmpty( final String string, int start, int end, final char... delimiters ) {
+//        Exceptions.requireNonNull( string );
+//
+//        char[][] comps = CharScanner.splitByCharsNoneEmpty( FastStringUtils.toCharArray( string ), start, end, delimiters );
+//        return Str.fromCharArrayOfArrayToStringArray( comps );
+//    }
 
-        char[][] comps = CharScanner.splitByCharsNoneEmpty( FastStringUtils.toCharArray( string ), start, end, delimiters );
-        return Str.fromCharArrayOfArrayToStringArray( comps );
+    public static float parseFloat( String buffer, int from, int to ) {
+        return CharScanner.parseFloat( FastStringUtils.toCharArray(buffer), from , to );
     }
+
+    public static float parseFloat( String buffer ) {
+        return CharScanner.parseFloat( FastStringUtils.toCharArray(buffer) );
+    }
+
 
 }

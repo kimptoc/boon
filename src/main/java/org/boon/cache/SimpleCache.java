@@ -60,15 +60,15 @@ public class SimpleCache<K, V> implements Cache<K, V> {
     public SimpleCache( final int limit, CacheType type ) {
 
         if ( type.equals( CacheType.LRU ) ) {
-            map = new InternalCacheLinkedList<>( limit, true );
+            map = new InternalCacheLinkedList<K, V>( limit, true );
         } else {
-            map = new InternalCacheLinkedList<>( limit, false );
+            map = new InternalCacheLinkedList<K, V>( limit, false );
         }
     }
 
     public SimpleCache( final int limit ) {
 
-        map = new InternalCacheLinkedList<>( limit, true );
+        map = new InternalCacheLinkedList<K, V>( limit, true );
 
     }
 
@@ -108,11 +108,11 @@ public class SimpleCache<K, V> implements Cache<K, V> {
     }
 
     public Collection<V> values() {
-        return new ArrayList<>(this.map.values());
+        return new ArrayList<V>(this.map.values());
     }
 
     public Collection<K> keys() {
-        return new ArrayList<>(this.map.keySet());
+        return new ArrayList<K>(this.map.keySet());
     }
 
 }

@@ -28,7 +28,7 @@
 
 package org.boon.primitive;
 
-import java.nio.charset.StandardCharsets;
+//import java.nio.charset.StandardCharsets;
 
 public class InputByteArray implements Input {
 
@@ -183,7 +183,7 @@ public class InputByteArray implements Input {
         short size = this.readUnsignedByte();
 
         byte[] bytes = this.readBytes( size );
-        return new String( bytes, StandardCharsets.UTF_8 );
+        return new String( bytes);
     }
 
 
@@ -193,7 +193,7 @@ public class InputByteArray implements Input {
 
         byte[] bytes = this.readBytes( size );
 
-        return new String( bytes, StandardCharsets.UTF_8 );
+        return new String( bytes);
     }
 
 
@@ -204,7 +204,7 @@ public class InputByteArray implements Input {
 
         byte[] bytes = this.readBytes( size );
 
-        return new String( bytes, StandardCharsets.UTF_8 );
+        return new String( bytes);
     }
 
 

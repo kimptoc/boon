@@ -152,7 +152,7 @@ public class SPIFactory {
             repoFactory = new Supplier<RepoComposer>() {
                 @Override
                 public RepoComposer get() {
-                    return new RepoDefault<>();
+                    return new RepoDefault();
                 }
             };
         }

@@ -49,7 +49,7 @@ import static org.boon.Exceptions.requireNonNull;
 public class Annotations {
 
     private final static Context _context;
-    private static WeakReference<Context> weakContext = new WeakReference<>( null );
+    private static WeakReference<Context> weakContext = new WeakReference<Context>( null );
 
 
     private static class Context {
@@ -57,25 +57,25 @@ public class Annotations {
         private Map<
                 Class<?>,
                 Map <String, List<AnnotationData>
-                        >> annotationDataCacheProperty = new ConcurrentHashMap<> (  );
+                        >> annotationDataCacheProperty = new ConcurrentHashMap<Class<?>, Map<String, List<AnnotationData>>>(  );
 
 
 
         private Map<
                 Class<?>,
                 Map <String, List<AnnotationData>
-                        >> annotationDataCacheField = new ConcurrentHashMap<> (  );
+                        >> annotationDataCacheField = new ConcurrentHashMap<Class<?>, Map<String, List<AnnotationData>>>(  );
 
 
         private Map<Class<?>, List<AnnotationData>> annotationDataCacheClass
-                = new ConcurrentHashMap<>(  );
+                = new ConcurrentHashMap<Class<?>, List<AnnotationData>>(  );
 
 
         private Map<
                 Class<?>,
                 Map<String, AnnotationData>
                 > annotationDataCacheClassAsMap
-                = new ConcurrentHashMap<>(  );
+                = new ConcurrentHashMap<Class<?>, Map<String, AnnotationData>>(  );
 
 
     }
@@ -86,7 +86,7 @@ public class Annotations {
         if ( noStatics || Sys.inContainer () ) {
 
             _context = null;
-            weakContext = new WeakReference<>( new Context() );
+            weakContext = new WeakReference<Context>( new Context() );
 
         } else {
             _context = new Context();
@@ -104,7 +104,7 @@ public class Annotations {
             Context context = weakContext.get();
             if ( context == null ) {
                 context = new Context();
-                weakContext = new WeakReference<>( context );
+                weakContext = new WeakReference<Context>( context );
             }
             return context;
         }
@@ -117,7 +117,7 @@ public class Annotations {
         Map<String, List<AnnotationData>> classMap = cacheProperty.get(clazz);
 
         if (classMap == null) {
-            classMap = new ConcurrentHashMap<> (  );
+            classMap = new ConcurrentHashMap<String, List<AnnotationData>>(  );
             cacheProperty.put ( clazz, classMap );
         }
 
@@ -143,7 +143,7 @@ public class Annotations {
         Map<String, List<AnnotationData>> classMap = cacheProperty.get(clazz);
 
         if (classMap == null) {
-            classMap = new ConcurrentHashMap<> (  );
+            classMap = new ConcurrentHashMap<String, List<AnnotationData>>(  );
             cacheProperty.put ( clazz, classMap );
         }
 
@@ -193,7 +193,7 @@ public class Annotations {
             if (list.size () == 0) {
                 map = Collections.EMPTY_MAP;
             } else {
-                map = new ConcurrentHashMap<> ( list.size () );
+                map = new ConcurrentHashMap<String, AnnotationData>( list.size () );
 
                 for (AnnotationData data : list) {
                     map.put ( data.getFullClassName (), data );
@@ -255,7 +255,7 @@ public class Annotations {
      */
     public static List<AnnotationData> extractValidationAnnotationData(
             Annotation[] annotations, Set<String> allowedPackages ) {
-        List<AnnotationData> annotationsList = new ArrayList<>();
+        List<AnnotationData> annotationsList = new ArrayList<AnnotationData>();
         for ( Annotation annotation : annotations ) {
             AnnotationData annotationData = new AnnotationData( annotation, allowedPackages );
             if ( annotationData.isAllowed() ) {

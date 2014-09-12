@@ -59,12 +59,12 @@ public class SearchableCollectionDefault<KEY, ITEM> implements SearchableCollect
 
     private Logger log = Logger.getLogger( RepoDefault.class.getName() );
 
-    protected Map<String, LookupIndex> lookupIndexMap = new LinkedHashMap<>();
-    protected Map<String, SearchIndex> searchIndexMap = new LinkedHashMap<>();
-    protected Set<LookupIndex> indexes = new LinkedHashSet<>();
+    protected Map<String, LookupIndex> lookupIndexMap = new LinkedHashMap<String, LookupIndex>();
+    protected Map<String, SearchIndex> searchIndexMap = new LinkedHashMap<String, SearchIndex>();
+    protected Set<LookupIndex> indexes = new LinkedHashSet<LookupIndex>();
     protected Filter filter;
 
-    protected Map<String, FieldAccess> fields = new LinkedHashMap<>();
+    protected Map<String, FieldAccess> fields = new LinkedHashMap<String, FieldAccess>();
     protected UniqueLookupIndex<KEY, ITEM> primaryIndex;
 
     protected Function<ITEM, KEY> primaryKeyGetter;
@@ -412,7 +412,7 @@ public class SearchableCollectionDefault<KEY, ITEM> implements SearchableCollect
     @Override
     public List<Map<String, Object>> queryAsMaps( Criteria... expressions ) {
         List<ITEM> items = this.query( expressions );
-        List<Map<String, Object>> results = new ArrayList<>( items.size() );
+        List<Map<String, Object>> results = new ArrayList<Map<String, Object>>( items.size() );
         for ( ITEM item : items ) {
             results.add( toMap( item ) );
         }

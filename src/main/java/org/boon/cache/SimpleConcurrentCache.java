@@ -185,7 +185,7 @@ public class SimpleConcurrentCache<K, V> implements Cache<K, V> {
         stripeSize = roundUpToPowerOf2( stripeSize );
         cacheRegions = new SimpleCache[ stripeSize ];
         for ( int index = 0; index < cacheRegions.length; index++ ) {
-            cacheRegions[ index ] = new SimpleThreadSafeCache<>( limit / cacheRegions.length, type, fair );
+            cacheRegions[ index ] = new SimpleThreadSafeCache<K, V>( limit / cacheRegions.length, type, fair );
         }
     }
 
@@ -209,7 +209,7 @@ public class SimpleConcurrentCache<K, V> implements Cache<K, V> {
         final int stripeSize = roundUpToPowerOf2( concurrency );
         cacheRegions = new SimpleCache[ stripeSize ];
         for ( int index = 0; index < cacheRegions.length; index++ ) {
-            cacheRegions[ index ] = new SimpleThreadSafeCache<>( limit / cacheRegions.length, type, fair );
+            cacheRegions[ index ] = new SimpleThreadSafeCache<K, V>( limit / cacheRegions.length, type, fair );
         }
     }
 
@@ -227,7 +227,7 @@ public class SimpleConcurrentCache<K, V> implements Cache<K, V> {
         final int stripeSize = roundUpToPowerOf2( concurrency );
         cacheRegions = new SimpleCache[ stripeSize ];
         for ( int index = 0; index < cacheRegions.length; index++ ) {
-            cacheRegions[ index ] = new SimpleThreadSafeCache<>( limit / cacheRegions.length, CacheType.LRU, fair );
+            cacheRegions[ index ] = new SimpleThreadSafeCache<K, V>( limit / cacheRegions.length, CacheType.LRU, fair );
         }
     }
 
@@ -328,9 +328,9 @@ public class SimpleConcurrentCache<K, V> implements Cache<K, V> {
     private static int randomHashSeed( SimpleConcurrentCache instance ) {
 
 
-        if ( useFastHash ) {
-            return sun.misc.Hashing.randomHashSeed( instance );
-        }
+//        if ( useFastHash ) {
+//            return sun.misc.Hashing.randomHashSeed( instance );
+//        }
 
         return 0;
     }

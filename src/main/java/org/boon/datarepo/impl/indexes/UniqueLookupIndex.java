@@ -108,7 +108,7 @@ public class UniqueLookupIndex<KEY, ITEM> implements LookupIndex<KEY, ITEM> {
             log.fine( "all called " );
         }
 
-        return new ArrayList<>( map.values() );
+        return new ArrayList<ITEM>( map.values() );
     }
 
     @Override

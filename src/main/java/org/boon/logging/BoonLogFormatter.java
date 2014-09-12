@@ -53,7 +53,7 @@ public class BoonLogFormatter  extends java.util.logging.Formatter {
     public String format(final LogRecord record) {
 
         CharBuf sb = CharBuf.create(255);
-        sb.jsonDate(record.getMillis());
+//        sb.jsonDate(record.getMillis());
 
         sb.add("[").add(Thread.currentThread().getName()).append("]");
 

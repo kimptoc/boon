@@ -35,7 +35,7 @@ import org.boon.core.Type;
 import org.boon.core.Value;
 import org.boon.core.reflection.FastStringUtils;
 import org.boon.json.JsonException;
-import org.boon.json.implementation.JsonStringDecoder;
+//import org.boon.json.implementation.JsonStringDecoder;
 import org.boon.primitive.CharBuf;
 import org.boon.primitive.CharScanner;
 
@@ -210,26 +210,26 @@ public class CharSequenceValue implements Value, CharSequence {
     }
 
     public String stringValue () {
-        if ( this.decodeStrings ) {
-            return JsonStringDecoder.decodeForSure ( buffer, startIndex, endIndex );
-        } else {
+//        if ( this.decodeStrings ) {
+//            return JsonStringDecoder.decodeForSure ( buffer, startIndex, endIndex );
+//        } else {
             return toString ();
-        }
+//        }
     }
 
     @Override
     public String stringValue(CharBuf charBuf) {
-        if ( this.decodeStrings ) {
-            return JsonStringDecoder.decodeForSure ( charBuf, buffer, startIndex, endIndex );
-        } else {
+//        if ( this.decodeStrings ) {
+//            return JsonStringDecoder.decodeForSure ( charBuf, buffer, startIndex, endIndex );
+//        } else {
             return toString ();
-        }
+//        }
     }
 
-    @Override
-    public String stringValueEncoded () {
-        return JsonStringDecoder.decode ( buffer, startIndex, endIndex );
-    }
+//    @Override
+//    public String stringValueEncoded () {
+//        return JsonStringDecoder.decode ( buffer, startIndex, endIndex );
+//    }
 
     @Override
     public Date dateValue () {
@@ -290,13 +290,13 @@ public class CharSequenceValue implements Value, CharSequence {
             1.0f,
             10.0f,
             100.0f,
-            1_000.0f,
-            10_000.0f,
-            100_000.0f,
-            1_000_000.0f,
-            10_000_000.0f,
-            100_000_000.0f,
-            1_000_000_000.0f,
+            1000.0f,
+            10000.0f,
+            100000.0f,
+            1000000.0f,
+            10000000.0f,
+            100000000.0f,
+            1000000000.0f,
     };
 
     @Override

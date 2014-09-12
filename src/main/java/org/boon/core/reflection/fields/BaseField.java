@@ -76,7 +76,7 @@ public abstract class BaseField implements FieldAccess {
     protected final String typeName;
     public final Type typeEnum;
     private final Type componentType;
-    private  Map<String,  Map<String, Object>> annotationMap = new ConcurrentHashMap<> (  );
+    private  Map<String,  Map<String, Object>> annotationMap = new ConcurrentHashMap<String, Map<String, Object>>(  );
     private  HashSet<String> includedViews;
     private  HashSet<String> ignoreWithViews;
     private final String alias;
@@ -102,7 +102,7 @@ public abstract class BaseField implements FieldAccess {
 
 
             if (includeWithViews!=null) {
-                this.includedViews = new HashSet<>(  );
+                this.includedViews = new HashSet<String>(  );
                 for (String view : includeWithViews) {
                     this.includedViews.add( view );
                 }
@@ -110,7 +110,7 @@ public abstract class BaseField implements FieldAccess {
 
 
             if (ignoreWithViews!=null) {
-                this.ignoreWithViews = new HashSet<>(  );
+                this.ignoreWithViews = new HashSet<String>(  );
                 for (String view : ignoreWithViews) {
                     this.ignoreWithViews.add( view );
                 }
@@ -134,7 +134,7 @@ public abstract class BaseField implements FieldAccess {
 
         if (hasAnnotation ( "Expose" ))  {
             final Map<String, Object> jsonIgnore = getAnnotationData ( "Expose" );
-            boolean serialize = (boolean) jsonIgnore.get ( "serialize" );
+            boolean serialize = (Boolean) jsonIgnore.get ( "serialize" );
             bits.set( INCLUDE, serialize );
             bits.set( IGNORE, !serialize);
         }
@@ -146,7 +146,7 @@ public abstract class BaseField implements FieldAccess {
         if (hasAnnotation( "Autowired" ))  {
             final Map<String, Object> props = getAnnotationData ( "Autowired" );
 
-            boolean required = (boolean) props.get ( "required" );
+            boolean required = (Boolean) props.get ( "required" );
             if (required)
             bits.set( REQUIRES_INJECTION );
 
@@ -155,7 +155,7 @@ public abstract class BaseField implements FieldAccess {
         if (hasAnnotation( "In" ))  {
             final Map<String, Object> props = getAnnotationData ( "In" );
 
-            boolean required = (boolean) props.get ( "required" );
+            boolean required = (Boolean) props.get ( "required" );
             if (required)
                 bits.set( REQUIRES_INJECTION );
 

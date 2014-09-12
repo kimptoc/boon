@@ -32,7 +32,7 @@ package org.boon.criteria;
 import org.boon.core.Function;
 import org.boon.core.reflection.BeanUtils;
 import org.boon.core.reflection.fields.FieldAccess;
-import org.boon.template.BoonTemplate;
+//import org.boon.template.BoonTemplate;
 
 import java.util.*;
 
@@ -115,7 +115,7 @@ public abstract class Selector {
          * @return map of selected items per row
          */
     public static <ITEM> List<Map<String, Object>> selectFrom(List<Selector> selectors, Collection<ITEM> results, Map<String, FieldAccess> fields) {
-        List<Map<String, Object>> rows = new ArrayList<>( results.size() );
+        List<Map<String, Object>> rows = new ArrayList<Map<String, Object>>( results.size() );
 
 
         for ( Selector s : selectors ) {
@@ -125,7 +125,7 @@ public abstract class Selector {
 
         int index = 0;
         for ( ITEM item : results ) {
-            Map<String, Object> row = new LinkedHashMap<>();
+            Map<String, Object> row = new LinkedHashMap<String, Object>();
             for ( Selector s : selectors ) {
                 s.handleRow( index, row, item, fields );
             }
@@ -309,37 +309,37 @@ public abstract class Selector {
         };
     }
 
-    /**
-     * Selects but allows having a different alias for the output.
-   \  * @param alias name that the value will be selected as.
-     * @param transform Function that allows you to convert from an object into another object
-     * @return selector
-     * */
-    public static Selector selectAsTemplate( final String alias,
-                                     final String  template,
-                                     final BoonTemplate transform) {
-        return new Selector( alias, alias ) {
-
-            @Override
-            public void handleRow( int index, Map<String, Object> row,
-                                   Object item, Map<String, FieldAccess> fields ) {
-
-                if (!path && fields!=null) {
-                    row.put( this.name, transform.replace(template, item) );
-                } else {
-                    row.put( alias, transform.replace(template, item)  );
-                }
-            }
-
-            @Override
-            public void handleStart( Collection<?> results ) {
-            }
-
-            @Override
-            public void handleComplete( List<Map<String, Object>> rows ) {
-            }
-        };
-    }
+//    /**
+//     * Selects but allows having a different alias for the output.
+//   \  * @param alias name that the value will be selected as.
+//     * @param transform Function that allows you to convert from an object into another object
+//     * @return selector
+//     * */
+//    public static Selector selectAsTemplate( final String alias,
+//                                     final String  template,
+//                                     final BoonTemplate transform) {
+//        return new Selector( alias, alias ) {
+//
+//            @Override
+//            public void handleRow( int index, Map<String, Object> row,
+//                                   Object item, Map<String, FieldAccess> fields ) {
+//
+//                if (!path && fields!=null) {
+//                    row.put( this.name, transform.replace(template, item) );
+//                } else {
+//                    row.put( alias, transform.replace(template, item)  );
+//                }
+//            }
+//
+//            @Override
+//            public void handleStart( Collection<?> results ) {
+//            }
+//
+//            @Override
+//            public void handleComplete( List<Map<String, Object>> rows ) {
+//            }
+//        };
+//    }
 
     public static Selector toStr( final String name ) {
         return new Selector( name + ".toString()", null ) {

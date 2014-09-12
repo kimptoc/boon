@@ -49,7 +49,7 @@ public class ObjectEditorDefault<KEY, ITEM> implements ObjectEditorComposer<KEY,
     private Logger log = Logger.getLogger( ObjectEditorDefault.class.getName() );
 
     protected SearchableCollection<KEY, ITEM> query;
-    protected Map<String, FieldAccess> fields = new LinkedHashMap<>();
+    protected Map<String, FieldAccess> fields = new LinkedHashMap<String, FieldAccess>();
     private boolean hashCodeOptimization;
 
 

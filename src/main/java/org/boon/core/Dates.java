@@ -41,6 +41,9 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.TimeZone;
 
+import static org.boon.Boon.len;
+import static org.boon.Boon.puts;
+
 public class Dates {
 
     public static final TimeZone GMT = TimeZone.getTimeZone("GMT");
@@ -405,10 +408,10 @@ public class Dates {
      *
      * @return euro style format.
      */
-    public static String euroUTCSystemDateNowString() {
-        long now = System.currentTimeMillis();
-        return euroUTCSystemDateString( now );
-    }
+//    public statxic String euroUTCSystemDateNowString() {
+//        long now = System.currentTimeMillis();
+//        return euroUTCSystemDateString( now );
+//    }
 
 
     /**
@@ -417,35 +420,35 @@ public class Dates {
      * @param timestamp the timestamp
      * @return euro style format.
      */
-    public static String euroUTCSystemDateString( long timestamp ) {
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTimeInMillis( timestamp );
-        calendar.setTimeZone( UTC_TIME_ZONE );
-        int day = calendar.get( Calendar.DAY_OF_MONTH );
-        int month = calendar.get( Calendar.MONTH );
-        int year = calendar.get( Calendar.YEAR );
-        int hour = calendar.get( Calendar.HOUR_OF_DAY );
-        int minute = calendar.get( Calendar.MINUTE );
-        int second = calendar.get( Calendar.SECOND );
+//    public static String euroUTCSystemDateString( long timestamp ) {
+//        Calendar calendar = Calendar.getInstance();
+//        calendar.setTimeInMillis( timestamp );
+//        calendar.setTimeZone( UTC_TIME_ZONE );
+//        int day = calendar.get( Calendar.DAY_OF_MONTH );
+//        int month = calendar.get( Calendar.MONTH );
+//        int year = calendar.get( Calendar.YEAR );
+//        int hour = calendar.get( Calendar.HOUR_OF_DAY );
+//        int minute = calendar.get( Calendar.MINUTE );
+//        int second = calendar.get( Calendar.SECOND );
+//
+//        CharBuf buf = CharBuf.create( 16 );
+//        buf.add( Str.zfill ( day, 2 ) ).add( '_' );
+//        buf.add( Str.zfill( month, 2 ) ).add( '_' );
+//        buf.add( year ).add( '_' );
+//        buf.add( Str.zfill( hour, 2 ) ).add( '_' );
+//        buf.add( Str.zfill( minute, 2 ) ).add( '_' );
+//        buf.add( Str.zfill( second, 2 ) ).add( "_utc_euro" );
+//
+//        return buf.toString();
+//    }
+//
 
-        CharBuf buf = CharBuf.create( 16 );
-        buf.add( Str.zfill ( day, 2 ) ).add( '_' );
-        buf.add( Str.zfill( month, 2 ) ).add( '_' );
-        buf.add( year ).add( '_' );
-        buf.add( Str.zfill( hour, 2 ) ).add( '_' );
-        buf.add( Str.zfill( minute, 2 ) ).add( '_' );
-        buf.add( Str.zfill( second, 2 ) ).add( "_utc_euro" );
-
-        return buf.toString();
-    }
-
-
-    public static void main( String... args ) {
-
-        Sys.println( euroUTCSystemDateNowString() );
-
-    }
-
+//    public static void main( String... args ) {
+//
+//        Sys.println( euroUTCSystemDateNowString() );
+//
+//    }
+//
 
     public static Date year( int year ) {
         Calendar c = Calendar.getInstance();
@@ -502,18 +505,33 @@ public class Dates {
 
     }
 
-    public static Date fromISO8601Jackson_(String string) {
-
-        try {
-
-            return new SimpleDateFormat( "yyyy-MM-dd'T'HH:mm:ss.SSSZ" ).parse( string );
-        } catch ( ParseException e ) {
-            return Exceptions.handle ( Date.class, "Not a valid ISO8601 \"Jackson\" date", e );
-        }
-
-
-    }
-
+//    public static Date fromISO8601Jackson_(String string) {
+//
+//
+//        if (string.length() == 29 && Str.idx(string, -3) == ':') {
+//
+//            try {
+//
+//                return new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSXXX").parse(string);
+//            } catch (ParseException e) {
+//                return Exceptions.handle(Date.class, "Not a valid ISO8601 \"Jackson\" date", e);
+//            }
+//
+//
+//        } else {
+//
+//            try {
+//
+//                return new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ").parse(string);
+//            } catch (ParseException e) {
+//                return Exceptions.handle(Date.class, "Not a valid ISO8601 \"Jackson\" date", e);
+//            }
+//
+//        }
+//
+//
+//    }
+//
     public static Date fromJsonDate_( String string ) {
 
         try {
@@ -567,12 +585,12 @@ public class Dates {
      * @param date the timestamp
      * @return json style format.
      */
-    public static String jsonDate( Date date ) {
-        CharBuf buf = CharBuf.create( JSON_TIME_LENGTH );
-        jsonDateChars ( date, buf );
-        return buf.toString();
-    }
-
+//    public static String jsonDate( Date date ) {
+//        CharBuf buf = CharBuf.create( JSON_TIME_LENGTH );
+//        jsonDateChars ( date, buf );
+//        return buf.toString();
+//    }
+//
 
     private final static boolean  isGMT;
     static {
@@ -584,80 +602,80 @@ public class Dates {
 
     }
 
-    public static void jsonDateChars( Date date, CharBuf buf ) {
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTimeZone (GMT);
-        jsonDateChars( calendar, date, buf );
-    }
+//    public static void jsonDateChars( Date date, CharBuf buf ) {
+//        Calendar calendar = Calendar.getInstance();
+//        calendar.setTimeZone (GMT);
+//        jsonDateChars( calendar, date, buf );
+//    }
 
 
-    public static void jsonDateChars( long milis, CharBuf buf ) {
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTimeZone (GMT);
-        jsonDateChars( calendar, milis, buf );
-    }
+//    public static void jsonDateChars( long milis, CharBuf buf ) {
+//        Calendar calendar = Calendar.getInstance();
+//        calendar.setTimeZone (GMT);
+//        jsonDateChars( calendar, milis, buf );
+//    }
+//
+//    public static void jsonDateChars( Calendar calendar, Date date, CharBuf buf ) {
+//        jsonDateChars(calendar, date.getTime(), buf);
+//    }
 
-    public static void jsonDateChars( Calendar calendar, Date date, CharBuf buf ) {
-        jsonDateChars(calendar, date.getTime(), buf);
-    }
+//    public static void jsonDateChars( Calendar calendar, long milis, CharBuf buf ) {
+//        if (isGMT) {
+//            /* For the Unix admins of the world who avoid it all and just GMT it. */
+//            fastJsonDateChars ( new Date(milis), buf );
+//            return;
+//        }
+//
+//        calendar.setTimeInMillis( milis );
+//
+//
+//        int day = calendar.get( Calendar.DAY_OF_MONTH );
+//        int month = calendar.get( Calendar.MONTH ) +1;
+//        int year = calendar.get( Calendar.YEAR );
+//        int hour = calendar.get( Calendar.HOUR_OF_DAY );
+//        int minute = calendar.get( Calendar.MINUTE );
+//        int second = calendar.get( Calendar.SECOND );
+//        int mili = calendar.get( Calendar.MILLISECOND );
+//
+//        buf.add( '"' );
+//        buf.add( year ).add( '-' );
+//        buf.add( Str.zfill( month, 2 ) ).add( '-' );
+//        buf.add( Str.zfill ( day, 2 ) ).add('T');
+//
+//        buf.add( Str.zfill( hour, 2 ) ).add( ':' );
+//        buf.add( Str.zfill( minute, 2 ) ).add( ':' );
+//        buf.add( Str.zfill( second, 2 ) ).add( "." );
+//        buf.add( Str.zfill( mili, 3 ) ).add( "Z" );
+//
+//        buf.add( '"' );
+//
+//    }
 
-    public static void jsonDateChars( Calendar calendar, long milis, CharBuf buf ) {
-        if (isGMT) {
-            /* For the Unix admins of the world who avoid it all and just GMT it. */
-            fastJsonDateChars ( new Date(milis), buf );
-            return;
-        }
-
-        calendar.setTimeInMillis( milis );
-
-
-        int day = calendar.get( Calendar.DAY_OF_MONTH );
-        int month = calendar.get( Calendar.MONTH ) +1;
-        int year = calendar.get( Calendar.YEAR );
-        int hour = calendar.get( Calendar.HOUR_OF_DAY );
-        int minute = calendar.get( Calendar.MINUTE );
-        int second = calendar.get( Calendar.SECOND );
-        int mili = calendar.get( Calendar.MILLISECOND );
-
-        buf.add( '"' );
-        buf.add( year ).add( '-' );
-        buf.add( Str.zfill( month, 2 ) ).add( '-' );
-        buf.add( Str.zfill ( day, 2 ) ).add('T');
-
-        buf.add( Str.zfill( hour, 2 ) ).add( ':' );
-        buf.add( Str.zfill( minute, 2 ) ).add( ':' );
-        buf.add( Str.zfill( second, 2 ) ).add( "." );
-        buf.add( Str.zfill( mili, 3 ) ).add( "Z" );
-
-        buf.add( '"' );
-
-    }
-
-    public static void fastJsonDateChars( Date date, CharBuf buf ) {
-
-        int day = date.getDate ();
-        int month = date.getMonth () +1;
-        int year = date.getYear () + 1900;
-        int hour = date.getHours ();
-        int minute = date.getMinutes ();
-        int second = date.getSeconds ();
-        int offset = date.getTimezoneOffset ();
-        int mili = 1;
-
-        buf.add( '"' );
-        buf.add( year ).add( '-' );
-        buf.add( Str.zfill( month, 2 ) ).add( '-' );
-        buf.add( Str.zfill ( day, 2 ) ).add('T');
-
-        buf.add( Str.zfill( hour, 2 ) ).add( ':' );
-        buf.add( Str.zfill( minute, 2 ) ).add( ':' );
-        buf.add( Str.zfill( second, 2 ) ).add( "." );
-        buf.add( Str.zfill( mili, 3 ) ).add( "Z" );
-
-        buf.add( '"' );
-
-    }
-
+//    public static void fastJsonDateChars( Date date, CharBuf buf ) {
+//
+//        int day = date.getDate ();
+//        int month = date.getMonth () +1;
+//        int year = date.getYear () + 1900;
+//        int hour = date.getHours ();
+//        int minute = date.getMinutes ();
+//        int second = date.getSeconds ();
+//        int offset = date.getTimezoneOffset ();
+//        int mili = 1;
+//
+//        buf.add( '"' );
+//        buf.add( year ).add( '-' );
+//        buf.add( Str.zfill( month, 2 ) ).add( '-' );
+//        buf.add( Str.zfill ( day, 2 ) ).add('T');
+//
+//        buf.add( Str.zfill( hour, 2 ) ).add( ':' );
+//        buf.add( Str.zfill( minute, 2 ) ).add( ':' );
+//        buf.add( Str.zfill( second, 2 ) ).add( "." );
+//        buf.add( Str.zfill( mili, 3 ) ).add( "Z" );
+//
+//        buf.add( '"' );
+//
+//    }
+//
     public static Date fromISO8601DateLoose( char[] buffer, int startIndex, int endIndex ) {
 
         if ( Dates.isISO8601QuickCheck( buffer, startIndex, endIndex ) ) {
@@ -721,7 +739,6 @@ public class Dates {
     public static Date fromISO8601Jackson(char[] charArray, int from, int to) {
 
         try {
-            int length = to - from;
             if ( isISO8601Jackson(charArray, from, to) ) {
                 int year = CharScanner.parseIntFromTo( charArray, from + 0, from + 4 );
                 int month = CharScanner.parseIntFromTo( charArray, from + 5, from + 7 );
@@ -739,10 +756,18 @@ public class Dates {
 
                     tz = GMT;
 
-                } else {
+                }
+
+                else {
                     StringBuilder builder = new StringBuilder( 8 );
                     builder.append("GMT");
-                    builder.append( charArray, from + 23, 5 );
+
+                    for (int index = from + 23; index < to; index++ ) {
+                        if (charArray[index] == ':') {
+                            continue;
+                        }
+                        builder.append( charArray[index] );
+                    }
                     String tzStr = builder.toString();
                     tz = TimeZone.getTimeZone(tzStr);
                 }
@@ -868,7 +893,7 @@ public class Dates {
         if ( length == SHORT_ISO_8601_TIME_LENGTH ) {
             valid &= ( charArray[ start + 19 ] == 'Z' );
 
-        } else if ( length == LONG_ISO_8601_JACKSON_TIME_LENGTH) {
+        } else if ( length == LONG_ISO_8601_JACKSON_TIME_LENGTH || length == 29) {
             valid &= ( charArray[ start + 23 ] == '-' || charArray[ start + 23 ] == '+' );
         } else {
             return false;

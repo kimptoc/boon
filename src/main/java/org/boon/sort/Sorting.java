@@ -125,7 +125,7 @@ public class Sorting {
             V[] array = toArray(componentType, collection);
             sort(array, sortBy, ascending, nullsFirst);
             if (collection instanceof LinkedHashSet) {
-                return new LinkedHashSet<>(Lists.list(array));
+                return new LinkedHashSet<V>(Lists.list(array));
             } else {
                 return Lists.list(array);
             }

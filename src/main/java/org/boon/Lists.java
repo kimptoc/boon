@@ -29,13 +29,13 @@
 package org.boon;
 
 
-import org.boon.collections.DoubleList;
-import org.boon.collections.FloatList;
-import org.boon.collections.IntList;
-import org.boon.collections.LongList;
+//import org.boon.collections.DoubleList;
+//import org.boon.collections.FloatList;
+//import org.boon.collections.IntList;
+//import org.boon.collections.LongList;
 import org.boon.core.Conversions;
 import org.boon.core.Predicate;
-import org.boon.core.Reducer;
+//import org.boon.core.Reducer;
 import org.boon.core.reflection.*;
 import org.boon.core.Function;
 import org.boon.core.reflection.fields.FieldAccess;
@@ -110,17 +110,17 @@ public class Lists {
     }
 
     public static <V> List<V> list( Class<V> clazz ) {
-        return new ArrayList<>();
+        return new ArrayList<V>();
     }
 
 
     public static <V> List<V> copy( Collection<V> collection ) {
-        return new ArrayList<>( collection );
+        return new ArrayList<V>( collection );
     }
 
 
     public static <V> List<V> deepCopy( Collection<V> collection ) {
-        List<V> list = new ArrayList<>(collection.size());
+        List<V> list = new ArrayList<V>(collection.size());
 
         for (V v : collection) {
             list.add( BeanUtils.copy( v ));
@@ -138,7 +138,7 @@ public class Lists {
 
 
     public static <V,T> List<T> deepCopy( Collection<V> src, Class<T> dest  ) {
-        List<T> list = new ArrayList<>(src.size());
+        List<T> list = new ArrayList<T>(src.size());
 
         for (V v : src) {
             list.add( BeanUtils.createFromSrc( v, dest ));
@@ -175,9 +175,9 @@ public class Lists {
 
 
     public static <V> List<List<V>> lists( Collection<V>... collections ) {
-        List<List<V>> lists = new ArrayList<>(collections.length);
+        List<List<V>> lists = new ArrayList<List<V>>(collections.length);
         for (Collection<V> collection : collections) {
-            lists.add(new ArrayList<>(collection));
+            lists.add(new ArrayList<V>(collection));
         }
         return lists;
     }
@@ -185,20 +185,27 @@ public class Lists {
 
 
     public static <V> List<V> list( Iterable<V> iterable ) {
-        List<V> list = new ArrayList<>();
+        List<V> list = new ArrayList<V>();
         for ( V o : iterable ) {
             list.add( o );
         }
         return list;
     }
 
+    public static <V> List<V> linkedList( Iterable<V> iterable ) {
+        List<V> list = new LinkedList<V>();
+        for ( V o : iterable ) {
+            list.add( o );
+        }
+        return list;
+    }
 
     public static List<?> toListOrSingletonList( Object item ) {
         if ( item == null ) {
-            return new ArrayList<>();
+            return new ArrayList();
         } else if ( item.getClass().isArray() ) {
             final int length = Array.getLength( item );
-            List<Object> list = new ArrayList<>();
+            List<Object> list = new ArrayList<Object>();
             for ( int index = 0; index < length; index++ ) {
                 list.add( Array.get( item, index ) );
             }
@@ -212,7 +219,7 @@ public class Lists {
         } else if ( item instanceof Iterable ) {
             return list( ( Iterable ) item );
         } else {
-            List<Object> list = new ArrayList<>();
+            List<Object> list = new ArrayList<Object>();
             list.add( item );
             return list;
         }
@@ -220,7 +227,7 @@ public class Lists {
 
 
     public static <PROP> List<PROP> toList( List<?> inputList, Class<PROP> cls, String propertyPath ) {
-        List<PROP> outputList = new ArrayList<>();
+        List<PROP> outputList = new ArrayList<PROP>();
 
         for (Object o : inputList) {
             outputList.add((PROP) BeanUtils.idx(o, propertyPath));
@@ -229,31 +236,31 @@ public class Lists {
         return outputList;
     }
 
-    public static IntList toIntList( List<?> inputList, String propertyPath ) {
-
-        return IntList.toIntList(inputList, propertyPath);
-    }
-
-
-    public static FloatList toFloatList( List<?> inputList, String propertyPath ) {
-
-        return FloatList.toFloatList(inputList, propertyPath);
-    }
+//    public static IntList toIntList( List<?> inputList, String propertyPath ) {
+//
+//        return IntList.toIntList(inputList, propertyPath);
+//    }
 
 
-    public static DoubleList toDoubleList( List<?> inputList, String propertyPath ) {
+//    public static FloatList toFloatList( List<?> inputList, String propertyPath ) {
+//
+//        return FloatList.toFloatList(inputList, propertyPath);
+//    }
 
-        return DoubleList.toDoubleList(inputList, propertyPath);
-    }
+
+//    public static DoubleList toDoubleList( List<?> inputList, String propertyPath ) {
+//
+//        return DoubleList.toDoubleList(inputList, propertyPath);
+//    }
 
 
-    public static LongList toLongList( List<?> inputList, String propertyPath ) {
-
-        return LongList.toLongList(inputList, propertyPath);
-    }
+//    public static LongList toLongList( List<?> inputList, String propertyPath ) {
+//
+//        return LongList.toLongList(inputList, propertyPath);
+//    }
 
     public static List<?> toList( List<?> inputList, String propertyPath ) {
-        List<Object> outputList = new ArrayList<>();
+        List<Object> outputList = new ArrayList<Object>();
 
         for (Object o : inputList) {
             outputList.add(BeanUtils.idx(o, propertyPath));
@@ -265,7 +272,7 @@ public class Lists {
     public static List<?> toList( Object item ) {
        if ( item!= null && item.getClass().isArray() ) {
             final int length = Array.getLength( item );
-            List<Object> list = new ArrayList<>();
+            List<Object> list = new ArrayList<Object>();
             for ( int index = 0; index < length; index++ ) {
                 list.add( Array.get( item, index ) );
             }
@@ -286,7 +293,7 @@ public class Lists {
 
 
     public static <V, WRAP> List<WRAP> convert(Class<WRAP> wrapper, Iterable<V> collection ) {
-        List<WRAP> list = new ArrayList<>(  );
+        List<WRAP> list = new ArrayList<WRAP>(  );
 
         for (V v : collection) {
 
@@ -296,7 +303,7 @@ public class Lists {
     }
 
     public static <V, WRAP> List<WRAP> convert(Class<WRAP> wrapper, Collection<V> collection ) {
-        List<WRAP> list = new ArrayList<>( collection.size() );
+        List<WRAP> list = new ArrayList<WRAP>( collection.size() );
 
         for (V v : collection) {
 
@@ -307,7 +314,7 @@ public class Lists {
 
 
     public static <V, WRAP> List<WRAP> convert(Class<WRAP> wrapper, V[] collection ) {
-        List<WRAP> list = new ArrayList<>( collection.length );
+        List<WRAP> list = new ArrayList<WRAP>( collection.length );
 
         for (V v : collection) {
 
@@ -318,7 +325,7 @@ public class Lists {
 
 
     public static <V, WRAP> List<WRAP> wrap(Class<WRAP> wrapper, Iterable<V> collection ) {
-        List<WRAP> list = new ArrayList<>(  );
+        List<WRAP> list = new ArrayList<WRAP>(  );
 
         for (V v : collection) {
             WRAP wrap = Reflection.newInstance ( wrapper, v );
@@ -333,7 +340,7 @@ public class Lists {
             return Collections.EMPTY_LIST;
         }
 
-        List<WRAP> list = new ArrayList<>( collection.size () );
+        List<WRAP> list = new ArrayList<WRAP>( collection.size () );
 
 
 
@@ -349,7 +356,7 @@ public class Lists {
 
 
     public static <V, WRAP> List<WRAP> wrap(Class<WRAP> wrapper, V[] collection ) {
-        List<WRAP> list = new ArrayList<>( collection.length );
+        List<WRAP> list = new ArrayList<WRAP>( collection.length );
 
         for (V v : collection) {
             WRAP wrap = Reflection.newInstance ( wrapper, v );
@@ -359,7 +366,7 @@ public class Lists {
     }
 
     public static <V> List<V> list( Enumeration<V> enumeration ) {
-        List<V> list = new ArrayList<>();
+        List<V> list = new ArrayList<V>();
         while ( enumeration.hasMoreElements() ) {
             list.add( enumeration.nextElement() );
         }
@@ -385,7 +392,7 @@ public class Lists {
 
 
     public static <V> List<V> list( Iterator<V> iterator ) {
-        List<V> list = new ArrayList<>();
+        List<V> list = new ArrayList<V>();
         while ( iterator.hasNext() ) {
             list.add( iterator.next() );
         }
@@ -394,38 +401,38 @@ public class Lists {
 
 
 
-    @SafeVarargs
+//    @SafeVarargs
     public static <V> List<V> list( final V... array ) {
         if ( array == null ) {
-            return new ArrayList<>();
+            return new ArrayList<V>();
         }
-        List<V> list = new ArrayList<>( array.length );
+        List<V> list = new ArrayList<V>( array.length );
         Collections.addAll( list, array );
         return list;
     }
 
-    @SafeVarargs
+//    @SafeVarargs
     public static <V> List<V> safeList( final V... array ) {
-        return new CopyOnWriteArrayList<>( array );
+        return new CopyOnWriteArrayList<V>( array );
     }
 
-    @SafeVarargs
+//    @SafeVarargs
     public static <V> List<V> linkedList( final V... array ) {
         if ( array == null ) {
-            return new ArrayList<>();
+            return new ArrayList<V>();
         }
-        List<V> list = new LinkedList<>();
+        List<V> list = new LinkedList<V>();
         Collections.addAll( list, array );
         return list;
     }
 
 
     public static <V> List<V> safeList( Collection<V> collection ) {
-        return new CopyOnWriteArrayList<>( collection );
+        return new CopyOnWriteArrayList<V>( collection );
     }
 
     public static <V> List<V> linkedList( Collection<V> collection ) {
-        return new LinkedList<>( collection );
+        return new LinkedList<V>( collection );
     }
 
     /**
@@ -541,28 +548,28 @@ public class Lists {
     @Universal
     public static <V> List<V> copy( List<V> list ) {
         if ( list instanceof LinkedList ) {
-            return new LinkedList<>( list );
+            return new LinkedList<V>( list );
         } else if ( list instanceof CopyOnWriteArrayList ) {
-            return new CopyOnWriteArrayList<>( list );
+            return new CopyOnWriteArrayList<V>( list );
         } else {
-            return new ArrayList<>( list );
+            return new ArrayList<V>( list );
         }
     }
 
 
     @Universal
     public static <V> List<V> copy( CopyOnWriteArrayList<V> list ) {
-        return new CopyOnWriteArrayList<>( list );
+        return new CopyOnWriteArrayList<V>( list );
     }
 
     @Universal
     public static <V> List<V> copy( ArrayList<V> list ) {
-        return new ArrayList<>( list );
+        return new ArrayList<V>( list );
     }
 
     @Universal
     public static <V> List<V> copy( LinkedList<V> list ) {
-        return new LinkedList<>( list );
+        return new LinkedList<V>( list );
     }
 
 
@@ -602,7 +609,7 @@ public class Lists {
 
 
     public static <T> List<T> listFromProperty( Class<T> propertyType, String propertyPath, Collection<?> list ) {
-        List<T> newList = new ArrayList<>( list.size() );
+        List<T> newList = new ArrayList<T>( list.size() );
 
         for ( Object item : list ) {
             T newItem = ( T ) BeanUtils.idx( item, propertyPath );
@@ -615,7 +622,7 @@ public class Lists {
 
 
     public static <T> List<T> listFromProperty( Class<T> propertyType, String propertyPath, Iterable<?> list ) {
-        List<T> newList = new ArrayList<>(  );
+        List<T> newList = new ArrayList<T>(  );
 
         for ( Object item : list ) {
             T newItem = ( T ) BeanUtils.idx( item, propertyPath );
@@ -747,7 +754,7 @@ public class Lists {
 
 
     public static <V, N> List<N> mapBy(  final V[] array, Function<V, N> function ) {
-        List<N> list = new ArrayList<>( array.length );
+        List<N> list = new ArrayList<N>( array.length );
 
         for ( V v : array ) {
             list.add( function.apply( v ) );
@@ -756,7 +763,7 @@ public class Lists {
     }
 
     public static <V, N> List<N> mapBy( final Collection<V> array, Function<V, N> function ) {
-        List<N> list = new ArrayList<>( array.size() );
+        List<N> list = new ArrayList<N>( array.size() );
 
         for ( V v : array ) {
             list.add( function.apply( v ) );
@@ -765,7 +772,7 @@ public class Lists {
     }
 
     public static <V, N> List<N> mapBy( final Iterable<V> array, Function<V, N> function ) {
-        List<N> list = new ArrayList<>(  );
+        List<N> list = new ArrayList<N>(  );
 
         for ( V v : array ) {
             list.add( function.apply( v ) );
@@ -774,14 +781,14 @@ public class Lists {
     }
 
 
-    public static <V, SUM> SUM reduceBy( final Iterable<V> array, Reducer<V, SUM> function ) {
-
-        SUM sum = null;
-        for ( V v : array ) {
-            sum = function.apply( sum, v ) ;
-        }
-        return sum;
-    }
+//    public static <V, SUM> SUM reduceBy( final Iterable<V> array, Reducer<V, SUM> function ) {
+//
+//        SUM sum = null;
+//        for ( V v : array ) {
+//            sum = function.apply( sum, v ) ;
+//        }
+//        return sum;
+//    }
 
 
     public static Object reduceBy( final Iterable<?> array, Object object ) {
@@ -796,7 +803,7 @@ public class Lists {
 
 
     public static <T> List<T> filterBy( final Iterable<T> array, Predicate<T> predicate ) {
-        List<T> list = new ArrayList<>(  );
+        List<T> list = new ArrayList<T>(  );
 
         for ( T v : array ) {
             if ( predicate.test(v)) {
@@ -808,7 +815,7 @@ public class Lists {
 
 
     public static <T> List<T> filterBy(  final Collection<T> array, Predicate<T> predicate ) {
-        List<T> list = new ArrayList<>( array.size()  );
+        List<T> list = new ArrayList<T>( array.size()  );
 
         for ( T v : array ) {
             if ( predicate.test(v)) {
@@ -820,7 +827,7 @@ public class Lists {
 
 
     public static <T> List<T> filterBy( Predicate<T> predicate, final T[] array ) {
-        List<T> list = new ArrayList<>( array.length  );
+        List<T> list = new ArrayList<T>( array.length  );
 
         for ( T v : array ) {
             if ( predicate.test(v)) {
@@ -833,7 +840,7 @@ public class Lists {
 
 
     public static <T> List<T> filterBy(  final Iterable<T> array, Object object ) {
-        List<T> list = new ArrayList<>(  );
+        List<T> list = new ArrayList<T>(  );
 
         for ( T v : array ) {
             if ( Invoker.invokeBooleanReturn(object, v) ) {
@@ -845,7 +852,7 @@ public class Lists {
 
 
     public static <T> List<T> filterBy( final Collection<T> array, Object object ) {
-        List<T> list = new ArrayList<>( array.size()  );
+        List<T> list = new ArrayList<T>( array.size()  );
 
         for ( T v : array ) {
             if ( Invoker.invokeBooleanReturn(object, v) ) {
@@ -857,7 +864,7 @@ public class Lists {
 
 
     public static <T> List<T> filterBy(  final T[] array, Object object ) {
-        List<T> list = new ArrayList<>( array.length  );
+        List<T> list = new ArrayList<T>( array.length  );
 
         for ( T v : array ) {
             if ( Invoker.invokeBooleanReturn(object, v) ) {
@@ -871,10 +878,10 @@ public class Lists {
 
 
     public static <T> List<T> filterBy(  final Iterable<T> array, Object object, String methodName ) {
-        List<T> list = new ArrayList<>(  );
+        List<T> list = new ArrayList<T>(  );
 
         for ( T v : array ) {
-            if ( (boolean) Invoker.invokeEither(object, methodName, v) ) {
+            if ( (Boolean) Invoker.invokeEither(object, methodName, v) ) {
                 list.add(  v  );
             }
         }
@@ -883,10 +890,10 @@ public class Lists {
 
 
     public static <T> List<T> filterBy( final Collection<T> array, Object object, String methodName ) {
-        List<T> list = new ArrayList<>( array.size()  );
+        List<T> list = new ArrayList<T>( array.size()  );
 
         for ( T v : array ) {
-            if ( (boolean) Invoker.invokeEither(object, methodName, v) ) {
+            if ( (Boolean) Invoker.invokeEither(object, methodName, v) ) {
                 list.add(  v  );
             }
         }
@@ -895,10 +902,10 @@ public class Lists {
 
 
     public static <T> List<T> filterBy(  final T[] array, Object object, String methodName ) {
-        List<T> list = new ArrayList<>( array.length  );
+        List<T> list = new ArrayList<T>( array.length  );
 
         for ( T v : array ) {
-            if ( (boolean) Invoker.invokeEither(object, methodName, v) ) {
+            if ( (Boolean) Invoker.invokeEither(object, methodName, v) ) {
                 list.add(  v  );
             }
         }

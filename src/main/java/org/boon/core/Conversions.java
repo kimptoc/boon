@@ -515,7 +515,8 @@ public class Conversions {
 
 
             case PATH:
-                return (T) IO.path(value.toString());
+                throw new UnsupportedOperationException("PATH:"+value.toString());
+//                return (T) IO.path(value.toString());
 
 
             case CLASS:
@@ -1246,7 +1247,7 @@ public class Conversions {
         } else if (object instanceof Calendar) {
             return ((Calendar) object).getTime();
         } else if (object instanceof Long) {
-            return new Date((long) object);
+            return new Date((Long) object);
         } else if (object instanceof String) {
             String val = (String) object;
             char[] chars = FastStringUtils.toCharArray(val);
@@ -1332,17 +1333,17 @@ public class Conversions {
     public static Collection<Object> createCollection(Class<?> type, int size) {
 
         if (type == List.class) {
-            return new ArrayList<>(size);
+            return new ArrayList<Object>(size);
         } else if (type == SortedSet.class) {
-            return new TreeSet<>();
+            return new TreeSet<Object>();
         } else if (type == Set.class) {
-            return new LinkedHashSet<>(size);
+            return new LinkedHashSet<Object>(size);
         } else if (Typ.isList(type)) {
-            return new ArrayList<>();
+            return new ArrayList<Object>();
         } else if (Typ.isSortedSet(type)) {
-            return new TreeSet<>();
+            return new TreeSet<Object>();
         } else if (Typ.isSet(type)) {
-            return new LinkedHashSet<>(size);
+            return new LinkedHashSet<Object>(size);
         } else {
             return new ArrayList(size);
         }
@@ -1353,13 +1354,13 @@ public class Conversions {
     public static Map<?, ?> createMap(Class<?> type, int size) {
 
         if (type == HashMap.class) {
-            return new HashMap<>(size);
+            return new HashMap(size);
         } else if (type == TreeMap.class) {
-            return new TreeMap<>();
+            return new TreeMap();
         } else if (type == SortedMap.class) {
-            return new TreeMap<>();
+            return new TreeMap();
         } else if (type == ConcurrentHashMap.class) {
-            return new ConcurrentHashMap<>();
+            return new ConcurrentHashMap();
         } else {
             return new HashMap(size);
         }
@@ -1371,7 +1372,7 @@ public class Conversions {
     public static <TO, FROM> List<TO> mapFilterNulls(Function<FROM, TO> converter,
                                                      Collection<FROM> fromCollection) {
 
-        ArrayList<TO> toList = new ArrayList<>(fromCollection.size());
+        ArrayList<TO> toList = new ArrayList<TO>(fromCollection.size());
 
         for (FROM from : fromCollection) {
             TO converted = converter.apply(from);

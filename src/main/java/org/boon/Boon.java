@@ -29,21 +29,21 @@
 package org.boon;
 
 
-import org.boon.config.ContextConfigReader;
+//import org.boon.config.ContextConfigReader;
 import org.boon.core.Conversions;
 import org.boon.core.Sys;
 import org.boon.core.Typ;
 import org.boon.core.reflection.*;
 import org.boon.core.reflection.fields.FieldAccessMode;
-import org.boon.di.Context;
-import org.boon.json.JsonFactory;
+//import org.boon.di.Context;
+//import org.boon.json.JsonFactory;
 import org.boon.logging.LogLevel;
 import org.boon.logging.Logging;
 import org.boon.logging.TerminalLogger;
 import org.boon.primitive.CharBuf;
-import org.boon.template.BoonTemplate;
+//import org.boon.template.BoonTemplate;
 
-import java.nio.file.Path;
+//import java.nio.file.Path;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicBoolean;
 
@@ -175,20 +175,20 @@ public class Boon {
      *
      * @param messages objects you want to print on the same line.
      */
-    public static void putc(Object context, Object... messages ) {
-
-        for ( Object message : messages ) {
-            if (message instanceof CharSequence) {
-                String transformedMessage =
-                        jstl( message.toString(), context );
-                print(message);
-            } else {
-                print( message );
-            }
-            print(' ');
-        }
-        println();
-    }
+//    public static void putc(Object context, Object... messages ) {
+//
+//        for ( Object message : messages ) {
+//            if (message instanceof CharSequence) {
+//                String transformedMessage =
+//                        jstl( message.toString(), context );
+//                print(message);
+//            } else {
+//                print( message );
+//            }
+//            print(' ');
+//        }
+//        println();
+//    }
 
 
     /**
@@ -198,20 +198,20 @@ public class Boon {
      *
      * @param messages objects you want to print on the same line.
      */
-    public static void puth(Object context, Object... messages ) {
-
-        for ( Object message : messages ) {
-            if (message instanceof CharSequence) {
-                String transformedMessage =
-                        handlebars( message.toString(), context );
-                print(message);
-            } else {
-                print( message );
-            }
-            print(' ');
-        }
-        println();
-    }
+//    public static void puth(Object context, Object... messages ) {
+//
+//        for ( Object message : messages ) {
+//            if (message instanceof CharSequence) {
+//                String transformedMessage =
+//                        handlebars( message.toString(), context );
+//                print(message);
+//            } else {
+//                print( message );
+//            }
+//            print(' ');
+//        }
+//        println();
+//    }
 
     /**
      * <p>
@@ -424,9 +424,9 @@ public class Boon {
      * @param value Java object
      * @return JSON-ified Java object
      */
-    public static String toJson(Object value) {
-        return JsonFactory.toJson(value);
-    }
+//    public static String toJson(Object value) {
+//        return JsonFactory.toJson(value);
+//    }
 
 
     /**
@@ -436,9 +436,9 @@ public class Boon {
      * @param value JSON content
      * @return Java object
      */
-    public static Object fromJson(String value) {
-        return JsonFactory.fromJson(value);
-    }
+//    public static Object fromJson(String value) {
+//        return JsonFactory.fromJson(value);
+//    }
 
     /**
      * Helper method to quickly convert JSON into a Java object.
@@ -448,9 +448,9 @@ public class Boon {
      * @param clazz type you want to convert the JSON to
      * @return Java object
      */
-    public static <T> T fromJson(String value, Class<T> clazz) {
-        return JsonFactory.fromJson(value, clazz);
-    }
+//    public static <T> T fromJson(String value, Class<T> clazz) {
+//        return JsonFactory.fromJson(value, clazz);
+//    }
 
 
     /**
@@ -484,9 +484,9 @@ public class Boon {
      * @param context context that the template uses
      * @return template results
      */
-    public static String jstl(String template, Object context) {
-        return BoonTemplate.jstl().replace(template, context).toString();
-    }
+//    public static String jstl(String template, Object context) {
+//        return BoonTemplate.jstl().replace(template, context).toString();
+//    }
 
 
     /**
@@ -495,9 +495,9 @@ public class Boon {
      * @param context context that the template uses
      * @return template results
      */
-    public static String handlebars(String template, Object context) {
-        return BoonTemplate.template().replace(template, context).toString();
-    }
+//    public static String handlebars(String template, Object context) {
+//        return BoonTemplate.template().replace(template, context).toString();
+//    }
 
 
     /** Adds a bunch of Strings together. */
@@ -594,18 +594,18 @@ public class Boon {
      * @param path path to find config files.
      * @return returns a DependencyInjection/Config context
      */
-    public static Context readConfig(String namespace, String path) {
-        String localConfigDir =
-                add( System.getProperty("user.home"), "/.",
-                        camelCaseLower( underBarCase( namespace) ) );
-
-
-        return readConfig(namespace, path,
-                "classpath:/",
-                localConfigDir,//look in local dir
-                sysProp(BOON_SYSTEM_CONF_DIR, "/etc/") //look in /etc/{path}
-                ); //look in classpath
-    }
+//    public static Context readConfig(String namespace, String path) {
+//        String localConfigDir =
+//                add( System.getProperty("user.home"), "/.",
+//                        camelCaseLower( underBarCase( namespace) ) );
+//
+//
+//        return readConfig(namespace, path,
+//                "classpath:/",
+//                localConfigDir,//look in local dir
+//                sysProp(BOON_SYSTEM_CONF_DIR, "/etc/") //look in /etc/{path}
+//                ); //look in classpath
+//    }
 
 
     /**
@@ -617,38 +617,38 @@ public class Boon {
      * @param roots roots to find paths.
      * @return context
      */
-    public static Context readConfig(String namespace, String path, String... roots) {
-
-        trace("readConfig(namespace, path, roots)", "IN", namespace, path, roots);
-
-        if (path.startsWith("/")) {
-            path = sliceOf(path, 1);
-
-        }
-
-        if (!path.endsWith(".json")) {
-            if (!path.endsWith("/")) {
-                path = add(path, "/");
-            }
-        }
-        ContextConfigReader contextConfigReader = ContextConfigReader.config().namespace(namespace);
-
-        for (String root : roots) {
-
-            if (!root.endsWith("/")) {
-                root = add(root, "/");
-            }
-
-
-            debug("readConfig", "adding root", root);
-            contextConfigReader.resource( add (root, path) );
-        }
-
-        trace("readConfig(namespace, path, roots)", "OUT", namespace, path, roots);
-
-        return contextConfigReader.read();
-
-    }
+//    public static Context readConfig(String namespace, String path, String... roots) {
+//
+//        trace("readConfig(namespace, path, roots)", "IN", namespace, path, roots);
+//
+//        if (path.startsWith("/")) {
+//            path = sliceOf(path, 1);
+//
+//        }
+//
+//        if (!path.endsWith(".json")) {
+//            if (!path.endsWith("/")) {
+//                path = add(path, "/");
+//            }
+//        }
+//        ContextConfigReader contextConfigReader = ContextConfigReader.config().namespace(namespace);
+//
+//        for (String root : roots) {
+//
+//            if (!root.endsWith("/")) {
+//                root = add(root, "/");
+//            }
+//
+//
+//            debug("readConfig", "adding root", root);
+//            contextConfigReader.resource( add (root, path) );
+//        }
+//
+//        trace("readConfig(namespace, path, roots)", "OUT", namespace, path, roots);
+//
+//        return contextConfigReader.read();
+//
+//    }
 
 
     /**
@@ -712,12 +712,12 @@ public class Boon {
      *
      * @return returns a DependencyInjection/Config context
      */
-    public static Context readConfig() {
-        return readConfig(
-                sysProp("BOON.APP.NAMESPACE", "boon.app"),
-                sysProp("BOON.APP.CONFIG.PATH", "boon/app"));
-
-    }
+//    public static Context readConfig() {
+//        return readConfig(
+//                sysProp("BOON.APP.NAMESPACE", "boon.app"),
+//                sysProp("BOON.APP.CONFIG.PATH", "boon/app"));
+//
+//    }
 
     /**
      * Press enter to continue. Used for console apps.
@@ -764,14 +764,14 @@ public class Boon {
      * @param path path to resource
      * @return resource returned.
      */
-    public static String resource(String path) {
-        if (!IO.exists(IO.path(path))) {
-            path = add ("classpath:/", path);
-        }
-
-        String str = IO.read(path);
-        return str;
-    }
+//    public static String resource(String path) {
+//        if (!IO.exists(IO.path(path))) {
+//            path = add ("classpath:/", path);
+//        }
+//
+//        String str = IO.read(path);
+//        return str;
+//    }
 
 
     /**
@@ -784,10 +784,10 @@ public class Boon {
      * @param path path to resource
      * @return resource returned.
      */
-    public static String resource(Path path) {
-        String str = IO.read(path);
-        return str;
-    }
+//    public static String resource(Path path) {
+//        String str = IO.read(path);
+//        return str;
+//    }
 
 
     /**
@@ -798,19 +798,19 @@ public class Boon {
      * @param context context that the template uses
      * @return the resource as a string
      */
-    public static String resourceFromHandleBarsTemplate(String path, Object context) {
-        if (!IO.exists(IO.path(path))) {
-            path = add ("classpath:/", path);
-        }
-
-        String str = IO.read(path);
-
-        if (str!=null) {
-            str = Boon.handlebars(str, context);
-        }
-
-        return str;
-    }
+//    public static String resourceFromHandleBarsTemplate(String path, Object context) {
+//        if (!IO.exists(IO.path(path))) {
+//            path = add ("classpath:/", path);
+//        }
+//
+//        String str = IO.read(path);
+//
+//        if (str!=null) {
+//            str = Boon.handlebars(str, context);
+//        }
+//
+//        return str;
+//    }
 
 
 
@@ -822,15 +822,15 @@ public class Boon {
      * @param context context that the template uses
      * @return the resource as a string
      */
-    public static String resourceFromHandleBarsTemplate(Path path, Object context) {
-        String str = IO.read(path);
-
-        if (str!=null) {
-            str = Boon.handlebars(str, context);
-        }
-
-        return str;
-    }
+//    public static String resourceFromHandleBarsTemplate(Path path, Object context) {
+//        String str = IO.read(path);
+//
+//        if (str!=null) {
+//            str = Boon.handlebars(str, context);
+//        }
+//
+//        return str;
+//    }
 
 
     /**
@@ -842,19 +842,19 @@ public class Boon {
      * @param context context that the template uses
      * @return the resource as a string
      */
-    public static String resourceFromTemplate(String path, Object context) {
-        if (!IO.exists(IO.path(path))) {
-            path = add ("classpath:/", path);
-        }
-
-        String str = IO.read(path);
-
-        if (str!=null) {
-            str = Boon.jstl(str, context);
-        }
-
-        return str;
-    }
+//    public static String resourceFromTemplate(String path, Object context) {
+//        if (!IO.exists(IO.path(path))) {
+//            path = add ("classpath:/", path);
+//        }
+//
+//        String str = IO.read(path);
+//
+//        if (str!=null) {
+//            str = Boon.jstl(str, context);
+//        }
+//
+//        return str;
+//    }
 
 
 
@@ -867,16 +867,16 @@ public class Boon {
      * @param context context that the template uses
      * @return the resource as a string
      */
-    public static String resourceFromTemplate(Path path, Object context) {
-
-        String str = IO.read(path);
-
-        if (str!=null) {
-            str = Boon.jstl(str, context);
-        }
-
-        return str;
-    }
+//    public static String resourceFromTemplate(Path path, Object context) {
+//
+//        String str = IO.read(path);
+//
+//        if (str!=null) {
+//            str = Boon.jstl(str, context);
+//        }
+//
+//        return str;
+//    }
 
 
     /**
@@ -885,17 +885,17 @@ public class Boon {
      * @param path path to resource
      * @return JSON object loaded as resource
      */
-    public static Object jsonResource(String path) {
-        if (!IO.exists(IO.path(path))) {
-             path = add ("classpath:/", path);
-        }
-
-        String str = IO.read(path);
-        if (str!=null) {
-            return fromJson(str);
-        }
-        return null;
-    }
+//    public static Object jsonResource(String path) {
+//        if (!IO.exists(IO.path(path))) {
+//             path = add ("classpath:/", path);
+//        }
+//
+//        String str = IO.read(path);
+//        if (str!=null) {
+//            return fromJson(str);
+//        }
+//        return null;
+//    }
 
 
     /**
@@ -904,14 +904,14 @@ public class Boon {
      * @param path path to resource
      * @return JSON object loaded as resource
      */
-    public static Object jsonResource(Path path) {
-
-        String str = IO.read(path);
-        if (str!=null) {
-            return fromJson(str);
-        }
-        return null;
-    }
+//    public static Object jsonResource(Path path) {
+//
+//        String str = IO.read(path);
+//        if (str!=null) {
+//            return fromJson(str);
+//        }
+//        return null;
+//    }
 
 
     /**
@@ -923,18 +923,18 @@ public class Boon {
      * @param path path to resource
      * @return JSON object loaded as resource
      */
-    public static Object jsonResourceFromTemplate(String path, Object context) {
-        if (!IO.exists(IO.path(path))) {
-            path = add ("classpath:/", path);
-        }
-
-        String str = IO.read(path);
-        if (str!=null) {
-            str = Boon.jstl(str, context);
-            return fromJson(str);
-        }
-        return null;
-    }
+//    public static Object jsonResourceFromTemplate(String path, Object context) {
+//        if (!IO.exists(IO.path(path))) {
+//            path = add ("classpath:/", path);
+//        }
+//
+//        String str = IO.read(path);
+//        if (str!=null) {
+//            str = Boon.jstl(str, context);
+//            return fromJson(str);
+//        }
+//        return null;
+//    }
 
 
     /**
@@ -946,15 +946,15 @@ public class Boon {
      * @param path path to resource
      * @return JSON object loaded as resource
      */
-    public static Object jsonResourceFromTemplate(Path path, Object context) {
-
-        String str = IO.read(path);
-        if (str!=null) {
-            str = Boon.jstl(str, context);
-            return fromJson(str);
-        }
-        return null;
-    }
+//    public static Object jsonResourceFromTemplate(Path path, Object context) {
+//
+//        String str = IO.read(path);
+//        if (str!=null) {
+//            str = Boon.jstl(str, context);
+//            return fromJson(str);
+//        }
+//        return null;
+//    }
 
 
     /**
@@ -966,9 +966,9 @@ public class Boon {
      * @param path path to resource
      * @return JSON object loaded as resource
      */
-    public static Map<String, Object> resourceMap(String path) {
-        return (Map<String, Object>)jsonResource(path);
-    }
+//    public static Map<String, Object> resourceMap(String path) {
+//        return (Map<String, Object>)jsonResource(path);
+//    }
 
 
     /**
@@ -980,9 +980,9 @@ public class Boon {
      * @param path path to resource
      * @return JSON object loaded as resource
      */
-    public static Map<String, Object> resourceMap(Path path) {
-        return (Map<String, Object>)jsonResource(path);
-    }
+//    public static Map<String, Object> resourceMap(Path path) {
+//        return (Map<String, Object>)jsonResource(path);
+//    }
 
 
     /**
@@ -994,10 +994,10 @@ public class Boon {
      * @param path path to resource
      * @return JSON object loaded as resource
      */
-    public static Map<String, Object> resourceMapFromTemplate(String path,
-                                                              Object context) {
-        return (Map<String, Object>)jsonResourceFromTemplate(path, context);
-    }
+//    public static Map<String, Object> resourceMapFromTemplate(String path,
+//                                                              Object context) {
+//        return (Map<String, Object>)jsonResourceFromTemplate(path, context);
+//    }
 
 
     /**
@@ -1009,9 +1009,9 @@ public class Boon {
      * @param path path to resource
      * @return JSON object loaded as resource
      */
-    public static Map<String, Object> resourceMapFromTemplate(Path path, Object context) {
-        return (Map<String, Object>)jsonResourceFromTemplate(path, context);
-    }
+//    public static Map<String, Object> resourceMapFromTemplate(Path path, Object context) {
+//        return (Map<String, Object>)jsonResourceFromTemplate(path, context);
+//    }
 
 
     /**
@@ -1023,9 +1023,9 @@ public class Boon {
      * @param path path to resource
      * @return JSON object loaded as resource
      */
-    public static <T> T resourceObject(String path, Class<T> type) {
-        return fromMap(resourceMap(path), type);
-    }
+//    public static <T> T resourceObject(String path, Class<T> type) {
+//        return fromMap(resourceMap(path), type);
+//    }
 
 
     /**
@@ -1036,9 +1036,9 @@ public class Boon {
      * @param path path to resource
      * @return JSON object loaded as resource
      */
-    public static <T> T resourceObject(Path path, Class<T> type) {
-        return fromMap(resourceMap(path), type);
-    }
+//    public static <T> T resourceObject(Path path, Class<T> type) {
+//        return fromMap(resourceMap(path), type);
+//    }
 
 
     /**
@@ -1050,9 +1050,9 @@ public class Boon {
      * @param path path to resource
      * @return JSON object loaded as resource
      */
-    public static <T> T resourceObjectFromTemplate(String path, Class<T> type, Object context) {
-        return fromMap(resourceMapFromTemplate(path, context), type);
-    }
+//    public static <T> T resourceObjectFromTemplate(String path, Class<T> type, Object context) {
+//        return fromMap(resourceMapFromTemplate(path, context), type);
+//    }
 
 
 
@@ -1065,9 +1065,9 @@ public class Boon {
      * @param path path to resource
      * @return JSON object loaded as resource
      */
-    public static <T> T resourceObjectFromTemplate(Path path, Class<T> type, Object context) {
-        return fromMap(resourceMapFromTemplate(path, context), type);
-    }
+//    public static <T> T resourceObjectFromTemplate(Path path, Class<T> type, Object context) {
+//        return fromMap(resourceMapFromTemplate(path, context), type);
+//    }
 
 
     /**
@@ -1078,9 +1078,9 @@ public class Boon {
      * @param path path to resource
      * @return JSON object loaded as resource
      */
-    public static List<?> resourceList(String path) {
-        return (List<?>)jsonResource(path);
-    }
+//    public static List<?> resourceList(String path) {
+//        return (List<?>)jsonResource(path);
+//    }
 
 
     /**
@@ -1091,9 +1091,9 @@ public class Boon {
      * @param path path to resource
      * @return JSON object loaded as resource
      */
-    public static List<?> resourceList(Path path) {
-        return (List<?>)jsonResource(path);
-    }
+//    public static List<?> resourceList(Path path) {
+//        return (List<?>)jsonResource(path);
+//    }
 
 
     /**
@@ -1104,12 +1104,12 @@ public class Boon {
      * @param path path to resource
      * @return JSON object loaded as resource
      */
-    public static <T> List<T> resourceListFromTemplate(String path,  Class<T> listOf, Object context) {
-        List<?> list = (List)jsonResourceFromTemplate(path, context);
-
-        return MapObjectConversion.convertListOfMapsToObjects(true, null,
-                FieldAccessMode.FIELD_THEN_PROPERTY.create(true), listOf, (List<Map>)list, Collections.EMPTY_SET);
-    }
+//    public static <T> List<T> resourceListFromTemplate(String path,  Class<T> listOf, Object context) {
+//        List<?> list = (List)jsonResourceFromTemplate(path, context);
+//
+//        return MapObjectConversion.convertListOfMapsToObjects(true, null,
+//                FieldAccessMode.FIELD_THEN_PROPERTY.create(true), listOf, (List<Map>)list, Collections.EMPTY_SET);
+//    }
 
 
     /**
@@ -1120,11 +1120,11 @@ public class Boon {
      * @param path path to resource
      * @return JSON object loaded as resource
      */
-    public static <T> List<T> resourceListFromTemplate(Path path,  Class<T> listOf, Object context) {
-        List<Map> list = (List)jsonResourceFromTemplate(path, context);
-
-        return MapObjectConversion.convertListOfMapsToObjects( listOf, list);
-    }
+//    public static <T> List<T> resourceListFromTemplate(Path path,  Class<T> listOf, Object context) {
+//        List<Map> list = (List)jsonResourceFromTemplate(path, context);
+//
+//        return MapObjectConversion.convertListOfMapsToObjects( listOf, list);
+//    }
 
     /**
      * <p>
@@ -1134,13 +1134,13 @@ public class Boon {
      * @param path path to resource
      * @return JSON object loaded as resource
      */
-    public static <T> List<T> resourceList(String path, Class<T> listOf) {
-
-        List<Map> list = (List)jsonResource(path);
-
-        return MapObjectConversion.convertListOfMapsToObjects( listOf, list);
-
-    }
+//    public static <T> List<T> resourceList(String path, Class<T> listOf) {
+//
+//        List<Map> list = (List)jsonResource(path);
+//
+//        return MapObjectConversion.convertListOfMapsToObjects( listOf, list);
+//
+//    }
 
 
     /**
@@ -1151,27 +1151,14 @@ public class Boon {
      * @param path path to resource
      * @return JSON object loaded as resource
      */
-    public static <T> List<T> resourceList(Path path, Class<T> listOf) {
+//    public static <T> List<T> resourceList(Path path, Class<T> listOf) {
+//
+//        List<Map> list = (List)jsonResource(path);
+//
+//        return MapObjectConversion.convertListOfMapsToObjects(listOf, list);
+//
+//    }
 
-        List<Map> list = (List)jsonResource(path);
-
-        return MapObjectConversion.convertListOfMapsToObjects(listOf, list);
-
-    }
-
-
-
-    /**
-     * <p>
-     * Load JSON list as resource.
-     * </p>
-     * Looks in file system first and then classpath.
-     * @param path path to resource
-     * @return JSON object loaded as resource
-     */
-    public static List<?> resourceListFromTemplate(String path, Object context) {
-        return (List<?>)jsonResourceFromTemplate(path, context);
-    }
 
 
     /**
@@ -1182,9 +1169,22 @@ public class Boon {
      * @param path path to resource
      * @return JSON object loaded as resource
      */
-    public static List<?> resourceListFromTemplate(Path path, Object context) {
-        return (List<?>)jsonResourceFromTemplate(path, context);
-    }
+//    public static List<?> resourceListFromTemplate(String path, Object context) {
+//        return (List<?>)jsonResourceFromTemplate(path, context);
+//    }
+
+
+    /**
+     * <p>
+     * Load JSON list as resource.
+     * </p>
+     * Looks in file system first and then classpath.
+     * @param path path to resource
+     * @return JSON object loaded as resource
+     */
+//    public static List<?> resourceListFromTemplate(Path path, Object context) {
+//        return (List<?>)jsonResourceFromTemplate(path, context);
+//    }
 
 
     /**

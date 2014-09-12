@@ -55,7 +55,7 @@ public class Sort {
     /**
      * A sort is a composite object that can contain other sorts.
      */
-    private List<Sort> sorts = new ArrayList<>();
+    private List<Sort> sorts = new ArrayList<Sort>();
 
     /**
      * Cache the toString and hashCode for speed.
@@ -235,7 +235,7 @@ public class Sort {
         Arrays.sort( array, this.comparator( fields ) );
 
         if (collection instanceof Set){
-            return new LinkedHashSet<>( Lists.list(array));
+            return new LinkedHashSet<T>( Lists.list(array));
         } else {
             return Lists.list(array);
         }
@@ -300,7 +300,7 @@ public class Sort {
      */
     private List<Comparator> childComparators( Map<String, FieldAccess> fields ) {
         if ( this.comparators == null ) {
-            this.comparators = new ArrayList<>( this.sorts.size() + 1 );
+            this.comparators = new ArrayList<Comparator>( this.sorts.size() + 1 );
 
             for ( Sort sort : sorts ) {
                 Comparator comparator = universalComparator(

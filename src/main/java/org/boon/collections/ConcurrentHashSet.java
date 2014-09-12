@@ -45,11 +45,11 @@ public class ConcurrentHashSet<T> implements Set<T> {
     private static final Object NOTHING = new Object();
 
     public ConcurrentHashSet( int size ) {
-        map = new ConcurrentHashMap<>( size );
+        map = new ConcurrentHashMap<T, Object>( size );
     }
 
     public ConcurrentHashSet() {
-        map = new ConcurrentHashMap<>();
+        map = new ConcurrentHashMap<T, Object>();
     }
 
 

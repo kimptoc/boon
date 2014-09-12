@@ -130,10 +130,10 @@ public class ValueContainer implements CharSequence, Value {
         }
     }
 
-    @Override
-    public String stringValueEncoded() {
-        return toString();
-    }
+//    @Override
+//    public String stringValueEncoded() {
+//        return toString();
+//    }
 
 
     public String toString() {

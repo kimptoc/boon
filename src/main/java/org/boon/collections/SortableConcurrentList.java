@@ -46,7 +46,7 @@ public class SortableConcurrentList<T extends Comparable> implements List<T> {
     }
 
     public SortableConcurrentList() {
-        this.list = new ArrayList<>();
+        this.list = new ArrayList<T>();
     }
 
     public boolean remove( Object o ) {
@@ -163,7 +163,7 @@ public class SortableConcurrentList<T extends Comparable> implements List<T> {
     public Iterator<T> iterator() {
         readWriteLock.readLock().lock();
         try {
-            return new ArrayList<>( list ).iterator();
+            return new ArrayList<T>( list ).iterator();
         } finally {
             readWriteLock.readLock().unlock();
         }
@@ -312,7 +312,7 @@ public class SortableConcurrentList<T extends Comparable> implements List<T> {
 
             Collections.sort( list );
 
-            List<T> removeList = new ArrayList<>( list.subList( 0, start ) );
+            List<T> removeList = new ArrayList<T>( list.subList( 0, start ) );
             list.removeAll( removeList );
             return removeList;
         } finally {

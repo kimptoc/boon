@@ -28,8 +28,8 @@
 
 package org.boon.core.reflection;
 
-import java.lang.invoke.ConstantCallSite;
-import java.lang.invoke.MethodHandle;
+//import java.lang.invoke.ConstantCallSite;
+//import java.lang.invoke.MethodHandle;
 import java.lang.reflect.Method;
 
 /**
@@ -54,13 +54,13 @@ public interface MethodAccess extends BaseAccess{
 
     MethodAccess bind(Object instance);
 
-    MethodHandle methodHandle();
+//    MethodHandle methodHandle();
 
     MethodAccess methodAccess();
 
     Object bound();
 
-    <T> ConstantCallSite invokeReducerLongIntReturnLongMethodHandle(T object);
+//    <T> ConstantCallSite invokeReducerLongIntReturnLongMethodHandle(T object);
 
     Method method();
 }

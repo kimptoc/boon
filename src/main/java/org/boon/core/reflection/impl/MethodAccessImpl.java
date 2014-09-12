@@ -32,10 +32,10 @@ import org.boon.core.reflection.AnnotationData;
 import org.boon.core.reflection.Annotations;
 import org.boon.core.reflection.MethodAccess;
 
-import java.lang.invoke.ConstantCallSite;
-import java.lang.invoke.MethodHandle;
-import java.lang.invoke.MethodHandles;
-import java.lang.invoke.MethodType;
+//import java.lang.invoke.ConstantCallSite;
+//import java.lang.invoke.MethodHandle;
+//import java.lang.invoke.MethodHandles;
+//import java.lang.invoke.MethodType;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 import java.lang.reflect.Type;
@@ -58,8 +58,8 @@ public class MethodAccessImpl implements MethodAccess {
 
 
 
-    final MethodHandles.Lookup lookup = MethodHandles.lookup();
-    final MethodHandle methodHandle;
+//    final MethodHandles.Lookup lookup = MethodHandles.lookup();
+//    final MethodHandle methodHandle;
 
     Object instance;
 
@@ -67,7 +67,7 @@ public class MethodAccessImpl implements MethodAccess {
         method=null;
         annotationData=null;
         annotationMap=null;
-        methodHandle = null;
+//        methodHandle = null;
     }
 
     public MethodAccessImpl( Method method ) {
@@ -76,20 +76,20 @@ public class MethodAccessImpl implements MethodAccess {
         this.annotationData = Annotations.getAnnotationDataForMethod(method);
 
 
-        MethodHandle m;
-         try {
+//        MethodHandle m;
+//         try {
+//
+//                    m = methodHandle();
+//
+//        } catch (Exception e) {
+//            m = null;
+//            handle(e);
+//        }
+//
+//
+//        methodHandle = m;
 
-                    m = methodHandle();
-
-        } catch (Exception e) {
-            m = null;
-            handle(e);
-        }
-
-
-        methodHandle = m;
-
-        annotationMap = new ConcurrentHashMap<>(  );
+        annotationMap = new ConcurrentHashMap<String, AnnotationData>(  );
         for (AnnotationData data : annotationData) {
             annotationMap.put( data.getName(), data );
             annotationMap.put( data.getSimpleClassName(), data );
@@ -142,33 +142,33 @@ public class MethodAccessImpl implements MethodAccess {
         return null;
     }
 
-    @Override
-    public MethodHandle methodHandle() {
-
-
-        MethodHandle m;
-        try {
-            m = lookup.unreflect(method);
-
-        } catch (Exception e) {
-            m = null;
-            handle(e);
-        }
-
-        return  m;
-    }
+//    @Override
+//    public MethodHandle methodHandle() {
+//
+//
+//        MethodHandle m;
+//        try {
+//            m = lookup.unreflect(method);
+//
+//        } catch (Exception e) {
+//            m = null;
+//            handle(e);
+//        }
+//
+//        return  m;
+//    }
 
     @Override
     public MethodAccess methodAccess() {
         return new MethodAccessImpl(this.method){
 
 
-            @Override
-            public MethodAccess bind(Object instance) {
-                methodHandle.bindTo(instance);
-                this.instance = instance;
-                return this;
-            }
+//            @Override
+//            public MethodAccess bind(Object instance) {
+//                methodHandle.bindTo(instance);
+//                this.instance = instance;
+//                return this;
+//            }
 
 
             @Override
@@ -185,19 +185,19 @@ public class MethodAccessImpl implements MethodAccess {
         return null;
     }
 
-    @Override
-    public <T> ConstantCallSite invokeReducerLongIntReturnLongMethodHandle(T object) {
-
-        MethodType methodType = MethodType.methodType(long.class, long.class, int.class);
-        try {
-            return new ConstantCallSite(this.lookup.bind(object, this.name(), methodType));
-        } catch (NoSuchMethodException e) {
-            handle(e, "Method not found", this.name());
-        } catch (IllegalAccessException e) {
-            handle(e, "Illegal access to method", this.name());
-        }
-        return  null;
-    }
+//    @Override
+//    public <T> ConstantCallSite invokeReducerLongIntReturnLongMethodHandle(T object) {
+//
+//        MethodType methodType = MethodType.methodType(long.class, long.class, int.class);
+//        try {
+//            return new ConstantCallSite(this.lookup.bind(object, this.name(), methodType));
+//        } catch (NoSuchMethodException e) {
+//            handle(e, "Method not found", this.name());
+//        } catch (IllegalAccessException e) {
+//            handle(e, "Illegal access to method", this.name());
+//        }
+//        return  null;
+//    }
 
     @Override
     public Method method() {

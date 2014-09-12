@@ -49,7 +49,7 @@ public class Maps {
     public static <V> List<V> lazyCreate( List<V> lazy ) {
         if (lazy == null) {
 
-            lazy = new ArrayList<>();
+            lazy = new ArrayList<V>();
         }
         return lazy;
     }
@@ -209,22 +209,22 @@ public class Maps {
     @Universal
     public static <K, V> SortedMap<K, V> copy( SortedMap<K, V> map ) {
         if ( map instanceof TreeMap ) {
-            return new TreeMap<>( map );
+            return new TreeMap<K, V>( map );
         } else if ( map instanceof ConcurrentSkipListMap ) {
-            return new ConcurrentSkipListMap<>( map );
+            return new ConcurrentSkipListMap<K, V>( map );
         } else {
-            return new TreeMap<>( map );
+            return new TreeMap<K, V>( map );
         }
     }
 
     @Universal
     public static <K, V> Map<K, V> copy( Map<K, V> map ) {
         if ( map instanceof LinkedHashMap ) {
-            return new LinkedHashMap<>( map );
+            return new LinkedHashMap<K, V>( map );
         } else if ( map instanceof ConcurrentHashMap ) {
-            return new ConcurrentHashMap<>( map );
+            return new ConcurrentHashMap<K, V>( map );
         } else {
-            return new LinkedHashMap<>( map );
+            return new LinkedHashMap<K, V>( map );
         }
     }
 
@@ -284,11 +284,11 @@ public class Maps {
 
 
     public static <K, V> Entry<K, V> entry( final K k, final V v ) {
-        return new EntryImpl<>( k, v );
+        return new EntryImpl<K, V>( k, v );
     }
 
     public static <K, V> Entry<K, V> entry( Entry<K, V> entry ) {
-        return new EntryImpl<>( entry );
+        return new EntryImpl<K, V>( entry );
     }
 
     public static Map<?, ?> mapFromArray( Object... args ) {
@@ -422,21 +422,21 @@ public class Maps {
 
 
     public static <K, V> Map<K, V> map( Class<K> keyClass, Class<V> valueClass ) {
-        return new LinkedHashMap<>( 10 );
+        return new LinkedHashMap<K, V>( 10 );
     }
 
     public static <K, V> Map<K, V> safeMap( Class<K> keyClass, Class<V> valueClass ) {
-        return new ConcurrentHashMap<>( 10 );
+        return new ConcurrentHashMap<K, V>( 10 );
     }
 
     public static <K, V> Map<K, V> map( K k0, V v0 ) {
-        Map<K, V> map = new LinkedHashMap<>( 10 );
+        Map<K, V> map = new LinkedHashMap<K, V>( 10 );
         map.put( k0, v0 );
         return map;
     }
 
     public static <K, V> Map<K, V> map( K k0, V v0, K k1, V v1 ) {
-        Map<K, V> map = new LinkedHashMap<>( 10 );
+        Map<K, V> map = new LinkedHashMap<K, V>( 10 );
         map.put( k0, v0 );
         map.put( k1, v1 );
         return map;
@@ -444,7 +444,7 @@ public class Maps {
 
 
     public static <K, V> Map<K, V> map( K k0, V v0, K k1, V v1, K k2, V v2 ) {
-        Map<K, V> map = new LinkedHashMap<>( 10 );
+        Map<K, V> map = new LinkedHashMap<K, V>( 10 );
         map.put( k0, v0 );
         map.put( k1, v1 );
         map.put( k2, v2 );
@@ -453,7 +453,7 @@ public class Maps {
 
     public static <K, V> Map<K, V> map( K k0, V v0, K k1, V v1, K k2, V v2, K k3,
                                         V v3 ) {
-        Map<K, V> map = new LinkedHashMap<>( 10 );
+        Map<K, V> map = new LinkedHashMap<K, V>( 10 );
         map.put( k0, v0 );
         map.put( k1, v1 );
         map.put( k2, v2 );
@@ -463,7 +463,7 @@ public class Maps {
 
     public static <K, V> Map<K, V> map( K k0, V v0, K k1, V v1, K k2, V v2, K k3,
                                         V v3, K k4, V v4 ) {
-        Map<K, V> map = new LinkedHashMap<>( 10 );
+        Map<K, V> map = new LinkedHashMap<K, V>( 10 );
         map.put( k0, v0 );
         map.put( k1, v1 );
         map.put( k2, v2 );
@@ -474,7 +474,7 @@ public class Maps {
 
     public static <K, V> Map<K, V> map( K k0, V v0, K k1, V v1, K k2, V v2, K k3,
                                         V v3, K k4, V v4, K k5, V v5 ) {
-        Map<K, V> map = new LinkedHashMap<>( 10 );
+        Map<K, V> map = new LinkedHashMap<K, V>( 10 );
         map.put( k0, v0 );
         map.put( k1, v1 );
         map.put( k2, v2 );
@@ -486,7 +486,7 @@ public class Maps {
 
     public static <K, V> Map<K, V> map( K k0, V v0, K k1, V v1, K k2, V v2, K k3,
                                         V v3, K k4, V v4, K k5, V v5, K k6, V v6 ) {
-        Map<K, V> map = new LinkedHashMap<>( 10 );
+        Map<K, V> map = new LinkedHashMap<K, V>( 10 );
         map.put( k0, v0 );
         map.put( k1, v1 );
         map.put( k2, v2 );
@@ -499,7 +499,7 @@ public class Maps {
 
     public static <K, V> Map<K, V> map( K k0, V v0, K k1, V v1, K k2, V v2, K k3,
                                         V v3, K k4, V v4, K k5, V v5, K k6, V v6, K k7, V v7 ) {
-        Map<K, V> map = new LinkedHashMap<>( 10 );
+        Map<K, V> map = new LinkedHashMap<K, V>( 10 );
         map.put( k0, v0 );
         map.put( k1, v1 );
         map.put( k2, v2 );
@@ -513,7 +513,7 @@ public class Maps {
 
     public static <K, V> Map<K, V> map( K k0, V v0, K k1, V v1, K k2, V v2, K k3,
                                         V v3, K k4, V v4, K k5, V v5, K k6, V v6, K k7, V v7, K k8, V v8 ) {
-        Map<K, V> map = new LinkedHashMap<>( 10 );
+        Map<K, V> map = new LinkedHashMap<K, V>( 10 );
         map.put( k0, v0 );
         map.put( k1, v1 );
         map.put( k2, v2 );
@@ -529,7 +529,7 @@ public class Maps {
     public static <K, V> Map<K, V> map( K k0, V v0, K k1, V v1, K k2, V v2, K k3,
                                         V v3, K k4, V v4, K k5, V v5, K k6, V v6, K k7, V v7, K k8, V v8,
                                         K k9, V v9 ) {
-        Map<K, V> map = new LinkedHashMap<>( 10 );
+        Map<K, V> map = new LinkedHashMap<K, V>( 10 );
         map.put( k0, v0 );
         map.put( k1, v1 );
         map.put( k2, v2 );
@@ -547,7 +547,7 @@ public class Maps {
     public static <K, V> Map<K, V> map( K k0, V v0, K k1, V v1, K k2, V v2, K k3,
                                         V v3, K k4, V v4, K k5, V v5, K k6, V v6, K k7, V v7, K k8, V v8,
                                         K k9, V v9, K k10, V v10 ) {
-        Map<K, V> map = new LinkedHashMap<>( 10 );
+        Map<K, V> map = new LinkedHashMap<K, V>( 10 );
         map.put( k0, v0 );
         map.put( k1, v1 );
         map.put( k2, v2 );
@@ -564,7 +564,7 @@ public class Maps {
     }
 
     public static <K, V> Map<K, V> map( List<K> keys, List<V> values ) {
-        Map<K, V> map = new LinkedHashMap<>( 10 + keys.size() );
+        Map<K, V> map = new LinkedHashMap<K, V>( 10 + keys.size() );
         Iterator<V> iterator = values.iterator();
         for ( K k : keys ) {
             if ( iterator.hasNext() ) {
@@ -579,7 +579,7 @@ public class Maps {
 
 
     public static <K, V> Map<K, V> map( LinkedHashSet<K> keys, LinkedHashSet<V> values ) {
-        Map<K, V> map = new LinkedHashMap<>( 10 + keys.size() );
+        Map<K, V> map = new LinkedHashMap<K, V>( 10 + keys.size() );
         Iterator<V> iterator = values.iterator();
         for ( K k : keys ) {
             if ( iterator.hasNext() ) {
@@ -601,7 +601,7 @@ public class Maps {
      * @return
      */
     public static <K, V> Map<K, V> map( Iterable<K> keys, Iterable<V> values ) {
-        Map<K, V> map = new LinkedHashMap<>();
+        Map<K, V> map = new LinkedHashMap<K, V>();
         Iterator<V> iterator = values.iterator();
         for ( K k : keys ) {
             if ( iterator.hasNext() ) {
@@ -616,7 +616,7 @@ public class Maps {
 
     public static <K, V> Map<K, V> map( K[] keys, V[] values ) {
 
-        Map<K, V> map = new LinkedHashMap<>( 10 + keys.length );
+        Map<K, V> map = new LinkedHashMap<K, V>( 10 + keys.length );
         int index = 0;
         for ( K k : keys ) {
             if ( index < keys.length ) {
@@ -631,9 +631,9 @@ public class Maps {
     }
 
 
-    @SafeVarargs
+//    @SafeVarargs
     public static <K, V> Map<K, V> map( Entry<K, V>... entries ) {
-        Map<K, V> map = new LinkedHashMap<>( entries.length );
+        Map<K, V> map = new LinkedHashMap<K, V>( entries.length );
         for ( Entry<K, V> entry : entries ) {
             map.put( entry.key(), entry.value() );
         }
@@ -642,20 +642,20 @@ public class Maps {
 
 
     public static <K, V> NavigableMap<K, V> sortedMap( K k0, V v0 ) {
-        NavigableMap<K, V> map = new TreeMap<>();
+        NavigableMap<K, V> map = new TreeMap<K, V>();
         map.put( k0, v0 );
         return map;
     }
 
     public static <K, V> NavigableMap<K, V> sortedMap( K k0, V v0, K k1, V v1 ) {
-        NavigableMap<K, V> map = new TreeMap<>();
+        NavigableMap<K, V> map = new TreeMap<K, V>();
         map.put( k0, v0 );
         map.put( k1, v1 );
         return map;
     }
 
     public static <K, V> NavigableMap<K, V> sortedMap( K k0, V v0, K k1, V v1, K k2, V v2 ) {
-        NavigableMap<K, V> map = new TreeMap<>();
+        NavigableMap<K, V> map = new TreeMap<K, V>();
         map.put( k0, v0 );
         map.put( k1, v1 );
         map.put( k2, v2 );
@@ -664,7 +664,7 @@ public class Maps {
 
     public static <K, V> NavigableMap<K, V> sortedMap( K k0, V v0, K k1, V v1, K k2, V v2, K k3,
                                                        V v3 ) {
-        NavigableMap<K, V> map = new TreeMap<>();
+        NavigableMap<K, V> map = new TreeMap<K, V>();
         map.put( k0, v0 );
         map.put( k1, v1 );
         map.put( k2, v2 );
@@ -674,7 +674,7 @@ public class Maps {
 
     public static <K, V> NavigableMap<K, V> sortedMap( K k0, V v0, K k1, V v1, K k2, V v2, K k3,
                                                        V v3, K k4, V v4 ) {
-        NavigableMap<K, V> map = new TreeMap<>();
+        NavigableMap<K, V> map = new TreeMap<K, V>();
         map.put( k0, v0 );
         map.put( k1, v1 );
         map.put( k2, v2 );
@@ -685,7 +685,7 @@ public class Maps {
 
     public static <K, V> NavigableMap<K, V> sortedMap( K k0, V v0, K k1, V v1, K k2, V v2, K k3,
                                                        V v3, K k4, V v4, K k5, V v5 ) {
-        NavigableMap<K, V> map = new TreeMap<>();
+        NavigableMap<K, V> map = new TreeMap<K, V>();
         map.put( k0, v0 );
         map.put( k1, v1 );
         map.put( k2, v2 );
@@ -697,7 +697,7 @@ public class Maps {
 
     public static <K, V> NavigableMap<K, V> sortedMap( K k0, V v0, K k1, V v1, K k2, V v2, K k3,
                                                        V v3, K k4, V v4, K k5, V v5, K k6, V v6 ) {
-        NavigableMap<K, V> map = new TreeMap<>();
+        NavigableMap<K, V> map = new TreeMap<K, V>();
         map.put( k0, v0 );
         map.put( k1, v1 );
         map.put( k2, v2 );
@@ -710,7 +710,7 @@ public class Maps {
 
     public static <K, V> NavigableMap<K, V> sortedMap( K k0, V v0, K k1, V v1, K k2, V v2, K k3,
                                                        V v3, K k4, V v4, K k5, V v5, K k6, V v6, K k7, V v7 ) {
-        NavigableMap<K, V> map = new TreeMap<>();
+        NavigableMap<K, V> map = new TreeMap<K, V>();
         map.put( k0, v0 );
         map.put( k1, v1 );
         map.put( k2, v2 );
@@ -724,7 +724,7 @@ public class Maps {
 
     public static <K, V> NavigableMap<K, V> sortedMap( K k0, V v0, K k1, V v1, K k2, V v2, K k3,
                                                        V v3, K k4, V v4, K k5, V v5, K k6, V v6, K k7, V v7, K k8, V v8 ) {
-        NavigableMap<K, V> map = new TreeMap<>();
+        NavigableMap<K, V> map = new TreeMap<K, V>();
         map.put( k0, v0 );
         map.put( k1, v1 );
         map.put( k2, v2 );
@@ -740,7 +740,7 @@ public class Maps {
     public static <K, V> NavigableMap<K, V> sortedMap( K k0, V v0, K k1, V v1, K k2, V v2, K k3,
                                                        V v3, K k4, V v4, K k5, V v5, K k6, V v6, K k7, V v7, K k8, V v8,
                                                        K k9, V v9 ) {
-        NavigableMap<K, V> map = new TreeMap<>();
+        NavigableMap<K, V> map = new TreeMap<K, V>();
         map.put( k0, v0 );
         map.put( k1, v1 );
         map.put( k2, v2 );
@@ -755,7 +755,7 @@ public class Maps {
     }
 
     public static <K, V> NavigableMap<K, V> sortedMap( Collection<K> keys, Collection<V> values ) {
-        NavigableMap<K, V> map = new TreeMap<>();
+        NavigableMap<K, V> map = new TreeMap<K, V>();
         Iterator<V> iterator = values.iterator();
         for ( K k : keys ) {
             if ( iterator.hasNext() ) {
@@ -770,7 +770,7 @@ public class Maps {
 
 
     public static <K, V> NavigableMap<K, V> sortedMap( Iterable<K> keys, Iterable<V> values ) {
-        NavigableMap<K, V> map = new TreeMap<>();
+        NavigableMap<K, V> map = new TreeMap<K, V>();
         Iterator<V> iterator = values.iterator();
         for ( K k : keys ) {
             if ( iterator.hasNext() ) {
@@ -786,7 +786,7 @@ public class Maps {
 
     public static <K, V> NavigableMap<K, V> sortedMap( K[] keys, V[] values ) {
 
-        NavigableMap<K, V> map = new TreeMap<>();
+        NavigableMap<K, V> map = new TreeMap<K, V>();
         int index = 0;
         for ( K k : keys ) {
             if ( index < keys.length ) {
@@ -802,7 +802,7 @@ public class Maps {
 
 
     public static <K, V> NavigableMap<K, V> sortedMap( List<Entry<K, V>> entries ) {
-        NavigableMap<K, V> map = new TreeMap<>();
+        NavigableMap<K, V> map = new TreeMap<K, V>();
         for ( Entry<K, V> entry : entries ) {
             map.put( entry.key(), entry.value() );
         }
@@ -813,20 +813,20 @@ public class Maps {
     //
 
     public static <K, V> NavigableMap<K, V> sortedMap( Comparator<K> comparator, K k0, V v0 ) {
-        NavigableMap<K, V> map = new TreeMap<>( comparator );
+        NavigableMap<K, V> map = new TreeMap<K, V>( comparator );
         map.put( k0, v0 );
         return map;
     }
 
     public static <K, V> NavigableMap<K, V> sortedMap( Comparator<K> comparator, K k0, V v0, K k1, V v1 ) {
-        NavigableMap<K, V> map = new TreeMap<>( comparator );
+        NavigableMap<K, V> map = new TreeMap<K, V>( comparator );
         map.put( k0, v0 );
         map.put( k1, v1 );
         return map;
     }
 
     public static <K, V> NavigableMap<K, V> sortedMap( Comparator<K> comparator, K k0, V v0, K k1, V v1, K k2, V v2 ) {
-        NavigableMap<K, V> map = new TreeMap<>( comparator );
+        NavigableMap<K, V> map = new TreeMap<K, V>( comparator );
         map.put( k0, v0 );
         map.put( k1, v1 );
         map.put( k2, v2 );
@@ -835,7 +835,7 @@ public class Maps {
 
     public static <K, V> NavigableMap<K, V> sortedMap( Comparator<K> comparator, K k0, V v0, K k1, V v1, K k2, V v2, K k3,
                                                        V v3 ) {
-        NavigableMap<K, V> map = new TreeMap<>( comparator );
+        NavigableMap<K, V> map = new TreeMap<K, V>( comparator );
         map.put( k0, v0 );
         map.put( k1, v1 );
         map.put( k2, v2 );
@@ -845,7 +845,7 @@ public class Maps {
 
     public static <K, V> NavigableMap<K, V> sortedMap( Comparator<K> comparator, K k0, V v0, K k1, V v1, K k2, V v2, K k3,
                                                        V v3, K k4, V v4 ) {
-        NavigableMap<K, V> map = new TreeMap<>( comparator );
+        NavigableMap<K, V> map = new TreeMap<K, V>( comparator );
         map.put( k0, v0 );
         map.put( k1, v1 );
         map.put( k2, v2 );
@@ -856,7 +856,7 @@ public class Maps {
 
     public static <K, V> NavigableMap<K, V> sortedMap( Comparator<K> comparator, K k0, V v0, K k1, V v1, K k2, V v2, K k3,
                                                        V v3, K k4, V v4, K k5, V v5 ) {
-        NavigableMap<K, V> map = new TreeMap<>( comparator );
+        NavigableMap<K, V> map = new TreeMap<K, V>( comparator );
         map.put( k0, v0 );
         map.put( k1, v1 );
         map.put( k2, v2 );
@@ -868,7 +868,7 @@ public class Maps {
 
     public static <K, V> NavigableMap<K, V> sortedMap( Comparator<K> comparator, K k0, V v0, K k1, V v1, K k2, V v2, K k3,
                                                        V v3, K k4, V v4, K k5, V v5, K k6, V v6 ) {
-        NavigableMap<K, V> map = new TreeMap<>( comparator );
+        NavigableMap<K, V> map = new TreeMap<K, V>( comparator );
         map.put( k0, v0 );
         map.put( k1, v1 );
         map.put( k2, v2 );
@@ -881,7 +881,7 @@ public class Maps {
 
     public static <K, V> NavigableMap<K, V> sortedMap( Comparator<K> comparator, K k0, V v0, K k1, V v1, K k2, V v2, K k3,
                                                        V v3, K k4, V v4, K k5, V v5, K k6, V v6, K k7, V v7 ) {
-        NavigableMap<K, V> map = new TreeMap<>( comparator );
+        NavigableMap<K, V> map = new TreeMap<K, V>( comparator );
         map.put( k0, v0 );
         map.put( k1, v1 );
         map.put( k2, v2 );
@@ -895,7 +895,7 @@ public class Maps {
 
     public static <K, V> NavigableMap<K, V> sortedMap( Comparator<K> comparator, K k0, V v0, K k1, V v1, K k2, V v2, K k3,
                                                        V v3, K k4, V v4, K k5, V v5, K k6, V v6, K k7, V v7, K k8, V v8 ) {
-        NavigableMap<K, V> map = new TreeMap<>( comparator );
+        NavigableMap<K, V> map = new TreeMap<K, V>( comparator );
         map.put( k0, v0 );
         map.put( k1, v1 );
         map.put( k2, v2 );
@@ -911,7 +911,7 @@ public class Maps {
     public static <K, V> NavigableMap<K, V> sortedMap( Comparator<K> comparator, K k0, V v0, K k1, V v1, K k2, V v2, K k3,
                                                        V v3, K k4, V v4, K k5, V v5, K k6, V v6, K k7, V v7, K k8, V v8,
                                                        K k9, V v9 ) {
-        NavigableMap<K, V> map = new TreeMap<>( comparator );
+        NavigableMap<K, V> map = new TreeMap<K, V>( comparator );
         map.put( k0, v0 );
         map.put( k1, v1 );
         map.put( k2, v2 );
@@ -926,7 +926,7 @@ public class Maps {
     }
 
     public static <K, V> NavigableMap<K, V> sortedMap( Comparator<K> comparator, Collection<K> keys, Collection<V> values ) {
-        NavigableMap<K, V> map = new TreeMap<>( comparator );
+        NavigableMap<K, V> map = new TreeMap<K, V>( comparator );
         Iterator<V> iterator = values.iterator();
         for ( K k : keys ) {
             if ( iterator.hasNext() ) {
@@ -941,7 +941,7 @@ public class Maps {
 
     public static <K, V> NavigableMap<K, V> sortedMap( Comparator<K> comparator, K[] keys, V[] values ) {
 
-        NavigableMap<K, V> map = new TreeMap<>( comparator );
+        NavigableMap<K, V> map = new TreeMap<K, V>( comparator );
         int index = 0;
         for ( K k : keys ) {
             if ( index < keys.length ) {
@@ -957,7 +957,7 @@ public class Maps {
 
 
     public static <K, V> NavigableMap<K, V> sortedMap( Comparator<K> comparator, List<Entry<K, V>> entries ) {
-        NavigableMap<K, V> map = new TreeMap<>( comparator );
+        NavigableMap<K, V> map = new TreeMap<K, V>( comparator );
         for ( Entry<K, V> entry : entries ) {
             map.put( entry.key(), entry.value() );
         }
@@ -966,13 +966,13 @@ public class Maps {
 
 
     public static <K, V> Map<K, V> safeMap( K k0, V v0 ) {
-        Map<K, V> map = new ConcurrentHashMap<>( 10 );
+        Map<K, V> map = new ConcurrentHashMap<K, V>( 10 );
         map.put( k0, v0 );
         return map;
     }
 
     public static <K, V> Map<K, V> safeMap( K k0, V v0, K k1, V v1 ) {
-        Map<K, V> map = new ConcurrentHashMap<>( 10 );
+        Map<K, V> map = new ConcurrentHashMap<K, V>( 10 );
         map.put( k0, v0 );
         map.put( k1, v1 );
         return map;
@@ -980,7 +980,7 @@ public class Maps {
 
 
     public static <K, V> Map<K, V> safeMap( K k0, V v0, K k1, V v1, K k2, V v2 ) {
-        Map<K, V> map = new ConcurrentHashMap<>( 10 );
+        Map<K, V> map = new ConcurrentHashMap<K, V>( 10 );
         map.put( k0, v0 );
         map.put( k1, v1 );
         map.put( k2, v2 );
@@ -989,7 +989,7 @@ public class Maps {
 
     public static <K, V> Map<K, V> safeMap( K k0, V v0, K k1, V v1, K k2, V v2, K k3,
                                             V v3 ) {
-        Map<K, V> map = new ConcurrentHashMap<>( 10 );
+        Map<K, V> map = new ConcurrentHashMap<K, V>( 10 );
         map.put( k0, v0 );
         map.put( k1, v1 );
         map.put( k2, v2 );
@@ -999,7 +999,7 @@ public class Maps {
 
     public static <K, V> Map<K, V> safeMap( K k0, V v0, K k1, V v1, K k2, V v2, K k3,
                                             V v3, K k4, V v4 ) {
-        Map<K, V> map = new ConcurrentHashMap<>( 10 );
+        Map<K, V> map = new ConcurrentHashMap<K, V>( 10 );
         map.put( k0, v0 );
         map.put( k1, v1 );
         map.put( k2, v2 );
@@ -1010,7 +1010,7 @@ public class Maps {
 
     public static <K, V> Map<K, V> safeMap( K k0, V v0, K k1, V v1, K k2, V v2, K k3,
                                             V v3, K k4, V v4, K k5, V v5 ) {
-        Map<K, V> map = new ConcurrentHashMap<>( 10 );
+        Map<K, V> map = new ConcurrentHashMap<K, V>( 10 );
         map.put( k0, v0 );
         map.put( k1, v1 );
         map.put( k2, v2 );
@@ -1022,7 +1022,7 @@ public class Maps {
 
     public static <K, V> Map<K, V> safeMap( K k0, V v0, K k1, V v1, K k2, V v2, K k3,
                                             V v3, K k4, V v4, K k5, V v5, K k6, V v6 ) {
-        Map<K, V> map = new ConcurrentHashMap<>( 10 );
+        Map<K, V> map = new ConcurrentHashMap<K, V>( 10 );
         map.put( k0, v0 );
         map.put( k1, v1 );
         map.put( k2, v2 );
@@ -1035,7 +1035,7 @@ public class Maps {
 
     public static <K, V> Map<K, V> safeMap( K k0, V v0, K k1, V v1, K k2, V v2, K k3,
                                             V v3, K k4, V v4, K k5, V v5, K k6, V v6, K k7, V v7 ) {
-        Map<K, V> map = new ConcurrentHashMap<>( 10 );
+        Map<K, V> map = new ConcurrentHashMap<K, V>( 10 );
         map.put( k0, v0 );
         map.put( k1, v1 );
         map.put( k2, v2 );
@@ -1049,7 +1049,7 @@ public class Maps {
 
     public static <K, V> Map<K, V> safeMap( K k0, V v0, K k1, V v1, K k2, V v2, K k3,
                                             V v3, K k4, V v4, K k5, V v5, K k6, V v6, K k7, V v7, K k8, V v8 ) {
-        Map<K, V> map = new ConcurrentHashMap<>( 10 );
+        Map<K, V> map = new ConcurrentHashMap<K, V>( 10 );
         map.put( k0, v0 );
         map.put( k1, v1 );
         map.put( k2, v2 );
@@ -1065,7 +1065,7 @@ public class Maps {
     public static <K, V> Map<K, V> safeMap( K k0, V v0, K k1, V v1, K k2, V v2, K k3,
                                             V v3, K k4, V v4, K k5, V v5, K k6, V v6, K k7, V v7, K k8, V v8,
                                             K k9, V v9 ) {
-        Map<K, V> map = new ConcurrentHashMap<>( 10 );
+        Map<K, V> map = new ConcurrentHashMap<K, V>( 10 );
         map.put( k0, v0 );
         map.put( k1, v1 );
         map.put( k2, v2 );
@@ -1080,7 +1080,7 @@ public class Maps {
     }
 
     public static <K, V> Map<K, V> safeMap( Collection<K> keys, Collection<V> values ) {
-        Map<K, V> map = new ConcurrentHashMap<>( 10 + keys.size() );
+        Map<K, V> map = new ConcurrentHashMap<K, V>( 10 + keys.size() );
         Iterator<V> iterator = values.iterator();
         for ( K k : keys ) {
             if ( iterator.hasNext() ) {
@@ -1094,7 +1094,7 @@ public class Maps {
     }
 
     public static <K, V> Map<K, V> safeMap( Iterable<K> keys, Iterable<V> values ) {
-        Map<K, V> map = new ConcurrentHashMap<>();
+        Map<K, V> map = new ConcurrentHashMap<K, V>();
         Iterator<V> iterator = values.iterator();
         for ( K k : keys ) {
             if ( iterator.hasNext() ) {
@@ -1109,7 +1109,7 @@ public class Maps {
 
     public static <K, V> Map<K, V> safeMap( K[] keys, V[] values ) {
 
-        Map<K, V> map = new ConcurrentHashMap<>( 10 + keys.length );
+        Map<K, V> map = new ConcurrentHashMap<K, V>( 10 + keys.length );
         int index = 0;
         for ( K k : keys ) {
             if ( index < keys.length ) {
@@ -1124,9 +1124,9 @@ public class Maps {
     }
 
 
-    @SafeVarargs
+//    @SafeVarargs
     public static <K, V> Map<K, V> safeMap( Entry<K, V>... entries ) {
-        Map<K, V> map = new ConcurrentHashMap<>( entries.length );
+        Map<K, V> map = new ConcurrentHashMap<K, V>( entries.length );
         for ( Entry<K, V> entry : entries ) {
             map.put( entry.key(), entry.value() );
         }
@@ -1135,13 +1135,13 @@ public class Maps {
 
 
     public static <K, V> NavigableMap<K, V> safeSortedMap( K k0, V v0 ) {
-        NavigableMap<K, V> map = new ConcurrentSkipListMap<>();
+        NavigableMap<K, V> map = new ConcurrentSkipListMap<K, V>();
         map.put( k0, v0 );
         return map;
     }
 
     public static <K, V> NavigableMap<K, V> safeSortedMap( K k0, V v0, K k1, V v1 ) {
-        NavigableMap<K, V> map = new ConcurrentSkipListMap<>();
+        NavigableMap<K, V> map = new ConcurrentSkipListMap<K, V>();
         map.put( k0, v0 );
         map.put( k1, v1 );
         return map;
@@ -1149,7 +1149,7 @@ public class Maps {
 
 
     public static <K, V> NavigableMap<K, V> safeSortedMap( K k0, V v0, K k1, V v1, K k2, V v2 ) {
-        NavigableMap<K, V> map = new ConcurrentSkipListMap<>();
+        NavigableMap<K, V> map = new ConcurrentSkipListMap<K, V>();
         map.put( k0, v0 );
         map.put( k1, v1 );
         map.put( k2, v2 );
@@ -1158,7 +1158,7 @@ public class Maps {
 
     public static <K, V> NavigableMap<K, V> safeSortedMap( K k0, V v0, K k1, V v1, K k2, V v2, K k3,
                                                            V v3 ) {
-        NavigableMap<K, V> map = new ConcurrentSkipListMap<>();
+        NavigableMap<K, V> map = new ConcurrentSkipListMap<K, V>();
         map.put( k0, v0 );
         map.put( k1, v1 );
         map.put( k2, v2 );
@@ -1168,7 +1168,7 @@ public class Maps {
 
     public static <K, V> NavigableMap<K, V> safeSortedMap( K k0, V v0, K k1, V v1, K k2, V v2, K k3,
                                                            V v3, K k4, V v4 ) {
-        NavigableMap<K, V> map = new ConcurrentSkipListMap<>();
+        NavigableMap<K, V> map = new ConcurrentSkipListMap<K, V>();
         map.put( k0, v0 );
         map.put( k1, v1 );
         map.put( k2, v2 );
@@ -1179,7 +1179,7 @@ public class Maps {
 
     public static <K, V> NavigableMap<K, V> safeSortedMap( K k0, V v0, K k1, V v1, K k2, V v2, K k3,
                                                            V v3, K k4, V v4, K k5, V v5 ) {
-        NavigableMap<K, V> map = new ConcurrentSkipListMap<>();
+        NavigableMap<K, V> map = new ConcurrentSkipListMap<K, V>();
         map.put( k0, v0 );
         map.put( k1, v1 );
         map.put( k2, v2 );
@@ -1191,7 +1191,7 @@ public class Maps {
 
     public static <K, V> NavigableMap<K, V> safeSortedMap( K k0, V v0, K k1, V v1, K k2, V v2, K k3,
                                                            V v3, K k4, V v4, K k5, V v5, K k6, V v6 ) {
-        NavigableMap<K, V> map = new ConcurrentSkipListMap<>();
+        NavigableMap<K, V> map = new ConcurrentSkipListMap<K, V>();
         map.put( k0, v0 );
         map.put( k1, v1 );
         map.put( k2, v2 );
@@ -1204,7 +1204,7 @@ public class Maps {
 
     public static <K, V> NavigableMap<K, V> safeSortedMap( K k0, V v0, K k1, V v1, K k2, V v2, K k3,
                                                            V v3, K k4, V v4, K k5, V v5, K k6, V v6, K k7, V v7 ) {
-        NavigableMap<K, V> map = new ConcurrentSkipListMap<>();
+        NavigableMap<K, V> map = new ConcurrentSkipListMap<K, V>();
         map.put( k0, v0 );
         map.put( k1, v1 );
         map.put( k2, v2 );
@@ -1218,7 +1218,7 @@ public class Maps {
 
     public static <K, V> NavigableMap<K, V> safeSortedMap( K k0, V v0, K k1, V v1, K k2, V v2, K k3,
                                                            V v3, K k4, V v4, K k5, V v5, K k6, V v6, K k7, V v7, K k8, V v8 ) {
-        NavigableMap<K, V> map = new ConcurrentSkipListMap<>();
+        NavigableMap<K, V> map = new ConcurrentSkipListMap<K, V>();
         map.put( k0, v0 );
         map.put( k1, v1 );
         map.put( k2, v2 );
@@ -1234,7 +1234,7 @@ public class Maps {
     public static <K, V> NavigableMap<K, V> safeSortedMap( K k0, V v0, K k1, V v1, K k2, V v2, K k3,
                                                            V v3, K k4, V v4, K k5, V v5, K k6, V v6, K k7, V v7, K k8, V v8,
                                                            K k9, V v9 ) {
-        NavigableMap<K, V> map = new ConcurrentSkipListMap<>();
+        NavigableMap<K, V> map = new ConcurrentSkipListMap<K, V>();
         map.put( k0, v0 );
         map.put( k1, v1 );
         map.put( k2, v2 );
@@ -1249,7 +1249,7 @@ public class Maps {
     }
 
     public static <K, V> NavigableMap<K, V> safeSortedMap( Collection<K> keys, Collection<V> values ) {
-        NavigableMap<K, V> map = new ConcurrentSkipListMap<>();
+        NavigableMap<K, V> map = new ConcurrentSkipListMap<K, V>();
         Iterator<V> iterator = values.iterator();
         for ( K k : keys ) {
             if ( iterator.hasNext() ) {
@@ -1263,7 +1263,7 @@ public class Maps {
     }
 
     public static <K, V> NavigableMap<K, V> safeSortedMap( Iterable<K> keys, Iterable<V> values ) {
-        NavigableMap<K, V> map = new ConcurrentSkipListMap<>();
+        NavigableMap<K, V> map = new ConcurrentSkipListMap<K, V>();
         Iterator<V> iterator = values.iterator();
         for ( K k : keys ) {
             if ( iterator.hasNext() ) {
@@ -1278,7 +1278,7 @@ public class Maps {
 
     public static <K, V> NavigableMap<K, V> safeSortedMap( K[] keys, V[] values ) {
 
-        NavigableMap<K, V> map = new ConcurrentSkipListMap<>();
+        NavigableMap<K, V> map = new ConcurrentSkipListMap<K, V>();
         int index = 0;
         for ( K k : keys ) {
             if ( index < keys.length ) {
@@ -1293,9 +1293,9 @@ public class Maps {
     }
 
 
-    @SafeVarargs
+//    @SafeVarargs
     public static <K, V> NavigableMap<K, V> safeSortedMap( Entry<K, V>... entries ) {
-        NavigableMap<K, V> map = new ConcurrentSkipListMap<>();
+        NavigableMap<K, V> map = new ConcurrentSkipListMap<K, V>();
         for ( Entry<K, V> entry : entries ) {
             map.put( entry.key(), entry.value() );
         }
@@ -1304,20 +1304,20 @@ public class Maps {
 
 
     public static <K, V> NavigableMap<K, V> safeSortedMap( Comparator<K> comparator, K k0, V v0 ) {
-        NavigableMap<K, V> map = new ConcurrentSkipListMap<>( comparator );
+        NavigableMap<K, V> map = new ConcurrentSkipListMap<K, V>( comparator );
         map.put( k0, v0 );
         return map;
     }
 
     public static <K, V> NavigableMap<K, V> safeSortedMap( Comparator<K> comparator, K k0, V v0, K k1, V v1 ) {
-        NavigableMap<K, V> map = new ConcurrentSkipListMap<>( comparator );
+        NavigableMap<K, V> map = new ConcurrentSkipListMap<K, V>( comparator );
         map.put( k0, v0 );
         map.put( k1, v1 );
         return map;
     }
 
     public static <K, V> NavigableMap<K, V> safeSortedMap( Comparator<K> comparator, K k0, V v0, K k1, V v1, K k2, V v2 ) {
-        NavigableMap<K, V> map = new ConcurrentSkipListMap<>( comparator );
+        NavigableMap<K, V> map = new ConcurrentSkipListMap<K, V>( comparator );
         map.put( k0, v0 );
         map.put( k1, v1 );
         map.put( k2, v2 );
@@ -1326,7 +1326,7 @@ public class Maps {
 
     public static <K, V> NavigableMap<K, V> safeSortedMap( Comparator<K> comparator, K k0, V v0, K k1, V v1, K k2, V v2, K k3,
                                                            V v3 ) {
-        NavigableMap<K, V> map = new ConcurrentSkipListMap<>( comparator );
+        NavigableMap<K, V> map = new ConcurrentSkipListMap<K, V>( comparator );
         map.put( k0, v0 );
         map.put( k1, v1 );
         map.put( k2, v2 );
@@ -1336,7 +1336,7 @@ public class Maps {
 
     public static <K, V> NavigableMap<K, V> safeSortedMap( Comparator<K> comparator, K k0, V v0, K k1, V v1, K k2, V v2, K k3,
                                                            V v3, K k4, V v4 ) {
-        NavigableMap<K, V> map = new ConcurrentSkipListMap<>( comparator );
+        NavigableMap<K, V> map = new ConcurrentSkipListMap<K, V>( comparator );
         map.put( k0, v0 );
         map.put( k1, v1 );
         map.put( k2, v2 );
@@ -1347,7 +1347,7 @@ public class Maps {
 
     public static <K, V> NavigableMap<K, V> safeSortedMap( Comparator<K> comparator, K k0, V v0, K k1, V v1, K k2, V v2, K k3,
                                                            V v3, K k4, V v4, K k5, V v5 ) {
-        NavigableMap<K, V> map = new ConcurrentSkipListMap<>( comparator );
+        NavigableMap<K, V> map = new ConcurrentSkipListMap<K, V>( comparator );
         map.put( k0, v0 );
         map.put( k1, v1 );
         map.put( k2, v2 );
@@ -1359,7 +1359,7 @@ public class Maps {
 
     public static <K, V> NavigableMap<K, V> safeSortedMap( Comparator<K> comparator, K k0, V v0, K k1, V v1, K k2, V v2, K k3,
                                                            V v3, K k4, V v4, K k5, V v5, K k6, V v6 ) {
-        NavigableMap<K, V> map = new ConcurrentSkipListMap<>( comparator );
+        NavigableMap<K, V> map = new ConcurrentSkipListMap<K, V>( comparator );
         map.put( k0, v0 );
         map.put( k1, v1 );
         map.put( k2, v2 );
@@ -1372,7 +1372,7 @@ public class Maps {
 
     public static <K, V> NavigableMap<K, V> safeSortedMap( Comparator<K> comparator, K k0, V v0, K k1, V v1, K k2, V v2, K k3,
                                                            V v3, K k4, V v4, K k5, V v5, K k6, V v6, K k7, V v7 ) {
-        NavigableMap<K, V> map = new ConcurrentSkipListMap<>( comparator );
+        NavigableMap<K, V> map = new ConcurrentSkipListMap<K, V>( comparator );
         map.put( k0, v0 );
         map.put( k1, v1 );
         map.put( k2, v2 );
@@ -1386,7 +1386,7 @@ public class Maps {
 
     public static <K, V> NavigableMap<K, V> safeSortedMap( Comparator<K> comparator, K k0, V v0, K k1, V v1, K k2, V v2, K k3,
                                                            V v3, K k4, V v4, K k5, V v5, K k6, V v6, K k7, V v7, K k8, V v8 ) {
-        NavigableMap<K, V> map = new ConcurrentSkipListMap<>( comparator );
+        NavigableMap<K, V> map = new ConcurrentSkipListMap<K, V>( comparator );
         map.put( k0, v0 );
         map.put( k1, v1 );
         map.put( k2, v2 );
@@ -1402,7 +1402,7 @@ public class Maps {
     public static <K, V> NavigableMap<K, V> safeSortedMap( Comparator<K> comparator, K k0, V v0, K k1, V v1, K k2, V v2, K k3,
                                                            V v3, K k4, V v4, K k5, V v5, K k6, V v6, K k7, V v7, K k8, V v8,
                                                            K k9, V v9 ) {
-        NavigableMap<K, V> map = new ConcurrentSkipListMap<>( comparator );
+        NavigableMap<K, V> map = new ConcurrentSkipListMap<K, V>( comparator );
         map.put( k0, v0 );
         map.put( k1, v1 );
         map.put( k2, v2 );
@@ -1417,7 +1417,7 @@ public class Maps {
     }
 
     public static <K, V> NavigableMap<K, V> safeSortedMap( Comparator<K> comparator, Collection<K> keys, Collection<V> values ) {
-        NavigableMap<K, V> map = new ConcurrentSkipListMap<>( comparator );
+        NavigableMap<K, V> map = new ConcurrentSkipListMap<K, V>( comparator );
         Iterator<V> iterator = values.iterator();
         for ( K k : keys ) {
             if ( iterator.hasNext() ) {
@@ -1432,7 +1432,7 @@ public class Maps {
 
     public static <K, V> NavigableMap<K, V> safeSortedMap( Comparator<K> comparator, K[] keys, V[] values ) {
 
-        NavigableMap<K, V> map = new ConcurrentSkipListMap<>( comparator );
+        NavigableMap<K, V> map = new ConcurrentSkipListMap<K, V>( comparator );
         int index = 0;
         for ( K k : keys ) {
             if ( index < keys.length ) {
@@ -1448,7 +1448,7 @@ public class Maps {
 
 
     public static <K, V> NavigableMap<K, V> safeSortedMap( Comparator<K> comparator, List<Entry<K, V>> entries ) {
-        NavigableMap<K, V> map = new ConcurrentSkipListMap<>( comparator );
+        NavigableMap<K, V> map = new ConcurrentSkipListMap<K, V>( comparator );
         for ( Entry<K, V> entry : entries ) {
             map.put( entry.key(), entry.value() );
         }
@@ -1486,7 +1486,7 @@ public class Maps {
 
 
     public static <T> Map<String, List<T>> toMultiValueMap( final String propertyPath, final Collection<T> collection ) {
-        LinkedHashMap<String, List<T>> map = new LinkedHashMap<>( collection.size() );
+        LinkedHashMap<String, List<T>> map = new LinkedHashMap<String, List<T>>( collection.size() );
 
         for ( T item : collection ) {
             Object oKey = BeanUtils.idx( item, propertyPath );
@@ -1497,7 +1497,7 @@ public class Maps {
 
             List<T> list = map.get( key );
             if ( list == null ) {
-                list = new ArrayList<>();
+                list = new ArrayList<T>();
                 map.put( key, list );
             }
             list.add( item );
@@ -1526,25 +1526,25 @@ public class Maps {
 
 
     public static <K, T> Map<K, T> toMap( Class<K> keyType, final String propertyPath, final Collection<T> collection ) {
-        LinkedHashMap<K, T> map = new LinkedHashMap<>( collection.size() );
+        LinkedHashMap<K, T> map = new LinkedHashMap<K, T>( collection.size() );
         doPopulateMapWithCollectionAndPropPath( keyType, propertyPath, collection, map );
         return map;
     }
 
     public static <K, T> NavigableMap<K, T> toSortedMap( Class<K> keyType, final String propertyPath, final Collection<T> collection ) {
-        TreeMap<K, T> map = new TreeMap<>();
+        TreeMap<K, T> map = new TreeMap<K, T>();
         doPopulateMapWithCollectionAndPropPath( keyType, propertyPath, collection, map );
         return map;
     }
 
     public static <K, T> NavigableMap<K, T> toSafeSortedMap( Class<K> keyType, final String propertyPath, final Collection<T> collection ) {
-        ConcurrentSkipListMap<K, T> map = new ConcurrentSkipListMap<>();
+        ConcurrentSkipListMap<K, T> map = new ConcurrentSkipListMap<K, T>();
         doPopulateMapWithCollectionAndPropPath( keyType, propertyPath, collection, map );
         return map;
     }
 
     public static <K, T> Map<K, T> toSafeMap( Class<K> keyType, final String propertyPath, final Collection<T> collection ) {
-        ConcurrentHashMap<K, T> map = new ConcurrentHashMap<>();
+        ConcurrentHashMap<K, T> map = new ConcurrentHashMap<K, T>();
         doPopulateMapWithCollectionAndPropPath( keyType, propertyPath, collection, map );
         return map;
     }
@@ -1573,7 +1573,7 @@ public class Maps {
     }
 
     public static <K, V> Map<K, V> copyKeys(Collection<K> keys, Map<K, V> sourceMap) {
-        Map<K,V> destinationMap = new ConcurrentHashMap<>();
+        Map<K,V> destinationMap = new ConcurrentHashMap<K, V>();
         for (K key : keys) {
             V value = sourceMap.get(key);
             if (value != null) {

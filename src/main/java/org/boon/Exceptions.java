@@ -190,8 +190,8 @@ public class Exceptions {
         if (stackTrace == null || stackTrace.length == 0) {
             return new StackTraceElement[0];
         }
-        List<StackTraceElement> list = new ArrayList<>();
-        Set<String> seenThisBefore = new HashSet<>();
+        List<StackTraceElement> list = new ArrayList<StackTraceElement>();
+        Set<String> seenThisBefore = new HashSet<String>();
 
         for (StackTraceElement st : stackTrace) {
             if ( startsWithItemInCollection( st.getClassName(), ignorePackages ) ) {
