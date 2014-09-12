@@ -7,7 +7,6 @@ import java.util.*;
 import static org.boon.Boon.puts;
 import static org.boon.criteria.ObjectFilter.and;
 import static org.boon.criteria.ObjectFilter.eq;
-import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
 public class DataRepoPerfTest
@@ -66,7 +65,7 @@ public class DataRepoPerfTest
             results = dbRepo.query(eq("colour","red"));
         }
         elapsed = System.currentTimeMillis() - start;
-        assertTrue(elapsed < 50, elapsed+" vs 50");
+        assertTrue(elapsed < 70, elapsed+" vs 70");
         assertTrue(results.size() > 10000);
         puts("DataRepo lookup", elapsed, "ms, found:", results.size());
 
@@ -85,15 +84,25 @@ public class DataRepoPerfTest
         start = System.currentTimeMillis();
         Collection<Map<String, String>> results2 = null;
         // DataRepo way
-//        for (int i=0; i<ITER; i++)
-//        {
-// TODO - NEVER FINISHES!
-//            results = dbRepo.query(and(eq("job", "artist"), eq("colour", "red")));
-            results2 = dbRepo.results(eq("sport", "swim")).filter(eq("colour", "red"));
-//        }
+        for (int i=0; i<ITER; i++)
+        {
+            results2 = dbRepo.query(and(eq("job", "artist"), eq("colour", "red"))); // TODO SLOW -dont use
+        }
         elapsed = System.currentTimeMillis() - start;
-        assertTrue(elapsed < 150, elapsed+" vs 100");
+        assertTrue(elapsed < 1150, elapsed+" vs 1150");
         assertTrue(results2.size() > 1000, results2.size()+" vs 1000");
-        puts("DataRepo lookup", elapsed, "ms, found:", results2.size());
+        puts("DataRepo AND lookup", elapsed, "ms, found:", results2.size());
+
+        start = System.currentTimeMillis();
+        results2 = null;
+        // DataRepo way
+        for (int i=0; i<ITER; i++)
+        {
+            results2 = dbRepo.results(eq("sport", "swim")).filter(eq("colour", "red")); // TODO SLOW - dont use
+        }
+        elapsed = System.currentTimeMillis() - start;
+        assertTrue(elapsed < 650, elapsed+" vs 150");
+        assertTrue(results2.size() > 1000, results2.size()+" vs 1000");
+        puts("DataRepo filtered lookup", elapsed, "ms, found:", results2.size());
     }
 }

@@ -63,6 +63,7 @@ public class FieldsAccessorsPropertyThenField implements FieldsAccessor {
         return caseInsensitive;
     }
 
+
     private final Map<String, FieldAccess> doGetFields ( Class<? extends Object> aClass ) {
         Map<String, FieldAccess> fieldAccessMap = Reflection.getPropertyFieldAccessMapPropertyFirstForSerializer( aClass );
         if (caseInsensitive) {

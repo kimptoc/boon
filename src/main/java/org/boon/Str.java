@@ -34,6 +34,8 @@ import org.boon.primitive.CharScanner;
 import org.boon.primitive.Chr;
 
 //import java.nio.charset.StandardCharsets;
+import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.util.Collection;
 import java.util.List;
 import java.util.Set;
@@ -182,6 +184,25 @@ public class Str {
         return builder.toString();
     }
 
+
+    public static String addObjects( Object... objects ) {
+        int length = 0;
+        for ( Object obj : objects ) {
+            if ( obj == null ) {
+                continue;
+            }
+            length += obj.toString().length();
+        }
+        CharBuf builder = CharBuf.createExact( length );
+        for ( Object str : objects ) {
+            if ( str == null ) {
+                continue;
+            }
+            builder.add( str.toString() );
+        }
+        return builder.toString();
+    }
+
     public static String compact( String str ) {
         return FastStringUtils.noCopyStringFromChars( Chr.compact( FastStringUtils.toCharArray(str) ) );
     }
@@ -324,6 +345,17 @@ public class Str {
         return new String( Chr.lpad( inStr.toCharArray(), size, ' ' ) );
     }
 
+
+    public static String lpad( Object inStr, int size ) {
+        return new String( Chr.lpad(inStr == null ? "".toCharArray() : inStr.toString().toCharArray(), size, ' ') );
+    }
+
+
+    public static String lpad( Object inStr) {
+        return new String( Chr.lpad( inStr == null ? "".toCharArray() : inStr.toString().toCharArray(), 20, ' ' ) );
+    }
+
+
     public static String zfill( int num, int size ) {
         return new String( Chr.lpad( Integer.toString( num ).toCharArray(),
                 size, '0' ) );
@@ -348,6 +380,22 @@ public class Str {
         }
     }
 
+
+    public static String rpad( Object obj) {
+        if (obj != null) {
+            return new String( Chr.rpad( obj.toString().toCharArray(), 20, ' ' ) );
+        } else {
+            return new String( Chr.rpad( "<NULL>".toCharArray(), 20, ' ' ) );
+        }
+    }
+
+    public static String rpad( Object obj, int size, char fill ) {
+        if (obj != null) {
+            return new String( Chr.rpad( obj.toString().toCharArray(), size, fill ) );
+        } else {
+            return new String( Chr.rpad( "<NULL>".toCharArray(), size, fill ) );
+        }
+    }
 
     public static String[] split( final String input,
                                   final char split ) {
@@ -388,6 +436,21 @@ public class Str {
         }
         return builder.toString();
     }
+
+    public static String joinObjects( char delim, Object... args ) {
+        CharBuf builder = CharBuf.create( 10 * args.length );
+
+        int index = 0;
+        for ( Object arg : args ) {
+            builder.add( arg == null ? "null" : arg.toString() );
+            if ( !( index == args.length - 1 ) ) {
+                builder.add( delim );
+            }
+            index++;
+        }
+        return builder.toString();
+    }
+
 
     public static String join( String... args ) {
         CharBuf builder = CharBuf.create( 10 * args.length );
@@ -494,4 +557,56 @@ public class Str {
 
     }
 
+    public static String num(Number count) {
+
+        if (count == null) {
+            return "";
+        }
+        if (count instanceof  Double || count instanceof BigDecimal) {
+            String s = count.toString();
+            if (idx(s, 1) == '.' && s.length() > 7) {
+                s = slc(s, 0, 5);
+                return s;
+            } else {
+                return s;
+            }
+
+        } else if (count instanceof Integer || count instanceof Long || count instanceof Short || count instanceof BigInteger){
+            String s = count.toString();
+            s = new StringBuilder(s).reverse().toString();
+
+            CharBuf buf = CharBuf.create(s.length());
+
+            int index = 0;
+            for (char c : s.toCharArray()) {
+
+
+                index++;
+
+                buf.add(c);
+
+
+                if (index % 3 == 0) {
+                    buf.add(',');
+                }
+
+
+            }
+
+            if (buf.lastChar() == ',') {
+                buf.removeLastChar();
+            }
+
+            s = buf.toString();
+
+            s = new StringBuilder(s).reverse().toString();
+
+            return s;
+
+        }
+
+        return count.toString();
+
+
+    }
 }

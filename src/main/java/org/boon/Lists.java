@@ -192,6 +192,11 @@ public class Lists {
         return list;
     }
 
+
+    public static <V> List<V> list( Collection<V> collection ) {
+        return new ArrayList<V>(collection);
+    }
+
     public static <V> List<V> linkedList( Iterable<V> iterable ) {
         List<V> list = new LinkedList<V>();
         for ( V o : iterable ) {
@@ -412,6 +417,10 @@ public class Lists {
     }
 
 //    @SafeVarargs
+    public static <V> List<V> safeList(Class<V> cls) {
+        return new CopyOnWriteArrayList<V>(  );
+    }
+
     public static <V> List<V> safeList( final V... array ) {
         return new CopyOnWriteArrayList<V>( array );
     }
@@ -419,7 +428,7 @@ public class Lists {
 //    @SafeVarargs
     public static <V> List<V> linkedList( final V... array ) {
         if ( array == null ) {
-            return new ArrayList<V>();
+            return new LinkedList<V>();
         }
         List<V> list = new LinkedList<V>();
         Collections.addAll( list, array );

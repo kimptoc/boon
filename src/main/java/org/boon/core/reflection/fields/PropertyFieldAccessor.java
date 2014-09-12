@@ -69,6 +69,8 @@ public class PropertyFieldAccessor implements FieldsAccessor {
         return caseInsensitive;
     }
 
+
+
     private final Map<String, FieldAccess> doGetFields ( Class<? extends Object> aClass ) {
         Map<String, FieldAccess> fieldAccessMap =Reflection.getPropertyFieldAccessors ( aClass );
         if (caseInsensitive) {

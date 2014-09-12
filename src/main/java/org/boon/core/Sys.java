@@ -29,6 +29,7 @@
 package org.boon.core;
 
 
+import com.sun.management.UnixOperatingSystemMXBean;
 import org.boon.Lists;
 import org.boon.Str;
 import org.boon.core.reflection.Annotations;
@@ -37,8 +38,14 @@ import org.boon.core.timer.TimeKeeper;
 import org.boon.core.timer.TimeKeeperBasic;
 import org.boon.logging.Logging;
 
+import java.lang.management.GarbageCollectorMXBean;
+import java.lang.management.ManagementFactory;
+import java.lang.management.MemoryUsage;
 import java.math.BigDecimal;
+import java.util.List;
 import java.util.concurrent.atomic.AtomicReference;
+
+import static org.boon.Boon.puts;
 
 
 public class Sys {
@@ -275,5 +282,225 @@ public class Sys {
         } catch (InterruptedException e) {
             Thread.interrupted();
         }
+    }
+
+    public static int availableProcessors() {
+        return Runtime.getRuntime().availableProcessors();
+    }
+
+
+    public static long freeMemory() {
+        return Runtime.getRuntime().freeMemory();
+    }
+
+
+    public static long totalMemory() {
+        return Runtime.getRuntime().totalMemory();
+    }
+
+
+    public static long maxMemory() {
+        return Runtime.getRuntime().maxMemory();
+    }
+
+
+    static boolean _oracleJVMAndUnix = false;
+    static {
+        try {
+            Class.forName("com.sun.management.UnixOperatingSystemMXBean");
+            _oracleJVMAndUnix = true;
+        } catch (ClassNotFoundException e) {
+            _oracleJVMAndUnix = false;
+        }
+    }
+
+    private final static boolean oracleJVMAndUnix = _oracleJVMAndUnix;
+
+
+    public static List<GarbageCollectorMXBean> gc() {
+        return ManagementFactory.getGarbageCollectorMXBeans();
+    }
+
+    public static double loadAverage() {
+        return ManagementFactory.getOperatingSystemMXBean().getSystemLoadAverage();
+    }
+
+
+
+    public static long maxFileDescriptorCount() {
+
+        if (oracleJVMAndUnix) {
+
+            UnixOperatingSystemMXBean unix = (UnixOperatingSystemMXBean) ManagementFactory.getOperatingSystemMXBean();
+            return unix.getMaxFileDescriptorCount();
+        }else {
+            return -1;
+        }
+    }
+
+
+    public static long openFileDescriptorCount() {
+
+        if (oracleJVMAndUnix) {
+
+            UnixOperatingSystemMXBean unix = (UnixOperatingSystemMXBean) ManagementFactory.getOperatingSystemMXBean();
+            return unix.getOpenFileDescriptorCount();
+        }else {
+            return -1;
+        }
+    }
+
+
+    public static long committedVirtualMemorySize() {
+
+        if (oracleJVMAndUnix) {
+
+            UnixOperatingSystemMXBean unix = (UnixOperatingSystemMXBean) ManagementFactory.getOperatingSystemMXBean();
+            return unix.getCommittedVirtualMemorySize();
+        }else {
+            return -1;
+        }
+    }
+
+
+    public static long totalSwapSpaceSize() {
+
+        if (oracleJVMAndUnix) {
+
+            UnixOperatingSystemMXBean unix = (UnixOperatingSystemMXBean) ManagementFactory.getOperatingSystemMXBean();
+            return unix.getTotalSwapSpaceSize();
+        }else {
+            return -1;
+        }
+    }
+
+
+    public static long freeSwapSpaceSize() {
+
+        if (oracleJVMAndUnix) {
+
+            UnixOperatingSystemMXBean unix = (UnixOperatingSystemMXBean) ManagementFactory.getOperatingSystemMXBean();
+            return unix.getFreeSwapSpaceSize();
+        }else {
+            return -1;
+        }
+    }
+
+
+    public static long processCpuTime() {
+
+        if (oracleJVMAndUnix) {
+
+            UnixOperatingSystemMXBean unix = (UnixOperatingSystemMXBean) ManagementFactory.getOperatingSystemMXBean();
+            return unix.getProcessCpuTime();
+        }else {
+            return -1;
+        }
+    }
+
+
+    public static long freePhysicalMemorySize() {
+
+        if (oracleJVMAndUnix) {
+
+            UnixOperatingSystemMXBean unix = (UnixOperatingSystemMXBean) ManagementFactory.getOperatingSystemMXBean();
+            return unix.getFreePhysicalMemorySize();
+        }else {
+            return -1;
+        }
+    }
+
+
+    public static long totalPhysicalMemorySize() {
+
+        if (oracleJVMAndUnix) {
+
+            UnixOperatingSystemMXBean unix = (UnixOperatingSystemMXBean) ManagementFactory.getOperatingSystemMXBean();
+            return unix.getTotalPhysicalMemorySize();
+        }else {
+            return -1;
+        }
+    }
+
+
+
+//    public static double systemCpuLoad() {
+//
+//        if (oracleJVMAndUnix) {
+//
+//            UnixOperatingSystemMXBean unix = (UnixOperatingSystemMXBean) ManagementFactory.getOperatingSystemMXBean();
+//            return unix.getSystemCpuLoad();
+//        }else {
+//            return -1;
+//        }
+//    }
+//
+//
+//    public static double processCpuLoad() {
+//
+//        if (oracleJVMAndUnix) {
+//
+//            UnixOperatingSystemMXBean unix = (UnixOperatingSystemMXBean) ManagementFactory.getOperatingSystemMXBean();
+//            return unix.getProcessCpuLoad();
+//        }else {
+//            return -1;
+//        }
+//    }
+//
+
+
+    public static long uptime() {
+        return ManagementFactory.getRuntimeMXBean().getUptime();
+    }
+
+    public static long startTime() {
+        return ManagementFactory.getRuntimeMXBean().getStartTime();
+    }
+
+    public static int pendingFinalizationCount() {
+        return ManagementFactory.getMemoryMXBean().getObjectPendingFinalizationCount();
+    }
+
+
+    public static MemoryUsage heapMemoryUsage() {
+        return ManagementFactory.getMemoryMXBean().getHeapMemoryUsage();
+    }
+
+    public static MemoryUsage nonHeapMemoryUsage() {
+        return ManagementFactory.getMemoryMXBean().getNonHeapMemoryUsage();
+    }
+
+
+    public static int threadPeakCount() {
+
+        return ManagementFactory.getThreadMXBean().getPeakThreadCount();
+    }
+
+
+    public static int threadCount() {
+
+        return ManagementFactory.getThreadMXBean().getThreadCount();
+    }
+
+
+    public static long threadsStarted() {
+
+        return ManagementFactory.getThreadMXBean().getTotalStartedThreadCount();
+    }
+
+    public static long threadCPUTime() {
+
+        return ManagementFactory.getThreadMXBean().getCurrentThreadCpuTime();
+    }
+
+    public static long threadUserTime() {
+
+        return ManagementFactory.getThreadMXBean().getCurrentThreadUserTime();
+    }
+
+
+    public static int threadDaemonCount() {
+
+        return ManagementFactory.getThreadMXBean().getDaemonThreadCount();
     }
 }

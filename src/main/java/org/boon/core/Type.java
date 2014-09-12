@@ -45,13 +45,13 @@ public enum Type {
     public  static Type getInstanceType ( Object object ) {
 
 
-             if (object == null) {
-                 return NULL;
-             } else if (object instanceof Class) {
-                 return CLASS;
-             } else {
-                 return getType(object.getClass ());
-             }
+        if (object == null) {
+            return NULL;
+        } else if (object instanceof Class) {
+            return CLASS;
+        } else {
+            return getType(object.getClass ());
+        }
     }
 
     public static Type getType ( Class<?> clazz ) {
@@ -132,6 +132,8 @@ public enum Type {
             return Type.FLOAT_WRAPPER;
         } else if (typeName.equals("java.lang.Character")) {
             return Type.CHAR_WRAPPER;
+        } else if (typeName.equals("java.lang.Number")) {
+            return Type.NUMBER;
         } else if (typeName.equals("java.lang.Class")) {
             return Type.CLASS;
         } else if (typeName.equals("java.lang.Void")) {
@@ -177,7 +179,7 @@ public enum Type {
         } else if (typeName.equals("java.util.Currency")) {
             return Type.CURRENCY;
         }
-            return Type.INSTANCE;
+        return Type.INSTANCE;
 
     }
 
