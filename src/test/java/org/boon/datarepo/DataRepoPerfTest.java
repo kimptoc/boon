@@ -57,11 +57,11 @@ public class DataRepoPerfTest
             }
         });
 
-        timeTask(dbRepo, "Brute force number lookup", 700, 10000, new RunThing() {
+        timeTask(dbRepo, "Brute force number lookup", 700, 800, new RunThing() {
             public Object go(Object param) {
                 List results = new ArrayList();
                 for (Map<String, Object> entry : database) {
-                    if ( (Integer)entry.get("experience") > 50) {
+                    if ( (Integer)entry.get("experience") > 98) {
                         results.add(entry);
                     }
                 }
@@ -119,9 +119,9 @@ public class DataRepoPerfTest
             }
         });
 
-        timeTask(dbRepo, "DataRepo number range", 5000, 1000, new RunThing() {
+        timeTask(dbRepo, "DataRepo number range", 5000, 100, new RunThing() {
             public Object go(Object param) {
-                return dbRepo.query(gt("experience", 50));
+                return dbRepo.query(gt("experience", 98)); // TODO VERY SLOW
             }
         });
 
