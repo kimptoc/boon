@@ -57,7 +57,7 @@ public class DataRepoPerfTest
             }
         });
 
-        timeTask(dbRepo, "Brute force number lookup", 700, 800, new RunThing() {
+        timeTask(dbRepo, "Brute force number lookup", 900, 800, new RunThing() {
             public Object go(Object param) {
                 List results = new ArrayList();
                 for (Map<String, Object> entry : database) {
