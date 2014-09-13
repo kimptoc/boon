@@ -44,7 +44,7 @@ public class DataRepoPerfTest
 
         dbRepo.addAll(database);
 
-        timeTask(dbRepo, "Brute force lookup", 900, 10000, new RunThing() {
+        timeTask(dbRepo, "Brute force lookup", 1200, 10000, new RunThing() {
             public Object go(Object param) {
                 List results;
                 results = new ArrayList();
