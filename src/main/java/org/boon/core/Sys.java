@@ -52,9 +52,9 @@ import java.util.concurrent.atomic.AtomicReference;
 public class Sys {
 
 
-    public static ConcurrentHashMap <Object, Object> systemProperties = new ConcurrentHashMap<>(System.getProperties());
+    public static ConcurrentHashMap <Object, Object> systemProperties = new ConcurrentHashMap<Object, Object>(System.getProperties());
 
-    public static ConcurrentHashMap <String, String> env = new ConcurrentHashMap<>(System.getenv());
+    public static ConcurrentHashMap <String, String> env = new ConcurrentHashMap<String, String>(System.getenv());
 
 
     private final static boolean isWindows = System.getProperty ( "os.name" ).contains ( "Windows" );

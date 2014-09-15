@@ -142,12 +142,12 @@ public class StringScanner {
      * @param delimiters delimeters to split it by
      * @return the split up string
      */
-    public static String[] splitByCharsNoneEmpty( final String string, int start, int end, final char... delimiters ) {
-        Exceptions.requireNonNull( string );
-
-        char[][] comps = CharScanner.splitByCharsNoneEmpty( FastStringUtils.toCharArray( string ), start, end, delimiters );
-        return Str.fromCharArrayOfArrayToStringArray( comps );
-    }
+//    public static String[] splitByCharsNoneEmpty( final String string, int start, int end, final char... delimiters ) {
+//        Exceptions.requireNonNull( string );
+//
+//        char[][] comps = CharScanner.splitByCharsNoneEmpty( FastStringUtils.toCharArray( string ), start, end, delimiters );
+//        return Str.fromCharArrayOfArrayToStringArray( comps );
+//    }
 
     /**
      * Parse float
