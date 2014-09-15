@@ -105,7 +105,7 @@ public class Conversions {
             return value ? 1 : 0;
         } else if (obj instanceof CharSequence) {
             try {
-                return Integer.parseInt(Str.toString(obj));
+                return StringScanner.parseInt(Str.toString(obj));
             } catch (Exception ex) {
                 return defaultValue;
             }
@@ -200,7 +200,7 @@ public class Conversions {
             }
 
             try {
-                return Long.parseLong(str);
+                return StringScanner.parseLong(str);
             } catch (Exception ex) {
                 return longDefault;
             }
@@ -494,9 +494,6 @@ public class Conversions {
                 return (T) (Boolean) toBoolean(value);
 
             case MAP:
-                if (value instanceof Map) {
-                    return (T) value;
-                }
                 return (T) toMap(value);
 
             case ARRAY:
@@ -658,9 +655,6 @@ public class Conversions {
                 return (T) (Boolean) toBooleanOrDie(value);
 
             case MAP:
-                if (value instanceof Map) {
-                    return (T) value;
-                }
                 return (T) toMap(value);
 
             case ARRAY:
@@ -795,9 +789,6 @@ public class Conversions {
             Boolean b = toBoolean(value);
             return (T) b;
         } else if (Typ.isMap(clz)) {
-            if (value instanceof Map) {
-                return (T) value;
-            }
             return (T) toMap(value);
         } else if (clz.isArray()) {
             return toPrimitiveArrayIfPossible(clz, value);
