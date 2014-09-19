@@ -3,7 +3,6 @@ package org.boon.datarepo;
 import org.testng.annotations.Test;
 
 import java.util.*;
-import java.util.concurrent.Executor;
 
 import static org.boon.Boon.puts;
 import static org.boon.criteria.ObjectFilter.and;
